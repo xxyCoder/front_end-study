@@ -1,0 +1,11 @@
+ul {
+    list-style: none;
+}
+.inline {
+    background-color: aqua;
+    height: 100px;
+}
+#comp {
+    height: 200px;
+    background-color: aqua;
+}
