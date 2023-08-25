@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root {
+            --myVar: #ccc
+        }
+
+        .container {
+            color: var(--myVar)
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">自定义属性</div>
+</body>
+
+<script>
+    const con = document.querySelector('.container');
+    const style = getComputedStyle(con);
+    const myVar = style.getPropertyValue('--myVar');
+    console.log(myVar);
+</script>
+
+</html>
