@@ -37,3 +37,17 @@
 
 ## 自动刷新
 ### 文件监听
+- watch
+- watchOptions
+
+## 区分环境
+```js
+if(process.env.NODE_ENV === "production") {
+  
+} else {
+
+}
+```
+- 使用DefinePlugin
+
+## 压缩代码
