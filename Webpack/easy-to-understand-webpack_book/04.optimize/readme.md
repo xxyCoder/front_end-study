@@ -51,3 +51,11 @@ if(process.env.NODE_ENV === "production") {
 - 使用DefinePlugin
 
 ## 压缩代码
+
+## CDN加速
+- CDN又称为内容分发网络，用户访问按照就近原则从离用户最近的服务器获取资源
+- 要给网站接入CDN，需要把网页的静态资源上传到CDN服务器上
+
+# tree shaking
+- 剔除JS中用不到的代码，依赖ES6的静态模块化语法
+- 首先需要关闭babel的模块转换功能
