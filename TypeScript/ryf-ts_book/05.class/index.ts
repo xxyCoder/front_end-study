@@ -21,6 +21,14 @@ class Point {
         return 1;
     }
 }
+// 构造函数声明
+class Point2 {
+    constructor(public x: number, public y: number) {
+
+    }
+}
+const p2 = new Point2(1, 2);
+console.log(p2.x, p2.y)
 // 类的接口
 interface Country1 {
     name: string;
@@ -62,3 +70,25 @@ class Bar {
     // private a: number;
 }
 const bar: Foo = new Bar();
+// 抽象类
+abstract class Base {
+    id = 1;
+    abstract foo: string;
+    abstract execute(): void;
+    show() {
+        console.log("xu")
+    }
+}
+class Ext extends Base {
+    amount: 2;
+    foo: string = "foo";
+    execute(): void {
+        console.log(this.id)
+        this.show();
+    }
+}
+// this问题
+function fn(this: { name: string }) {
+    console.log(this.name);
+}
+fn.call({ name: 'xxy' })
