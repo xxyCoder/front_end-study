@@ -35,3 +35,34 @@
 - parentNode
   - 类型可能是元素节点、文档节点、文档片段节点
 - parentElement 当前节点的父元素节点
+- childNodes 当前节点的所有子节点
+- isConnected 布尔值，表示当前节点是否在文档之中
+- appendChild() 接受一个节点对象作为参数，将其插入到最后一个子节点末尾
+  - 如何插入的是DocumentFragment节点，那么插入的其所有子节点
+- hasChildNodes() 表示当前节点是否有子节点
+- cloneNode() 克隆一个节点，接受布尔值表示是否深度克隆
+  - 克隆一个节点会拷贝其所有属性，但是会丧失addEventListener方法和on-方法
+- insertBefore() 将某个节点插入父节点内部指定的位置
+- removeChild() 从当前节点移除该子节点
+- replaceChild(newChild, oldChild) 用一个新节点替换旧节点
+- contains()
+  - 参数节点为当前节点
+  - 参数节点为当前节点的子节点
+  - 参数节点为当前节点的后代节点
+- compareDocumentPosition() 比较两个节点的位置并返回一个十六进制的数
+- isEqualNode() 判断两个节点是否相等（类型、属性、子节点）
+
+# NodeList接口
+- 成员是节点对象
+  - 通过childNodes获取
+  - 通过querySelectorAll()等节点搜索方法
+- 有forEach方法
+
+# HTMLCollection接口
+- 节点对象的集合，只能包含元素节点
+- 没有forEach方法
+
+# ParentNode接口
+- 只有元素节点、文档节点、文档片段节点有该接口
+- children 所有元素节点
+- childElementCount 所有元素子节点的数目
