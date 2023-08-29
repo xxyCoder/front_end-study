@@ -23,3 +23,51 @@ function id<T>(args: T): T {
 }
 let myId_1: <T>(args: T) => T = id;
 let myId_2: { <T>(args: T): T } = id;
+// 接口泛型
+interface B<T> {
+    content: T;
+    compareTo(value: T): boolean
+}
+class C implements B<number> {
+    content: number;
+    compareTo(value: number): boolean {
+        return this.content === value
+    }
+}
+interface Fn {
+    <T>(agrs: T): T;
+}
+let myId_3: Fn = id;
+// 类的泛型参数
+class Pair<T, U> {
+    key: T;
+    value: U;
+}
+class A extends Pair<number, string> {
+
+}
+let p = new Pair<string, number>();
+// 类型别名泛型
+type Nullable<T> = T | undefined | null;
+type Container<T> = {
+    value: T
+}
+const a: Container<number> = {
+    value: 0
+}
+// 泛型的约束条件
+function comp<T extends { length: number }>(a: T, b: T) {
+    if (a.length <= b.length) {
+        return a;
+    } else {
+        return b;
+    }
+}
+// 可以引用其他参数，但是不能引用自身
+function conn<T extends U, U>(a: T, b: U): void {
+
+}
+// 泛型可以嵌套
+type orNull<T> = T | null;
+type oneOrMany<T> = T | T[];
+type oneOrManyOrNull<T> = orNull<oneOrMany<T>>
