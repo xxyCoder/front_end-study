@@ -22,10 +22,22 @@
 <script>
     const comm = document.body.childNodes[1];
     console.log(comm)
+
     const con = document.getElementById('container');
     console.log(con.nodeType, con.nodeName, con.nodeValue, con.textContent);
     console.log(con.parentNode, con.parentElement)
     console.log(con.childNodes instanceof NodeList)
+
+    const p = document.createElement('p');
+    p.innerText = "hello world";
+    con.before(p)
+    con.remove();
+
+    console.log(document, document.doctype, document.body, document.head, document.defaultView)
+
+    const attr = document.createAttribute("xxy");
+    attr.value = "xxyCoder"
+    p.setAttribute(attr);
 </script>
 
 </html>

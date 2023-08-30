@@ -66,3 +66,36 @@
 - 只有元素节点、文档节点、文档片段节点有该接口
 - children 所有元素节点
 - childElementCount 所有元素子节点的数目
+
+# ChildNode接口
+- remove() 从父节点移除该节点
+- before() 在当前节点的前面插入节点（可多个，也可以是文本）
+- after() 在当前节点的后面插入节点（可多个，也可以是文本）
+- replaceWith() 替换当前节点（可以是元素也可以是文本）
+
+# document节点
+- 该对象代表整个文档
+- 获取方法
+  - 正常的网页 document 或 window.document
+  - iframe框架 iframe节点的contentDocument
+  - ajax返回的网页 使用XMLHttpRequest对象的responseXML属性
+  - 内部节点的ownerDocument
+- defaultView 属于window对象返回window对象，否则返回null
+- doctype <DOCTYPE>节点
+- documentElement <html>节点
+- body <body>节点
+- head <head>节点
+- scrollingElement 当文档元素在滚动，返回那个元素在滚动，不存在则返回null
+- links 返回当前文档所有设定了href属性<a>以及<area>节点
+- forms 返回所有<form>表单节点
+- images 返回页面所有的<img>图片节点
+- scripts 返回当前页面所有的<script>节点
+- location 拿到该对象
+- lastModified 表示当前文档最后修改的时间
+- cookie  
+- open 清楚文档所有内容，使其变得可写
+- write writeln 写入内容
+- close 关闭打开的文档
+- querySelector querySelectorAll
+- getElementsByTagName() getElementsByClassName() getElementsByName() getElementById()
+- createElement() createTextNode() createAttribute()
