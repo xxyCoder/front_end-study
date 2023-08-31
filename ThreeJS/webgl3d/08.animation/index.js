@@ -57,6 +57,8 @@ scene.add(directionalLight);
 // 创建渲染器
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(width, height);
+// 避免模糊问题
+renderer.setPixelRatio(window.devicePixelRatio)
 // 执行渲染，类比相机拍照
 renderer.render(scene, cemare)
 // 把渲染结果添加到网页页面
