@@ -25,3 +25,12 @@
 - push对象中加入可选属性query
   - 使用route (通过useRoute获得) 拿到传递的参数router.query.xxx
 - push对象加入可选属性params
+
+# 动态路由
+- 路径中使用一个动态字段，称之为路径参数
+- 动态字段以 ：冒号开始
+- 其动态字段的值可以通过route.params拿到
+
+# sensitive与strict路由配置
+- 默认情况下，所有路由都不区分大小写，并且能匹配带有或不带有尾部斜线的路由
+- 通过选项配置是单个path还是全部path
