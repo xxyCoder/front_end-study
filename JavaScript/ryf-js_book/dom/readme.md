@@ -98,4 +98,31 @@
 - close 关闭打开的文档
 - querySelector querySelectorAll
 - getElementsByTagName() getElementsByClassName() getElementsByName() getElementById()
-- createElement() createTextNode() createAttribute()
+- createElement() createTextNode() createAttribute() createComment() createDocumentFragment()
+- createEvent() 生成一个事件对象 参数是事件类型如UIEvents MouseEvent MutationEvents HTMLEvents
+- dispatchEvent() 触发事件
+- adoptNode() 将某个节点及其子节点从原来文档中移除，归属到当前document对象（只是改变归属，并没有插入文档树中）
+- importNode(node, deep) 拷贝某个节点及其子节点（可选），归属document对象
+- createNodeIterator() 返回一个子节点遍历器
+  - 参数一是要遍历的根节点
+  - 参数二是要遍历的类型
+    - NodeFilter.SHOW_ALL
+    - NodeFilter.SHOW_ELEMENT
+    - NodeFilter.SHOW_TEXT
+    - NodeFilter.SHOW_COMMENT
+  - 可调用nextNode() 或previousNode() 遍历
+
+# Element节点
+- 继承了Node接口
+- id 可读写
+- tagName 大写标签名
+- hidden 元素是否可见
+- attributes 类似数组的对象，成员是当前元素节点的所有属性
+- className class属性，每个class用空格隔开
+- classList 数组对象，每个class是对象的一个成员
+  - add()
+  - remove()
+  - contains()
+  - toggle()
+  - toString()
+- dateset 自定义data- 属性，用来添加数据

@@ -10,7 +10,7 @@
 <body>
     <!-- 这是一个注释 -->
     666
-    <div id="container">
+    <div id="container" data-columns="3" data-index-number="0">
         内容填充
         <span>补充内容</span>
         <p>
@@ -37,7 +37,22 @@
 
     const attr = document.createAttribute("xxy");
     attr.value = "xxyCoder"
-    p.setAttribute(attr);
+    p.setAttributeNode(attr);
+
+    const event = document.createEvent("Event");
+    event.initEvent("build", true, true);
+    document.addEventListener("build", function (e) {
+        console.log(e);
+    }, false)
+    document.dispatchEvent(event)
+
+    const nodeIterator = document.createNodeIterator(document.body, NodeFilter.SHOW_ALL)
+    let currentNode;
+    while (currentNode = nodeIterator.nextNode()) {
+        console.log("cur", currentNode)
+    }
+
+    console.log(con.dataset.columns, con.dataset.indexNumber)
 </script>
 
 </html>
