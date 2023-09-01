@@ -5,6 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        #app {
+            border: 1px solid red;
+            margin: 10px;
+            padding: 10px;
+        }
+    </style>
 </head>
 
 <body>
@@ -16,6 +23,17 @@
         <p>
             垫底内容
         </p>
+    </div>
+    <div id="app">
+        123
+        <br>
+        123
+    </div>
+
+    <div id="box">
+        <div>hello world</div>
+        <div>hello world</div>
+        <div>hello world</div>
     </div>
 </body>
 
@@ -53,6 +71,12 @@
     }
 
     console.log(con.dataset.columns, con.dataset.indexNumber)
+
+    const app = document.getElementById('app');
+    console.log(app.clientHeight, app.clientLeft, app.offsetHeight)
+
+    const box = document.getElementById('box')
+    console.log(box.getClientRects())
 </script>
 
 </html>

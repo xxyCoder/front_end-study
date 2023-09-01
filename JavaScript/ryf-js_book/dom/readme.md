@@ -126,3 +126,12 @@
   - toggle()
   - toString()
 - dateset 自定义data- 属性，用来添加数据
+- clientHeight 元素高度+padding
+- clientLeft 元素节点左边框的宽度 不包括左侧padding和margin
+- scrollHeight 当前元素总高度，包括溢出部分和不可见部分，也包括padding部分，不包括border、margin、::after、::before高度
+- scrollLeft 表示当前元素水平滚动条向右侧滚动的像素量
+- offsetParent 返回最靠近当前元素且CSS中position不为static的元素
+- offsetHeight 元素高度+padding+border+水平滚动条高度
+- offsetLeft 返回当前元素左上角相对于offsetParent节点的水平位移
+- getBoundingClientRect() 返回一个对象，存储了当前元素节点的大小、位置等信息
+- getClientRects() 类数组对象，返回对象有多少个成员取决于该元素在页面上占据多少行
