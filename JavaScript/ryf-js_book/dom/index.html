@@ -77,6 +77,15 @@
 
     const box = document.getElementById('box')
     console.log(box.getClientRects())
+
+    const text = new Text("hello world");
+    console.log(box.firstElementChild.nodeValue)
+    box.style.setProperty("background", "0x3f3f3f", "important")
+
+    CSS.supports('display: table-cell')
+
+    const divStyle = window.getComputedStyle(app)
+    console.log(divStyle.background)
 </script>
 
 </html>

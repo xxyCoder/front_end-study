@@ -135,3 +135,25 @@
 - offsetLeft 返回当前元素左上角相对于offsetParent节点的水平位移
 - getBoundingClientRect() 返回一个对象，存储了当前元素节点的大小、位置等信息
 - getClientRects() 类数组对象，返回对象有多少个成员取决于该元素在页面上占据多少行
+
+# Text节点
+- 代表元素节点和属性节点的文本内容
+- 提供Text()构造函数，返回一个文本节点实例，参数为文本内容
+- data属性等同于nodeValue属性，用来设置或读取文本节点
+- wholeText属性将文本节点与相邻文本节点作为一个整体返回
+- nextElementSibling和previousElementSibling属性返回紧跟在当前节点后面那个同级元素节点
+- appendData() deleteData() insertData() replaceDate() subStringData()
+- remove() 移除当前Text节点
+
+# DocumentFragment节点
+- 代表一个文档的片段，本身是一个完整的DOM插入当前文档
+
+# CSS
+- cssText属性用来读写当前规则的所有样式声明文本
+- length 表示当前规则包含多少条样式声明
+- getPropertyPriority() 接受CSS样式的属性名作为参数，返回一个字符串（表示有没有设置important，有就返回important，没有就空字符串）
+- getPropertyValue() 接受CSS样式名作为参数，返回一个字符串表示该属性的值
+- removeProperty() 删除CSS样式
+- setProperty() 设置新的CSS属性
+- CSS.supports() 返回布尔值判断当前环境是否支持某一CSS规则
+- window.getComputedStyle() 
