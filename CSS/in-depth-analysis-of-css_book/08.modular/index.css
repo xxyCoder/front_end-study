@@ -1,0 +1,18 @@
+.message {
+    padding: 10px;
+    border-radius: 0.3em;
+    color: #ccc;
+    background-color: aqua;
+}
+
+.message--success {
+    color:aquamarine;
+    background-color: blanchedalmond;
+}
+
+.message--error {
+    color: brown;
+}
+
+.media__image {}
+.media__body {}
