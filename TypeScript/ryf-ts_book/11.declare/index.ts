@@ -2,3 +2,4 @@
 String.prototype.toSmallString = (): string => {
     return "";
 }
+sayHello("xxyCoder");
