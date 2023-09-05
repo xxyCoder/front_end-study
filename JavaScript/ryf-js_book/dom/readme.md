@@ -157,3 +157,14 @@
 - setProperty() 设置新的CSS属性
 - CSS.supports() 返回布尔值判断当前环境是否支持某一CSS规则
 - window.getComputedStyle() 
+
+# StyleSheet接口
+- 代表网页的一张样式表，包括link元素加载的样式表和style内嵌的样式表以及XML文档样式表
+  - 子类CSSStyleSheet表示页面的CSS样式表
+- StyleSheet.href 返回样式表的网址，对于内嵌样式表，该属性返回null
+- StyleSheets[index].media.appendMedium(string) 添加媒介
+- StyleSheets[index].media.deleteMedium(string) 删除媒介
+- StyleSheet.parentStyleSheet 返回了包含当前样式表的那张表
+  - @import允许在样式表中加载其他样式表
+- StyleSheet.onwerNode 通常是link或style，对于由其他样式引用的为null
+- CSSStyleSheet.ownerRule 返回一个CSSRule实例，代表那行@import规则，没有则是null
