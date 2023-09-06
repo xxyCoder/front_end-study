@@ -35,6 +35,8 @@
         <div>hello world</div>
         <div>hello world</div>
     </div>
+
+    <div id="styleElement">CSSRule</div>
 </body>
 
 <script>
@@ -89,6 +91,13 @@
 
     const sheets = document.styleSheets
     console.log(sheets)
+
+    // 回调函数中能拿到变动数组、观察器实例
+    const observer = new MutationObserver((mutations, observer) => {
+        mutations.forEach((mutation) => {
+            console.log(mutation)
+        })
+    })
 </script>
 
 </html>

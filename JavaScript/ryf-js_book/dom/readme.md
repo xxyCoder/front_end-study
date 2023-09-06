@@ -168,3 +168,19 @@
   - @import允许在样式表中加载其他样式表
 - StyleSheet.onwerNode 通常是link或style，对于由其他样式引用的为null
 - CSSStyleSheet.ownerRule 返回一个CSSRule实例，代表那行@import规则，没有则是null
+- CSSStyleSheet.insertRule() 方法用于在当前样式插入一个新的CSS规则
+  
+# Mutation Observer
+- 用于监视DOM变动
+- 与事件的区别是：事件是同步触发，而Mutation Observe是异步触发
+- 等待所有脚本任务完成后才运行
+- 把所有DOM变动记录封装成一个数组处理，而不是一条条个别处理DOM变动
+- 可以观察所有DOM变动类型，也可以指定某一类变动
+- 有observe() 方法来启动监听
+  - 第一个参数观察DOM节点
+  - 配置对象，指定观察的特点变动
+    - childList 子节点变动
+    - attributes 属性的变动
+    - characterData 节点内容
+- disconnect() 停止观察
+- takeRecords() 清除变动记录，会返回变动记录的数组
