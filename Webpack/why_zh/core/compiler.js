@@ -6,7 +6,7 @@ const parser = require('@babel/parser');
 const traverse = require('@babel/traverse').default;
 const generator = require('@babel/generator').default;
 const t = require('@babel/types')
-const tryExtensions = require('./utils/index')
+const tryExtensions = require('./utils/tryExtensions')
 
 class Compiler {
     constructor(options) {
@@ -21,7 +21,7 @@ class Compiler {
             done: new SyncHook()
         }
         // 相对路径跟Context参数
-        this.rootPath = this.options.context || toUnixPath(process.cwd());
+        this.rootPath = toUnixPath(this.options.context) || toUnixPath(process.cwd());
         // 保存所有入口模块对象
         this.entries = new Set();
         // 保存所有依赖模块对象
@@ -38,6 +38,7 @@ class Compiler {
         // 发布开始执行的订阅
         this.hooks.run.call();
         const entry = this.getEntry();
+        this.buildEntryModule(entry);
     }
     // 获取入口文件路径
     getEntry() {
@@ -51,10 +52,11 @@ class Compiler {
         // 将entry变为绝对路径
         Object.keys(entry).forEach((key) => {
             const value = entry[key];
-            if (path.isAbsolute(value)) {
+            if (!path.isAbsolute(value)) {
                 entry[key] = toUnixPath(path.join(this.rootPath, value))
             }
         })
+        return entry;
     }
     // 入口编译方法
     buildEntryModule(entry) {
@@ -63,13 +65,13 @@ class Compiler {
             const entryObj = this.buildModule(entryName, entryPath);
             this.entries.add(entryObj);
         })
+        console.log(this.entries, "entries");
     }
     buildModule(moduleName, modulePath) {
         // 通过fs读取源代码
         // 调用匹配的Loader
         // 进行编译，修改源码的中的require
         // 有依赖则递归依赖，没有则返回编译后模块
-
         // 模块编译
         const originSourceCode = (this.originSourceCode = fs.readFileSync(modulePath, 'utf-8'));
         // moduleCode是修改后的代码
@@ -102,7 +104,7 @@ class Compiler {
     }
     handleWebpackCompiler(moduleName, modulePath) {
         // 将当前模块相对于项目启动根目录计算出相对路径，作为模块ID
-        const moduleId = './' + path.posix.relative(this.rootPath, modulePath);
+        const moduleId = './' + toUnixPath(path.relative(this.rootPath, modulePath));
         // 创建模块对象
         const module = {
             id: moduleId,
@@ -115,34 +117,53 @@ class Compiler {
         });
         // 深度遍历语法Tree
         traverse(ast, {
-            // 遇到require语句
+            // 当遇到require语句时
             CallExpression: (nodePath) => {
                 const node = nodePath.node;
                 if (node.callee.name === 'require') {
-                    // 获得源代码相对路径
+                    // 获得源代码中引入模块相对路径
                     const requirePath = node.arguments[0].value;
-                    // 寻找模块绝对路径
-                    const moduleDirName = path.posix.dirname(modulePath);
-                    const absoultePath = tryExtensions(
-                        path.posix.join(moduleDirName, requirePath),
+                    // 寻找模块绝对路径 当前模块路径+require()对应相对路径
+                    const moduleDirName = path.dirname(modulePath);
+                    const absolutePath = tryExtensions(
+                        path.join(moduleDirName, requirePath),
                         this.options.resolve.extensions,
                         requirePath,
                         moduleDirName
-                    )
-                    const moduleId = './' + path.posix.relative(this.rootPath, absoultePath);
-                    // 通过Babel修改源代码的require变成__webpack_require__
+                    );
+                    // 生成moduleId - 针对于跟路径的模块ID 添加进入新的依赖模块路径
+                    const moduleId =
+                        './' + toUnixPath(path.relative(this.rootPath, absolutePath));
+                    // 通过babel修改源代码中的require变成__webpack_require__语句
                     node.callee = t.identifier('__webpack_require__');
-                    // 修改源代码中require语句引入的模块
+                    // 修改源代码中require语句引入的模块 全部修改变为相对于跟路径来处理
                     node.arguments = [t.stringLiteral(moduleId)];
-                    // 为当前模块添加依赖
-                    module.dependencies.add(moduleId);
+                    // 转换为ids数组
+                    const alreadyModules = Array.from(this.modules).map((i) => i.id);
+                    // 避免重复添加依赖
+                    if (!alreadyModules.includes(moduleId)) {
+                        // 为当前模块添加require语句造成的依赖(内容为相对于根路径的模块ID)
+                        module.dependencies.add(moduleId);
+                    } else {
+                        // 已经存在的话 虽然不进行添加进入模块编译 但是仍要更新这个模块依赖的入口
+                        this.modules.forEach(value => {
+                            if (value.id === moduleId) {
+                                value.name.push(moduleName)
+                            }
+                        })
+                    }
+
                 }
-            }
-        })
+            },
+        });
         // 遍历结束根据AST生成新的代码
         const { code } = generator(ast);
         // 为当前模块挂载新代码
         module._source = code;
+        module.dependencies.forEach(dependency => {
+            const depModule = this.buildModule(moduleName, dependency);
+            this.modules.add(depModule)
+        })
         return module;
     }
 }
