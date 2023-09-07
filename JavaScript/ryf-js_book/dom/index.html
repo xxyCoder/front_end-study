@@ -98,6 +98,19 @@
             console.log(mutation)
         })
     })
+
+    const callback = function (records) {
+        records.map(function (record) {
+            console.log("Mutation type:", record.type);
+            console.log("Mutation target:", record.target)
+        })
+    }
+    const mo = new MutationObserver(callback)
+    const options = {
+        'childList': true,
+        'subtree': true
+    }
+    mo.observe(document.body, options)
 </script>
 
 </html>

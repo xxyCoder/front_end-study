@@ -184,3 +184,11 @@
     - characterData 节点内容
 - disconnect() 停止观察
 - takeRecords() 清除变动记录，会返回变动记录的数组
+
+# MutationRecord对象
+- DOM每次发送变化都会生成一条变动记录，Mutation Observer处理的是一个由MutationRecord对象组成的数组
+- type 观察变动的类型(attributes、characterData、childList)
+- target 发生变化的DOM
+- attributeName 发生变动属性
+- oldValue 变动前的值 只对attribute和characterData变动有效
+- 

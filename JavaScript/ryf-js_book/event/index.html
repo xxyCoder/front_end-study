@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="btn">
+        btn
+    </div>
+    <script>
+        const btn = document.getElementById('btn');
+        btn.addEventListener('click', {
+            handleEvent: function (event) {
+                console.log('添加监听函数的另一种方式')
+            }
+        }, {
+            once: true,
+            capture: false,
+            passive: true,  // 表示禁止监听调用preventDefault方法
+        })
+    </script>
+</body>
+
+</html>
