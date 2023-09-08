@@ -7,6 +7,7 @@ const traverse = require('@babel/traverse').default;
 const generator = require('@babel/generator').default;
 const t = require('@babel/types')
 const tryExtensions = require('./utils/tryExtensions')
+const getSourceCode = require('./utils/getSourceCode')
 
 class Compiler {
     constructor(options) {
@@ -39,6 +40,40 @@ class Compiler {
         this.hooks.run.call();
         const entry = this.getEntry();
         this.buildEntryModule(entry);
+        // 导出列表，将每个chunk转换为单独的文件加入到输出列表assets中
+        this.exportFile(callback);
+    }
+    exportFile(callback) {
+        const output = this.options.output;
+        this.chunks.forEach((chunk) => {
+            const parseFileName = output.filename.replace('[name]', chunk.name);
+            this.assets[parseFileName] = getSourceCode(chunk);
+        });
+
+        this.hooks.emit.call();
+        if (!fs.existsSync(output.path)) {
+            fs.mkdirSync(output.path);
+        }
+        // 保存所有文件生成名
+        this.files = Object.keys(this.assets);
+        // 将assets内容生成打包文件，写入文件系统
+        Object.keys(this.assets).forEach(filename => {
+            const filepath = path.join(output.path, filename);
+            fs.writeFileSync(filepath, this.assets[filename])
+        });
+        // 结束之后触发钩子
+        this.hooks.done.call();
+        callback(null, {
+            toJson: () => {
+                return {
+                    entries: this.entries,
+                    modules: this.modules,
+                    files: this.files,
+                    chunks: this.chunks,
+                    assets: this.assets
+                };
+            }
+        });
     }
     // 获取入口文件路径
     getEntry() {
@@ -64,8 +99,18 @@ class Compiler {
             const entryPath = entry[entryName];
             const entryObj = this.buildModule(entryName, entryPath);
             this.entries.add(entryObj);
+            // 根据当前文件入口和模块的相互依赖关系，组装成一个个包含当前入口所有依赖的chunk
+            this.buildUpChunk(entryName, entryObj);
         })
-        console.log(this.entries, "entries");
+    }
+    // 组装chunk
+    buildUpChunk(entryName, entryObj) {
+        const chunk = {
+            name: entryName,
+            entryModule: entryObj,
+            modules: Array.from(this.modules).filter(i => i.name.includes(entryName))
+        }
+        this.chunks.add(chunk);
     }
     buildModule(moduleName, modulePath) {
         // 通过fs读取源代码
