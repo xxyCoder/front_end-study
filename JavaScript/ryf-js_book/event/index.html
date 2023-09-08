@@ -11,17 +11,34 @@
     <div id="btn">
         btn
     </div>
+    <div id="box">
+        box
+    </div>
     <script>
         const btn = document.getElementById('btn');
         btn.addEventListener('click', {
             handleEvent: function (event) {
                 console.log('添加监听函数的另一种方式')
+                console.log("this", this)
+                console.log(event.composedPath())
             }
         }, {
             once: true,
             capture: false,
             passive: true,  // 表示禁止监听调用preventDefault方法
         })
+
+        const box = document.getElementById('box');
+        box.onclick = function () {
+            console.log("this", this)
+        }
+
+        const ev = new Event("click", {
+            bubbles: true,
+            cancelable: true
+        });
+        btn.dispatchEvent(ev)
+
     </script>
 </body>
 
