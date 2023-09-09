@@ -14,6 +14,11 @@
     <div id="box">
         box
     </div>
+    <ul>
+        <li>item1</li>
+        <li>item2</li>
+        <li>item3</li>
+    </ul>
     <script>
         const btn = document.getElementById('btn');
         btn.addEventListener('click', {
@@ -39,6 +44,20 @@
         });
         btn.dispatchEvent(ev)
 
+        const ul = document.querySelector('ul');
+        ul.addEventListener('mouseenter', (e) => {
+            console.log("mousee enter")
+        });
+        ul.addEventListener('mouseover', (e) => {
+            console.log("mouse over");
+        })
+        const li = document.querySelector('li');
+        li.addEventListener('mouseenter', (e) => {
+            console.log("li mousee enter")
+        });
+        li.addEventListener('mouseover', (e) => {
+            console.log("li mouse over");
+        })
     </script>
 </body>
 

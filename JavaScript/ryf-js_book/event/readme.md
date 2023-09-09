@@ -28,3 +28,19 @@
 - stopPropagation() 阻止传播
 - stopImmediatePropagation() 阻止同一个事件的其他监听函数被调用，不管监听函数定义在当前节点还是其他节点，比stopPropagation阻止的更彻底
 - composePath() 返回一个数组，成员是事件的最底层节点和依次冒泡经过上方的所有节点
+  
+# 鼠标事件
+- MouseEvent接口继承了Event
+- button
+  - 0 表示按下鼠标左键
+  - 1 表示按下鼠标滚轮
+  - 2 表示按下鼠标右键
+- buttons 表示同时按下那些键钮
+  - 1 按下左键
+  - 2 按下滚轮
+  - 4 按下右键
+- movementX movementY 返回当前位置与上一个mousemove事件之间的距离
+- clientX 返回鼠标相对于浏览器位置
+- screenX 返回鼠标相对于屏幕位置
+- offsetX 返回鼠标相对于目标节点左侧padding边缘水平距离
+- pageX 返回鼠标相对于文档左侧边缘距离
