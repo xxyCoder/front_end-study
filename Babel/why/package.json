@@ -1,0 +1,15 @@
+{
+  "name": "why",
+  "version": "1.0.0",
+  "description": "- Preset是一些Plugin整合称为包\r - babel-preset-env，可以将高版本JS代码根据内置的规则转译成为低版本的JS代码\r - babel-preset-react，对JSX进行转译\r - babel-preset-typescript，对TS进行编译",
+  "main": "babel.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/runtime": "^7.22.15"
+  }
+}
