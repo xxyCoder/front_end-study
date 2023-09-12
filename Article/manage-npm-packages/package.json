@@ -1,0 +1,32 @@
+{
+  "name": "manage-npm-packages",
+  "version": "1.0.0",
+  "description": "- main字段 当文件引入是CJS方式，会查询该字段，如果没有，则查询module字段\r - module字段 当文件引入是ESM方式，会查询该字段，如果没有，则查询main字段\r - 两个字段都不存在的话，则寻找当前包下的index.js作为入口文件",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "browser": {
+    "./src/server.js": "./src/client.js"
+  },
+  "exports": {
+    ".": "./index.js",
+    "./submodule.js": "./src/submodule.js",
+    "./feature.js": {
+      "import": "./feature-node.js",
+      "default": "./feature.js"
+    },
+    "node": {
+      "import": "./feature-node.mjs",
+      "require": "./feature-node.cjs"
+    },
+    "default": "./feature.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  }
+}
