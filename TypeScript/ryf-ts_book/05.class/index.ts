@@ -87,8 +87,3 @@ class Ext extends Base {
         this.show();
     }
 }
-// this问题
-function fn(this: { name: string }) {
-    console.log(this.name);
-}
-fn.call({ name: 'xxy' })

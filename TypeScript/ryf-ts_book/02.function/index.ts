@@ -58,3 +58,8 @@ type AnimalConstructor = new () => Animal;
 function create(c: AnimalConstructor): Animal {
     return new c();
 }
+// this问题
+function fn(this: { name: string }) {
+    console.log(this.name);
+}
+fn.call({ name: 'xxy' })

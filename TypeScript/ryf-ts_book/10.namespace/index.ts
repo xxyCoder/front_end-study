@@ -27,7 +27,9 @@ function f() {
 
 namespace f {
     export const version = 1.0
+    const nickname = "xxyCoder"
 }
+f.version;
 
 class C {
     foo = "Foo"
@@ -38,3 +40,5 @@ namespace C {
 }
 let c = new C();
 C.foo
+
+export { };

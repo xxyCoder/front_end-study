@@ -18,7 +18,6 @@ interface CountryWihtPop extends Country {
 }
 // 继承class
 class A {
-    // private a: string = "";
     x: string = "";
     y(): boolean {
         return true;
@@ -35,3 +34,26 @@ const b: B = {
     },
     z: 1
 }
+// 继承class带有私有属性
+class X {
+    private name: string;
+    constructor(name: string) {
+        this.name = name;
+    }
+    intro() {
+        console.log(`my name is ${this.name}`);
+    }
+    private print() {
+        console.log(this.name);
+    }
+}
+interface xx extends X {
+    show(message: string): void;
+}
+class Y extends X {
+    show(message: string) {
+        console.log(message);
+    }
+}
+
+const y: xx = new Y("xxyCoder");
