@@ -1,0 +1,19 @@
+# 错误处理机制
+- Error实例对象
+  - message 错误提示信息
+  - name    错误名称（非标准）
+  - stack   错误的堆栈（非标准）
+- 原生错误类型，在Error基础上定义了其他6种错误对象
+  - SyntaxError 对象是解析代码时发生的错误
+  - ReferenceError  引用一个不存在的变量时候发生
+  - RangeError  超出有效范围时发生的错误，主要是一数组长度为负值，二是Number对象方法超出访范围，三是堆栈超过最大值
+  - TypeError   对象或变量不是预期类型时发生错误
+  - URIError    对象是URI相关参数不正确
+  - EvalError   eval函数没有被正确执行时
+- throw 抛出错误，可以抛出错误实例或其他类型值
+- 捕获错误
+  - try...catch
+  - 监听 onerror事件
+    - window.onerror    可打印的信息较多，加载资源失败无法捕获
+    - addEventListener  可打印信息较少，加载资源失败可以捕获，但是需要是捕获阶段
+  - 监听 unhandledrejection 异步错误
