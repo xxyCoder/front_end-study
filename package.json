@@ -4,6 +4,7 @@
     "@babel/parser": "^7.22.15",
     "@babel/traverse": "^7.22.15",
     "@babel/types": "^7.22.15",
-    "nodejs-websocket": "^1.7.2"
+    "nodejs-websocket": "^1.7.2",
+    "vue-router": "^4.2.5"
   }
 }
