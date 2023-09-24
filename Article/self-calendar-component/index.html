@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自定义日历组件</title>
+    <style>
+        .calendar {
+            border: 1px solid #000;
+            padding: 10px;
+            width: 300px;
+            height: 250px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 40px;
+        }
+
+        .days {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .day,
+        .empty {
+            width: calc(100% / 7);
+            text-align: center;
+            line-height: 30px;
+        }
+
+        .day:hover {
+            background-color: #ccc;
+            cursor: pointer;
+        }
+
+        button {
+            border: none;
+            background: transparent;
+        }
+
+        button:hover {
+            cursor: pointer;
+        }
+
+        .active {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="calendar">
+        <div class="header">
+            <button id="pre">&lt;</button>
+            <div id="date" class="content">2023年9月</div>
+            <button id="nxt">&gt;</button>
+        </div>
+        <div id="main" class="days">
+        </div>
+    </div>
+
+    <script>
+        function renderDays(year, month) {
+            const days = new Date(year, month + 1, 0).getDate();
+            const main = document.getElementById('main');
+            let daysContent = `
+                <div class="day">日</div>
+                <div class="day">一</div>
+                <div class="day">二</div>
+                <div class="day">三</div>
+                <div class="day">四</div>
+                <div class="day">五</div>
+                <div class="day">六</div>
+            `;
+            const empty = new Date(year, month, 1).getDay()
+            // 补空位
+            for (let i = 0; i < empty; ++i) {
+                daysContent += `<div class="empty"></div>`;
+            }
+            for (let i = 1; i <= days; ++i) {
+                daysContent += `<div class="day">${i}</div>`
+            }
+            main.innerHTML = daysContent;
+            const day = document.getElementsByClassName('day')
+            for (let i = 7; i < days; ++i) {
+                day[i].addEventListener('click', (e) => {
+                    for (let j = 0; j < days; ++j) {
+                        day[j].classList.remove('active')
+                    }
+                    day[i].classList.add('active')
+                    alert(`${year}年${month + 1}月${i - 6}天`);
+                })
+            }
+        }
+        const data = new Date();
+        let year = data.getFullYear(), month = data.getMonth();
+        renderDays(year, month);
+        const pre = document.getElementById('pre'), nxt = document.getElementById('nxt'), con = document.getElementById('date');
+        pre.addEventListener('click', (e) => {
+            if (month !== 0) {
+                --month;
+            } else {
+                month = 11;
+                --year;
+            }
+            con.innerText = `${year}年${month + 1}月`;
+            renderDays(year, month);
+        })
+        nxt.addEventListener('click', (e) => {
+            if (month !== 11) {
+                ++month
+            } else {
+                month = 0;
+                ++year;
+            }
+            con.innerText = `${year}年${month + 1}月`;
+            renderDays(year, month);
+        })
+    </script>
+</body>
+
+</html>
