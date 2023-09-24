@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input {
+            appearance: none;
+            width: 1em;
+            height: 1em;
+            display: inline-block;
+            background: red;
+        }
+
+        input:checked {
+            border-radius: 50%;
+            background: green;
+        }
+
+        select {
+            border: 1px solid black;
+            font-size: 1em;
+        }
+
+        select.none {
+            appearance: none;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="checkbox" />1<br/>
+    <input type="checkbox" checked />2<br/>
+
+    <select>
+        <option>default</option>
+        <option>option 2</option>
+    </select>
+    <select class="none">
+        <option>appearance: none</option>
+        <option>option 2</option>
+    </select>
+</body>
+
+</html>
