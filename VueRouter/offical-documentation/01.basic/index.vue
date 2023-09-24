@@ -11,6 +11,13 @@ router.push({ name: 'users', params: { userrname: 'xxyCoder' } })
 router.push({ path: '/register', query: { username: 'xxyCoder' } })
 // 带hash   /about#team
 router.push({ path: '/about', hash: '#team' })
+// 检测导航错误
+const navigationResult = await router.push('/my-profile')
+if(navigationResult) {
+    // 导航被阻止
+} else {
+    // 导航成功
+}
 </script>
 
 <template>
