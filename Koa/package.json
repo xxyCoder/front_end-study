@@ -1,0 +1,12 @@
+{
+  "name": "koa",
+  "version": "1.0.0",
+  "description": "- 是一个包含中间件函数数组的对象，占据很小的空间，因为没有打包任何中间件\r - 中间件调用next() 函数会挂起并将控制权交给下一个中间件，当下游没有中间件的时候，每个中间件恢复执行其上游行为",
+  "main": "application.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
