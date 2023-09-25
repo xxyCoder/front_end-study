@@ -28,3 +28,15 @@
 ## 响应
 - response.status   获取或者设置响应状态
 - response.body 获取响应正文
+
+## 中间件
+- koa-static(root,options)  设置静态资源根目录
+- koa-cors(options) 
+  - origin  Access-Control-Allow-Origin
+  - methods Access-Control-Allow-Methods
+  - headers Access-Control-Allow-Headers 
+- koa-body(options)
+  - multipart: boolean  解析多个body
+  - formidable: Object  传递给强大的多部分解析器的选项
+- koa-parameter(app)    参数校验
+- koa-router(router.routes())
