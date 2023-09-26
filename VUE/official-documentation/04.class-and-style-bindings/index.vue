@@ -26,5 +26,6 @@ const staticStyle = {
         <div :class="classCom"></div>
         <div :class="[activeClass, staticClass]"></div>
         <div :class="[isActive ? active : '', staticClass]" :style="[activeStyle, staticStyle]"></div>
+        <div :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }">样式多值</div>
     </div>
 </template>
