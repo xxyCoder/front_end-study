@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const popup = window.open("http://bbb.com", "title");
+        // 父窗口向子窗口发送消息
+        popup.postMessage("Hello World", "http://bbb.com")
+        // 子窗口向父窗口发送消息
+        window.opener.postMessage("Nice to meet you", "http://aaa.com")
+        // 监听对方发送消息
+        window.addEventListener("message", e => {
+            console.log("消息内容", e.data)
+            console.log("发送消息窗口", e.source)
+            console.log("消息发送的网址", e.origin)
+
+            if (e.origin !== "http://aaa.com") {    // 过滤不是发送给自己的消息
+                e.source.postMessage("Nice to meet you too!", e.origin);
+            }
+        }, false)
+    </script>
+
+    <script>
+        function cb(data) {
+
+        }
+        const script = document.createElement("script");
+        script.src = "http://api?callback=cb";
+        document.appendChild(script)
+    </script>
+</body>
+
+</html>
