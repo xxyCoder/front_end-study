@@ -1,0 +1,15 @@
+# 生命周期
+- setup
+  - beforeCreate    初始化实例对象
+  - create  实例化之后，data和method已经初始化完成
+- beforeMount
+  - 组件已经完成了其响应式状态的设置，但还没有创建DOM节点
+- mount
+  - 其同步子组件都已经挂载，其自身的DOM树已经创建并插入父容器中
+- beforeUpdate
+  - 钩子可以用来在Vue更新DOM之前访问DOM状态
+- update
+- beforeUnmount
+  - 组件还未被销毁，可以用于解除自定义事件等
+- unmount
+  - 组件完全销毁

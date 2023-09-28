@@ -6,7 +6,10 @@ const name = ref("xxyCoder");
 const count = ref(0);
 const intro = computed(() => { return `my name is ${name.value}, age is ${age.value}` });
 const obj = reactive({
-    cnt: 0
+    cnt: 0,
+    x: {
+        y: 1
+    }
 });
 
 watch(age, (newAge, oldAge) => {
