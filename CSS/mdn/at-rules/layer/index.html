@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        p {
+            background-color: yellow;
+        }
+
+        @layer utilities, after;
+
+        @layer after {
+            p {
+                font-size: 30px;
+            }
+        }
+
+        @layer utilities {
+            .box p {
+                margin-block: 1rem;
+                background-color: aqua;
+                color: blue;
+                font-size: 50px;
+            }
+
+            @layer font {
+                p {
+                    font-size: 20px;
+                    box-shadow: 0 0 5px black;
+                }
+            }
+        }
+
+        @layer {
+            p {
+                color: chartreuse;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <p>Hello World</p>
+    </div>
+</body>
+
+</html>
