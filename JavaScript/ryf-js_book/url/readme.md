@@ -23,3 +23,6 @@
 - 静态方法
   - createObjectURL()   用来上传/下载文件、流媒体文件生成一个URL字符串，这个字符串代表了File对象或Blob对象的URL
   - revokeObjectURL()   由于createObjecetURL会在内存中生成URL实例，如果不再需要该URL字符串，可以使用revokeObjectURL方法释放
+
+# URLSearchParams对象
+- 是浏览器的原生对象，用来构造、解析和处理URL的查询字符串，本身也是构造函数，参数可以为查询字符串，起首的问好有没有都可以，也可以是字符串的数组或对象

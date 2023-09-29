@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="file" accept="image/*" multiple onchange="fileinfo(this.files)">
+    <br/>
+    <input type="file" onchange="readfile(this.files[0])"></input>
+    <pre id="output"></pre>
+    <script>
+        function fileinfo(files) {
+            for (let i = 0; i < files.length; ++i) {
+                const f = files[i];
+                // 获取文件信息
+                console.log(f.name, f.size, f.type, f.lastModifiedDate)
+            }
+        }
+        // 下载文件
+        function getBlob(url, callback) {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", url);
+            xhr.responseType = "blob";
+            xhr.onload = function () {
+                callback(xhr.response)
+            }
+            xhr.send(null)
+        }
+        // 读取文件
+        function readfile(file) {
+            const reader = new FileReader();
+            reader.readAsText(file);
+            reader.onload = function () {
+                const text = reader.result;
+                var out = document.getElementById('output');
+                out.innerHTML = '';
+                out.appendChild(document.createTextNode(text));
+            }
+            reader.onerror = function (e) {
+                console.log(e)
+            }
+        }
+    </script>
+</body>
+
+</html>
