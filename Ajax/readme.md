@@ -5,3 +5,14 @@
   - 2 请求已接受
   - 3 正在处理请求
   - 4 请求已经完成
+- response  表示服务器返回的数据体(即HTTP的body部分)
+- responseText  返回从服务器接到的字符串
+- responseXML 返回服务器接受到的HTML或XML文档对象
+- responseURL 返回发送数据的服务器网址
+- status statusText 返回服务器的状态码和状态提示
+- 监听属性
+  - load  请求完成
+  - progress  正在发送和加载数据
+- withCredentials 表示跨域请求,cookie是否携带
+- upload  属性可以得到一个对象,通过观察读写可以得知上传进度(监听对象的loadstart、load、abort、progress等)
+- abort() 用于终止已经发出的HTTP请求,使用之后readyState=4,status=0
