@@ -1,5 +1,6 @@
 fetch("http://localhost:3000")
     .then(async response => {
+        // response是流对象
         console.log("同步属性:", response.status, response.statusText)
         response.headers.forEach((v, k) => console.log(k, ":", v))
         if (response.status >= 200 && response.status < 300) {  // 判断是否请求成功，或者使用response.ok属性判断
@@ -37,3 +38,12 @@ const respponse = await fetch("http://localhost:3000", {
 })
 console.log(respponse.json())
 
+fetch("http://localhost:3000", {
+    method: "GET",
+    headers: {
+        "Content-Type": "text/plain;charset=UTF-8"
+    },
+    mode: "cors",
+    credentials: "same-origin",
+    cache: "default"
+})
