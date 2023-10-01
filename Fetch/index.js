@@ -36,7 +36,7 @@ const respponse = await fetch("http://localhost:3000", {
     keepalive: true,
     signal: controller.signal
 })
-console.log(respponse.json())
+console.log(await respponse.json())
 
 fetch("http://localhost:3000", {
     method: "GET",
