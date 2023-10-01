@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        p {
+            height: 7em;
+            background: #ff9;
+            columns: 3;
+            column-rule: 1px solid;
+        }
+
+        p.fill-auto {
+            column-fill: auto;
+        }
+
+        p.fill-balance {
+            column-fill: balance;
+        }
+    </style>
+</head>
+
+<body>
+    <p class="fill-auto">
+        This paragraph fills columns one at a time. Since all of the text can fit in
+        the first column, the others are empty.
+        This paragraph fills columns one at a time. Since all of the text can fit in
+        the first column, the others are empty.
+        This paragraph fills columns one at a time. Since all of the text can fit in
+        the first column, the others are empty.
+    </p>
+
+    <p class="fill-balance">
+        This paragraph attempts to balance the amount of content in each column.
+        This paragraph attempts to balance the amount of content in each column.
+        This paragraph attempts to balance the amount of content in each column.
+        This paragraph attempts to balance the amount of content in each column.
+        This paragraph attempts to balance the amount of content in each column.
+    </p>
+</body>
+
+</html>
