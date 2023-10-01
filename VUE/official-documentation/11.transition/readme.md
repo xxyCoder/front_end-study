@@ -3,6 +3,10 @@
 - v-enter-from ---> v-enter-active ---> v-enter-to
 - v-leave-to ---> v-leave-active ---> v-leave-from
 - name属性声明过渡名，默认是v
+- 如果即想使用transition又想使用animation，同时触发两个效果可以使用type指定关注那个
+
+## 深层级过渡
+- class过渡仅仅用于子元素，可以使用后代选择器使得深层级过渡
 
 ## 自定义过渡class
 - enter-from-class  
