@@ -15,3 +15,11 @@
 - checkValidity()   手动触发表单的验证
 - willValidate属性  表示是否在提交时候进行校验
 - validationMessage属性 返回一个字符串，表示控制不满足校验条件时，浏览器显示提示文本
+- setCustomValidity() 定制校验失败时的报错信息
+- validity属性  返回一个ValidityState对象，包含当前校验状态
+  - ValidityState.patternMismatch 输入不满足模式要求
+  - ValidityState.rangeOverflow 表示用户输入的值是否大于最大范围
+  - ValidityState.rangeUnderflow  用户输入的值小于最小范围
+  - ValidityState.valid 用户是否满足所有校验条件
+  - ValidityState.valueMissing  用户是否没有输入必填字段
+- noValidate  关闭浏览器的自动校验，或者设置在submit按钮上

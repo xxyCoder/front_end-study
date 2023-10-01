@@ -11,7 +11,7 @@
     <form id="myForm" name="myForm">
         <div>
             <label for="username">用户名：</label>
-            <input type="text" id="username" name="username">
+            <input pattern="[a-z]{1,15}" type="text" id="username" name="username">
         </div>
         <div>
             <label for="useracc">账号：</label>
@@ -23,7 +23,7 @@
             <input type="file" id="userfile" name="userfile">
         </div>
         <!-- <input type="submit" value="Submit!" > -->
-        <button onclick="submitForm" >submit</button>
+        <button onclick="submitForm">submit</button>
     </form>
 
     <!-- 必填 -->
@@ -67,6 +67,12 @@
             }
         }
 
+        const username = document.getElementById("username");
+        username.oninvalid = function(e) {
+            e.target.setCustomValidity("用户名必须小写字母，且长度在1-15之间！")
+        }
+        // 关闭自动校验
+        myForm.noValidate = true
     </script>
 </body>
 

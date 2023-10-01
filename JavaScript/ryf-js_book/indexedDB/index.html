@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>indexedDB</title>
+</head>
+
+<body>
+    <script>
+        // 第一个参数是字符串，表示数据库名字，没有则创建
+        // 第二个参数是整数，表示数据库版本，如果省略，默认打开当前版本，新建版本为1
+        const request = window.indexedDB.open("xxy", 1)
+        // 监听数据库打开失败
+        request.onerror = function (e) {
+            console.log("数据库打开失败")
+        }
+        // 监听数据库打开成功
+        let db = null;
+        request.onsuccess = function (e) {
+            db = request.result;
+            console.log("数据库打开成功");
+            add({ id: 1, name: "xxyCoder", age: 21 });
+            read()
+        }
+        // 版本更新监听
+        // 版本从无到有也会触发该函数
+        request.onupgradeneeded = function (e) {
+            db = e.target.result;
+            let objectStore;
+            if (!db.objectStoreNames.contains("person")) {
+                objectStore = db.createObjectStore("person", { keyPath: "id" })
+                // 自动生成主键
+                // objectStore = db.createObjectStore("person", { autoIncrement: true })
+            }
+            // 第一个参数表示索引名称
+            // 第二个参数表示索引所在属性
+            // 第三个参数表示配置对象
+            objectStore.createIndex("name", "name", { unique: true })
+            objectStore.createIndex("age", "age", { unique: false })
+        }
+
+        function add(data) {
+            const req = db.transaction(["person"], "readwrite").objectStore("person").add(data);
+            req.onsuccess = function (e) {
+                console.log("数据写入成功")
+            }
+            req.onerror = function (e) {
+                console.log("数据写入失败")
+            }
+        }
+
+        function read() {
+            const t = db.transaction(["person"]);
+            const objectStore = t.objectStore("person");
+            const req = objectStore.get(1);
+
+            req.onerror = function (e) {
+                console.log("事务失败");
+            }
+            req.onsuccess = function (e) {
+                if (req.result) {
+                    console.log("读取后数据", req.result)
+                } else {
+                    console.log("没有数据")
+                }
+                readAll();
+            }
+        }
+
+        function readAll() {
+            const objectStore = db.transaction(["person"]).objectStore("person");
+            objectStore.openCursor().onsuccess = function (e) {
+                const cursor = e.target.result;
+
+                if (cursor) {
+                    console.log("cursor:", cursor);
+                } else {
+                    console.log("没有更多数据了")
+                }
+            }
+        }
+        // 更新
+        function update() {
+            var request = db.transaction(['person'], 'readwrite')
+                .objectStore('person')
+                .put({ id: 1, name: 'xxy', age: 22 });
+
+            request.onsuccess = function (event) {
+                console.log('数据更新成功');
+            };
+
+            request.onerror = function (event) {
+                console.log('数据更新失败');
+            }
+        }
+        // 删除记录
+        function remove() {
+            var request = db.transaction(['person'], 'readwrite')
+                .objectStore('person')
+                .delete(1);
+
+            request.onsuccess = function (event) {
+                console.log('数据删除成功');
+            };
+        }
+        // 根据索引查找数据记录
+        function findbyIndex(seg, data) {
+            const t = db.transaction(["person"], "readonly");
+            const store = t.objectStore("person");
+            const index = store.index(seg);
+            const req = index.get(data);
+
+            req.onsuccess = function (e) {
+                const result = e.target.result;
+                if (result) {
+                    console.log("查找成功:", result);
+                } else {
+                    console.log("查找失败")
+                }
+            }
+        }
+        // 删除数据库
+        const DBDeleteRequest = window.indexedDB.deleteDatabase("person");
+        DBDeleteRequest.onsuccess = function (e) {
+            console.log("数据库删除成功");
+        }
+        DBDeleteRequest.onerror = function (e) {
+            console.log("数据库删除失败")
+        }
+    </script>
+</body>
+
+</html>
