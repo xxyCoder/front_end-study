@@ -1,6 +1,7 @@
 # Fetch https://www.ruanyifeng.com/blog/2020/12/fetch-tutorial.html
 - 功能与XMLHttpRequest基本相同，但有三个主要的差异
   - fetch使用Promise，不使用回调函数
+  - 采用模块化设计，API分散在多个对象上（Response、Request、Headers）
   - 通过数据流处理数据
 - fetch成功后，得到一个Response对象
 - 只有网络错误或无法连接，fetch才会报错，也就是说即使服务器返回的状态是4xx或5xx，Promise也不会是reject状态
