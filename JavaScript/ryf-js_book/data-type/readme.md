@@ -12,4 +12,4 @@
 - 特殊数值
   - 正零和负零，会被当做正常0，除了当分母，一个返回Infinity，另一个返回-Infinity
   - NaN，表示非数字，其不等于任何值包括本身 isNaN判断
-  - Infinity，表示无穷  isInfite判断
+  - Infinity，表示无穷  isFinite判断
