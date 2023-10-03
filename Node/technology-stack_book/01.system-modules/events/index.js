@@ -32,3 +32,23 @@ oneDayPlan.on("7:00", function () {
 
 // 错误处理
 emitter.on("error", new Error("This is a error"))
+
+// 实现EventEmitter类型
+class MyEventEmitter {
+    constructor() {
+        this.subs = new Map();
+    }
+    on(name, fn) {
+        if (!this.subs.has(name)) {
+            this.subs.set(name, []);
+        }
+        this.subs.get(name).push(fn);
+    }
+    emit(name, ...args) {
+        if (this.subs.has(name)) {
+            this.subs.get(name).forEach(cb => {
+                cb(...args);
+            })
+        }
+    }
+}
