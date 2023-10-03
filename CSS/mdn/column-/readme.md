@@ -10,3 +10,9 @@
 
 # column-span
 - 当值被设定为all的时，可以让一个元素跨越所有列
+
+# column-width
+- 设置列的宽度
+
+# columns
+- 简写属性，表示列宽、列数量

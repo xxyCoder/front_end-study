@@ -1,0 +1,12 @@
+# filter
+- 将模糊或颜色偏移等图形效果应用于元素
+- url() 引用SVG滤镜元素
+- blur()    应用高斯模糊
+- brightness()  调整亮度
+- contrast()    调整对比度，值是0%表示变灰
+- drop-shadow() 沿着图像的轮廓生成阴影效果
+- grayscale()   将图像转换为灰度图
+- hue-rotate()  色相旋转
+- invert()  反转输入图像
+- opacity() 应用透明度
+- saturate()    改变图像饱和度
