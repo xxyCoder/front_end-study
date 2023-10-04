@@ -20,7 +20,7 @@ class Store {
         app.provide(STORE_KEY, this);
     }
     get state() {
-        return this._state.data;
+        return this._state;
     }
     get getters() {
         return this._getter;
