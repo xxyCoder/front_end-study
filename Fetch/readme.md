@@ -16,3 +16,21 @@
 
 ## body
 - response.body返回一个一个ReadableStream对象，可以用来分块读取内容，显示下载的进度
+
+## cache
+- default 默认值，先从缓存中找
+- no-store
+- reload  直接请求服务器，并更新缓存
+- no-cache  类似协商缓存
+- force-cache 缓存优先，只有不存在缓存才会请求远程
+- only-if-cache 只检查缓存，如果缓存不存在，返回504错误
+
+## mode
+- cors  默认值，允许跨域请求
+- same-origin 只允许同源请求
+- no-cors 只限于GET、POST、HEAD，并添加部分请求头
+
+## credentials
+- same-origin 默认值，同源请求发送cookie
+- include 不论同源还是跨域都发送cookie
+- omit  都不发送
