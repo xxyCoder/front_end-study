@@ -17,14 +17,14 @@ class MyPromise {
                 this.state = "fulfilled";
                 this.value = value;
                 // 状态一旦落定，就要执行之前收集对应状态的函数
-                this.onFulfilledCallbacks.forEach(cb => cb(this.value));
+                this.onFulfilledCallbacks.forEach(cb => cb(value));
             }
         }
         const reject = (reason) => {
             if (this.state === "pending") {
                 this.state = "rejected";
                 this.reason = reason;
-                this.onRejectedCallbacks.forEach(cb => cb(this.reason));
+                this.onRejectedCallbacks.forEach(cb => cb(reason));
             }
         }
 
@@ -39,6 +39,7 @@ class MyPromise {
         onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : (value) => value;
         onRejected = typeof onRejected === 'function' ? onRejected : (reson) => reson;
 
+        const that = this;
         const promise = new MyPromise((resolve, reject) => {
             // 封装函数，避免冗余代码，但是要写在内部，不然resolve和reject是未定义的
             const onFulfilledTask = (value) => {
@@ -67,24 +68,24 @@ class MyPromise {
                     reject(ers);
                 }
             }
-            if (this.state === "pending") {
-                this.onFulfilledCallbacks.push((value) => {
+            if (that.state === "pending") {
+                that.onFulfilledCallbacks.push((value) => {
                     onFulfilledTask(value);
                 });
-                this.onRejectedCallbacks.push((reason) => {
+                that.onRejectedCallbacks.push((reason) => {
                     onRejectedTask(reason);
                 });
-            } else if (this.state === "fulfilled") {
-                onFulfilledTask(this.value);
+            } else if (that.state === "fulfilled") {
+                onFulfilledTask(that.value);
             } else {
-                onRejectedTask(this.reason);
+                onRejectedTask(that.reason);
             }
         })
 
         return promise;
     }
     catch(onRejected) {
-        return this.then(null, onRejected);
+        return that.then(null, onRejected);
     }
 
 }
@@ -183,8 +184,9 @@ let p = new MyPromise((resolve, reject) => {
 p
     .then((value) => {
         console.log('value', value);
-        return 456;
-    });
+        return MyPromise.resolve(6666);
+    })
+    .then(val => console.log(val))
 
 p.
     then((value) => {

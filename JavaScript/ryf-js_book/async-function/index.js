@@ -30,22 +30,19 @@ function spawn(genF) {
             let next;
             try {
                 next = nextF();
-            } catch (e) {
-                return reject(e);
+            } catch (err) {
+                reject(err);
+                return;
             }
+
             if (next.done) {
-                return resolve(next.value);
+                resolve(next.value);
+                return;
             }
             Promise
                 .resolve(next.value)
-                .then(v => {
-                    step(function () {
-                        return gen.next(v);
-                    }, e => {
-                        step(function () {
-                            return gen.throw(e);
-                        })
-                    })
+                .then((value) => {
+                    step(() => gen.next(value));
                 })
         }
         step(() => gen.next(undefined));
