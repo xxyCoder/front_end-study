@@ -19,6 +19,13 @@
 
 # Node接口
 - nodeType 整数值，表示节点类型
+  - Element   1
+  - Attr  2
+  - Text  3
+  - Comment 8
+  - Document  9
+  - DocumentType  10
+  - DocumentFragment  11
 - nodeName，节点的名称
   - 文档节点 #document
   - 元素节点 大写的标签名
@@ -35,7 +42,7 @@
 - parentNode
   - 类型可能是元素节点、文档节点、文档片段节点
 - parentElement 当前节点的父元素节点
-- childNodes 当前节点的所有子节点
+- childNodes 当前节点的所有子节点（包含文本节点和注释节点）
 - isConnected 布尔值，表示当前节点是否在文档之中
 - appendChild() 接受一个节点对象作为参数，将其插入到最后一个子节点末尾
   - 如何插入的是DocumentFragment节点，那么插入的其所有子节点
@@ -50,7 +57,7 @@
   - 参数节点为当前节点的子节点
   - 参数节点为当前节点的后代节点
 - compareDocumentPosition() 比较两个节点的位置并返回一个十六进制的数
-- isEqualNode() 判断两个节点是否相等（类型、属性、子节点）
+- isEqualNode() 判断两个节点是否相等（类型、属性、后代节点、文本节点、注释节点）
 
 # NodeList接口
 - 成员是节点对象
@@ -65,7 +72,12 @@
 # ParentNode接口
 - 只有元素节点、文档节点、文档片段节点有该接口
 - children 所有元素节点
+- firstElementChild 第一个元素节点
+- lastElementChild  最后一个元素节点
 - childElementCount 所有元素子节点的数目
+- append()  为当前节点添加一个或多个子节点，不仅可以使用元素字节作为参数，也可以使用字符串作为参数添加文本节点
+  - 与appendChild()的区别在于其只能添加一个节点（即只允许一个参数）；不能使用字符串作为参数
+- prepend() 为当前节点追加一个或多个子节点，位置是第一个元素子节点前面，用法与append()一致
 
 # ChildNode接口
 - remove() 从父节点移除该节点
@@ -126,11 +138,13 @@
   - toggle()
   - toString()
 - dateset 自定义data- 属性，用来添加数据
-- clientHeight 元素高度+padding
+- clientHeight 元素高度+padding，只对块级元素生效
+- clientWidth 元素本身的宽度和padding，如果有垂直滚动条，还要减去垂直滚动条的宽度
 - clientLeft 元素节点左边框的宽度 不包括左侧padding和margin
 - scrollHeight 当前元素总高度，包括溢出部分和不可见部分，也包括padding部分，不包括border、margin、::after、::before高度
 - scrollLeft 表示当前元素水平滚动条向右侧滚动的像素量
 - offsetParent 返回最靠近当前元素且CSS中position不为static的元素
+  - Element.offsetTop和Element.offsetLeft就是offsetParent元素计算的
 - offsetHeight 元素高度+padding+border+水平滚动条高度
 - offsetLeft 返回当前元素左上角相对于offsetParent节点的水平位移
 - getBoundingClientRect() 返回一个对象，存储了当前元素节点的大小、位置等信息
