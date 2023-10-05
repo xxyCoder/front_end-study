@@ -1,16 +1,27 @@
 import React from 'react'
 import ReactDom from 'react-dom/client'
-import DiaLog from './components/Dialog';
+import VoteClass from './views/VoteClass';
 
 const root = ReactDom.createRoot(document.getElementById("root"));
 root.render(
     <>
-        <DiaLog title="友情提示" content="出门注意防护，带好口罩！">
-            <button>确定</button>
-            <button>取消</button>
-        </DiaLog>
+        <VoteClass title="React"></VoteClass>
     </>
 )
+// root.render(
+//     <>
+//         <Vote title="React好学" ></Vote>
+//     </>
+// )
+
+// root.render(
+//     <>
+//         <DiaLog title="友情提示" content="出门注意防护，带好口罩！">
+//             <button>确定</button>
+//             <button>取消</button>
+//         </DiaLog>
+//     </>
+// )
 // root.render(
 //     <>
 //         <DemoOne title="标题一" x={2} className="box" style={{ fontSize: "10px" }} data={[10, 20]} >

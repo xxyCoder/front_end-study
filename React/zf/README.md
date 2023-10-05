@@ -10,7 +10,7 @@
         key: null,
         props: {},
         ref: null,
-        type: DemoOne
+        type: DemoOne(函数即函数名)
     }
     ```
   3. 基于root.render把虚拟DOM变为真是DOM
@@ -27,3 +27,27 @@
 - 可以对props属性设置校验,不论成功还是失败,都正常运行,失败则报警告
   - 设置默认值 函数组件.defaultProps = {}
   - 设置其他规则    依赖第官方插件 prop-types
+
+# 类组件
+- 继承React.Component
+- 需要有render方法,返回一个JSX视图
+- 虚拟DOM
+```js
+{
+  $$typeof: Symbol(react.element),
+  key: null,
+  props: {},
+  ref: null,
+  type: Class Vote
+}
+```
+- 每次调用都是new一个新的实例对象
+- 传递props挂载自身
+  - 需要constructor构造函数中调用super,将props挂载到this实例上
+  - 或者不写constructor,React也会自动挂载到this实例上
+- 状态初始化  this.state
+- 重新渲染视图  
+  - this.setState
+  - this.forceUpdate()  强制更新
+
+# 生命周期函数
