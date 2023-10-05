@@ -4,7 +4,7 @@ const axios = require('axios')
 // 发起POST请求
 axios({
     method: "post",
-    url: "http://localhost:8080/user/123",
+    url: "http://localhost:3000/user/123",
     data: {
         firstname: "xxy",
         lastname: "Coder"
@@ -13,7 +13,7 @@ axios({
 // 发起GET请求
 axios({
     method: "GET",
-    url: "http://localhost:8080/xxx",
+    url: "http://localhost:3000",
     responseType: "stream"
 })
     .then(response => {
@@ -23,7 +23,7 @@ axios("/user/123")
 
 // 创建Axios实例
 const instance = axios.create({
-    baseURL: "http://localhost:8080/api/",
+    baseURL: "http://localhost:3000/api/",
     timeout: 3000,
 })
 // 自定义实例默认值
@@ -70,7 +70,7 @@ let cancel = null;
 const options = {
     url: "/user",
     method: "get",
-    baseURL: "http://localhost:8080/api",
+    baseURL: "http://localhost:3000/api",
     // 允许向服务器发送前修改请求数据
     // 只能适用于POST GET PATCH请求
     // 数组中最后一个函数必须返回字符串 Buffer实例 FormData或Stream
