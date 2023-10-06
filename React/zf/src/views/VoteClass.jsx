@@ -20,6 +20,7 @@ class VoteClass extends React.Component {
     // }
 
     render() {
+        console.log("render")
         const { supNum, oppNum } = this.state;
         const { title } = this.props;
 
@@ -37,6 +38,29 @@ class VoteClass extends React.Component {
                 <button onClick={() => { ++this.state.oppNum; this.forceUpdate() }}>反对</button>
             </div>
         </div>
+    }
+    componentWillMount() {
+        console.log("componentWillMount")
+    }
+    componentDidMount() {
+        console.log("componentDidMount")
+    }
+    shouldComponentUpdate(nextProps, nextState) {   // 此时状态还没有发生改变
+        console.log("shouldComponentUpdate")
+        console.log(this.props, " VS ", nextProps);
+        console.log(this.state, "  VS ", nextState);
+        // return true  允许更新，进行下一步
+        // return false 不允许更新
+        return true
+    }
+    componentWillUpdate() { // 此时状态还没有发生改变
+        console.log("componentWillUpdate", this.state, this.props)
+    }
+    componentDidUpdate() {
+        console.log("componentDidUpdate")
+    }
+    componentWillUnmount() {
+        console.log("componentWillUnmount")
     }
 }
 

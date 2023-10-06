@@ -51,3 +51,24 @@
   - this.forceUpdate()  强制更新
 
 # 生命周期函数
+## 挂载钩子函数
+- componentWillMount()   不安全
+- render()
+  - 子组件componentWillMount()
+  - 子组件render()
+  - 子组件componentDidMount()
+- componentDidMount()
+
+## 更新钩子函数
+- shouldComponentUpdate() 
+  - 对于forceUpdate会跳过该钩子函数，进入下一步
+- componentWillUpdate() 不安全
+- render()
+  - 子组件shouldComponentUpdate()
+  - 子组件componentWillUpdate()
+  - 子组件render()
+  - 子组件componentDidUpdate()
+- componentDidUpdate()
+
+## 卸载钩子函数
+- componentWillUnmount()  
