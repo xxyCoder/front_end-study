@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>text-wrap</title>
+    <style>
+        p {
+            width: 300px;
+            border: 1px solid black;
+            text-wrap: balance;
+            word-break: break-all
+        }
+    </style>
+</head>
+
+<body>
+    <p>
+        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        连接一起的字母作为一个整体，不会自己换行 连接一起的字母作为一个整体，不会自己换行，需要添加word-break
+        xxxxxxx
+        xxxxxxx
+        xxxxxxx
+        xxxxxxx
+        xxxxxxx
+        xxxxxxx
+        xxxxxxx
+    </p>
+</body>
+
+</html>
+
+<!-- 
+    text-wrap: balance; 可以让每一行文字的个数尽可能相等
+ -->

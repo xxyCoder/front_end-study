@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>::file-selector-button</title>
+    <style>
+        /* 修改文字 */
+        [type="file"] {
+            color: gray;
+        }
+
+        ::file-selector-button {
+            height: 2rem;
+            font-size: 1rem;
+            color: #fff;
+            background-color: aqua;
+            padding: 3px 6px;
+            cursor: pointer;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="file" name="image" accept="images/*,video/*" /><br>
+    <input type="file" name="image" accept="image/*" capture="user">开启前置摄像头<br />
+    <input type="file" name="image" accept="images/*" capture="environment" />调用后置摄像头<br />
+    <input type="file" name="image" accept="audio/*" capture= />调用麦克风和摄像头<br>
+    <input type="file" webkitdirectory directory multiple />选择文件夹
+</body>
+
+</html>
