@@ -4,6 +4,7 @@
 - 追踪用户，记录和分析用户行为
 - 按照域名划分，只能读取自己域名，各级子域名和本域名都可以读取本域名cookie
 - 一般来说，单个域名设置的cookie不应该超过30个，每个cookie大小不能超过4kb，超出限制将被忽略
+- navigator.cookieEnabled 返回一个布尔值，表示浏览器是否打开cookie功能
 
 ## cookie元数据
 - name  名字

@@ -16,7 +16,7 @@
 - 脚本可以获取DOM的时机
   - 脚本放底部执行
   - DOMContentLoaded事件的回调
-  - script的onload属性
+  - script的onload属性（当srcipt指定的外部脚本文件下载和解析完成，才会触发onload）
 - 解决脚本文件下载阻塞网页渲染的问题
   - defer属性，延迟脚本的执行，等到DOM加载生成后，再执行脚本
     1. 浏览器开始解析HTML页面

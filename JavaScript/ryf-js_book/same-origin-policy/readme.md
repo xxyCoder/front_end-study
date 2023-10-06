@@ -6,6 +6,7 @@
   - 无法读取非同源网页的Cookie、localStorage和IndexedDB
   - 无法接触非同源网页的DOM
   - 无法向非同源地址发送AJAX请求（可以发送，但是浏览器会拒绝响应）
+- 浏览器通过检查document.domain判断是否同源，可以更改domain使得cookie在同源不同路径下共享，但是对于localStorage和indexDB没有作用
 
 ## iframe和多窗口通信
 - 只有同源情况下，子窗口和父窗口才能通信
