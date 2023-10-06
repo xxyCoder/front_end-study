@@ -105,6 +105,9 @@
 - location 拿到该对象
 - lastModified 表示当前文档最后修改的时间
 - cookie  
+- designMode  表示当前文档是否可编辑
+  - on  表示可以编辑
+  - off 表示不可编辑
 - open 清楚文档所有内容，使其变得可写
 - write writeln 写入内容
 - close 关闭打开的文档
@@ -170,7 +173,7 @@
 - removeProperty() 删除CSS样式
 - setProperty() 设置新的CSS属性
 - CSS.supports() 返回布尔值判断当前环境是否支持某一CSS规则
-- window.getComputedStyle() 
+- window.getComputedStyle() 返回浏览器计算后得到的最终规则
 
 # StyleSheet接口
 - 代表网页的一张样式表，包括link元素加载的样式表和style内嵌的样式表以及XML文档样式表
@@ -205,4 +208,3 @@
 - target 发生变化的DOM
 - attributeName 发生变动属性
 - oldValue 变动前的值 只对attribute和characterData变动有效
-- 
