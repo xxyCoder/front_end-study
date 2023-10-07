@@ -1,13 +1,20 @@
 import React from 'react'
 import ReactDom from 'react-dom/client'
-import VoteClass from './views/VoteClass';
+import DemoThree from './views/DemoThree';
 
 const root = ReactDom.createRoot(document.getElementById("root"));
 root.render(
     <>
-        <VoteClass title="React"></VoteClass>
+        <DemoThree />
     </>
 )
+
+// root.render(
+//     <>
+//         <VoteClass title="React"></VoteClass>
+//     </>
+// )
+
 // root.render(
 //     <>
 //         <Vote title="React好学" ></Vote>
