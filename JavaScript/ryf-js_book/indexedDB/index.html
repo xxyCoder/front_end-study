@@ -73,9 +73,10 @@
             const objectStore = db.transaction(["person"]).objectStore("person");
             objectStore.openCursor().onsuccess = function (e) {
                 const cursor = e.target.result;
-
+                
                 if (cursor) {
                     console.log("cursor:", cursor);
+                    cursor.continue();
                 } else {
                     console.log("没有更多数据了")
                 }
