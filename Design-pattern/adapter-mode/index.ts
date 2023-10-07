@@ -41,3 +41,21 @@ class MediaAdapter implements MediaPlayer {
         }
     }
 }
+
+
+class LinuxUtils {
+    linuxMethod() {
+        console.log("linux method");
+    }
+}
+
+interface IAdapter {
+    adapterMethod(): void;
+}
+
+class WindowsAdapter extends LinuxUtils implements IAdapter {
+    adapterMethod(): void {
+        console.log("linux ---> windows method");
+        super.linuxMethod();
+    }
+}
