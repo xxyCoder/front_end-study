@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>web页面 生命周期</title>
+</head>
+
+<body>
+    <script>
+        const f = document.createDocumentFragment();
+        for (let i = 0; i < 10; ++i) {
+            const div = document.createElement("div");
+            div.innerText = `我是第${i + 1}个div`;
+            f.appendChild(div);
+        }
+        document.body.appendChild(f);
+    </script>
+
+    <script>
+        onload = function () {
+            console.log("onload")
+        }
+        onpageshow = function () {
+            console.log("pageshow");
+        }
+        document.addEventListener("readystatechange", (event) => {
+            console.log("readystatechange:", document.readyState)
+        });
+        document.addEventListener("DOMContentLoaded",() => {
+            console.log("DOMContentLoaded")
+        })
+    </script>
+</body>
+
+</html>
