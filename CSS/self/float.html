@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>观察float属性</title>
+    <style>
+        div {
+            height: 300px;
+            background-color: cadetblue;
+            overflow: visible;
+        }
+
+        .float-left {
+            float: left;
+            color: red;
+            background-color: aqua;
+        }
+        .float-right {
+            float: right;
+            color: yellow;
+            background-color: bisque;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+    <div class="float-left">start xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx end</div>
+    <div>start xxxxxxx end</div>
+    <div class="float-left" style="width: 1000px;height: 300px;">start xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx end</div>
+    <div class="float-left" style="width: 100px;height: 100px;">start xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx end</div>
+    <div class="float-left" style="width: 200px;height: 300px;">start xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx end</div>
+    <div>start xxxxxxxxxxx end</div>
+    <div class="float-right" style="width: 1000px;height: 300px;">start xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx end</div>
+    <div class="float-left" style="width: 100px;height: 100px;">start xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx end</div>
+    <div class="float-left" style="width: 200px;height: 300px;">start xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx end</div>
+</body>
+
+</html>
+
+<!-- 
+    总结：
+        float会尽量向上靠拢，如果后面有非float元素，就相当于浮在非float元素上
+        非float元素正常排列，就相当于不知道float元素一样，但是文字会在浮动元素文字之后开始写，超出则不可见（设置可见也无效）
+ -->
