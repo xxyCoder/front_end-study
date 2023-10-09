@@ -14,7 +14,7 @@
         const request = window.indexedDB.open("xxy", 1)
         // 监听数据库打开失败
         request.onerror = function (e) {
-            console.log("数据库打开失败")
+            console.log("数据库打开失败", e.target.errorCode)
         }
         // 监听数据库打开成功
         let db = null;
@@ -29,11 +29,12 @@
         request.onupgradeneeded = function (e) {
             db = e.target.result;
             let objectStore;
-            if (!db.objectStoreNames.contains("person")) {
-                objectStore = db.createObjectStore("person", { keyPath: "id" })
-                // 自动生成主键
-                // objectStore = db.createObjectStore("person", { autoIncrement: true })
+            if (db.objectStoreNames.contains("person")) {
+                db.deleteObjectStore("person");
             }
+            objectStore = db.createObjectStore("person", { keyPath: "id" })
+            // 自动生成主键
+            // objectStore = db.createObjectStore("person", { autoIncrement: true })
             // 第一个参数表示索引名称
             // 第二个参数表示索引所在属性
             // 第三个参数表示配置对象
@@ -73,9 +74,19 @@
             const objectStore = db.transaction(["person"]).objectStore("person");
             objectStore.openCursor().onsuccess = function (e) {
                 const cursor = e.target.result;
-                
+
                 if (cursor) {
                     console.log("cursor:", cursor);
+                    if (cursor.key === 1) {
+                        console.log(curson.value.name, cursor.value.age);
+                        cursor.value.name = "xxx";
+                        // 保存数据
+                        const updateRequest = cursor.update(cursor.value);
+                        updateRequest.onsuccess = function () { console.log("操作成功"); }
+                        updateRequest.onerror = function () { console.log("操作失败"); }
+                    } else if (cursor.key === 2) {
+                        cursor.delete()
+                    }
                     cursor.continue();
                 } else {
                     console.log("没有更多数据了")
