@@ -7,6 +7,9 @@ const server = ws.createServer((conn) => {
     conn.on("close", (code, reason) => {
         console.log(`close ${code} ${reason}`)
     })
+    conn.on("error", (err) => {
+        console.log("err:", err)
+    })
     conn.sendText("Hello!")
 })
 
