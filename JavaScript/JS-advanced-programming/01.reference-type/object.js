@@ -26,6 +26,13 @@ ObjectPrototype.prototype.say = function () {
     console.log(this.name)
 }
 
+// 手写new
+function myNew(Constructor, ...args) {
+    const thisValue = Object.create(Constructor.prototype);
+    const result = Constructor.apply(thisValue, args);
+    return typeof result === 'object' && result !== null ? result : thisValue;
+}
+
 // 属性
 const person = {}
 // 使用该方法不指定值默认为false
@@ -139,3 +146,61 @@ console.log("解构:", name, fname, age, sex, phone)
 // 原始属性解构，在内部调用ToObject()转换为对象，除了undefined和null不能解构
 const { length } = "xxyCoder", { constructor: c } = 1
 console.log("basic:", length, c);
+
+
+function SuperType(name) {
+    this.property = true;
+    this.name = name;
+    this.color = ["red", "blue", "green"];
+}
+SuperType.prototype.getSuperValue = function () {
+    return this.property;
+}
+SuperType.prototype.sayName = function () {
+    console.log(this.name);
+}
+
+// 原型链继承
+function SubType1() {
+    this.subProperty = false;
+}
+SubType1.prototype = new SuperType("xxyCoder");
+SubType1.prototype.constructor = SubType1;
+SubType1.prototype.getSubValue = function () {
+    return this.subProperty;
+}
+
+// 盗用构造函数
+function SubType2(name) {
+    // 继承
+    SuperType.call(this, name);
+}
+
+// 组合继承
+function SubType3(name) {
+    SuperType.call(this, name);
+}
+SubType3.prototype = new SuperType();
+SubType3.prototype.constructor = SubType3;
+
+// 寄生式组合继承
+function SubType4(name) {
+    SuperType.call(this, name);
+}
+SubType4.prototype = Object(SuperType.prototype)    // 将父类原型对象的副本给子类原型对象
+SubType4.prototype.constructor = SubType4;
+
+// 手写instanceof方法
+function myInstanceOf(tag, src) {
+    if (typeof tag === 'undefined' || tag === null) {
+        return false;
+    }
+
+    while (tag) {
+        if (tag.constructor === src) {
+            return true;
+        }
+        tag = Object.getPrototypeOf(tag);
+    }
+    return false;
+}
