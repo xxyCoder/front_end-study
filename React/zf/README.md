@@ -90,3 +90,10 @@
 - 如果绑定DOM中是ref对象（{current:null}），会让当前DOM对象绑定在current中
 - 对于函数组件使用ref会报错（Function components cannot be given refs）
   - 配合forwardRef，获取函数子组件内部某个元素
+
+## setState
+- 接受第二个参数（回调函数），在componentDidUpdate之后触发
+- 即使shouldComponentUpdate阻止了更新，但回调函数仍然会执行
+- 异步更新，多次修改视图只更新一次
+  - 减少视图更新次数，降低渲染的性能消耗
+  - 利用更新队列机制处理，在相同的时间段内遇到setState会立即放入更新队列当中
