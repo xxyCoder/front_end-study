@@ -1,0 +1,21 @@
+{
+  "name": "monitoring",
+  "version": "1.0.0",
+  "description": "- 代码埋点\r   - 以嵌入代码的形式进行埋点，比如需要监控用户的点击事件，会选择在用户点击时，插入一段代码，保存这个监听行为或以某种数据形式发送给服务器端\r   - 优点是可以在任意时刻，精确的发送或保存所需信息\r   - 缺点是工作量大\r - 可视化埋点\r   - 通过可视化交互的手段\r   - 代替手工埋点\r - 无痕埋点\r   - 前端的任意一个事件都被绑定一个标识，所有事件都被记录下来，通过定期上传记录文件，配合文件解析\r   - 优点是采集全量数据，不会漏埋和误埋\r   - 缺点是给服务器增加压力",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "dev": "webpack-dev-server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "html-webpack-plugin": "^5.5.3",
+    "user-agent": "^1.0.4",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  }
+}
