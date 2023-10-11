@@ -24,3 +24,7 @@
 - HTTP回应 Set-Cookie: key=value;
 - 如果想要改变之前设置过的cookie，就必须保证其cookie的key、domain、path、secure是与要改变的cookie相同
 - HTTP请求 Cookie: key=value，服务器收到浏览器发送的cookie，是无法知道cookie何时过期，也不知道属于那个域名（一级还是二级）
+
+## 子cookie
+- 目的是绕过浏览器对每个域的cookie数限制，格式类似于查询字符串
+  - name1=valu1&name2=value2

@@ -191,16 +191,57 @@ SubType4.prototype = Object(SuperType.prototype)    // 将父类原型对象的�
 SubType4.prototype.constructor = SubType4;
 
 // 手写instanceof方法
-function myInstanceOf(tag, src) {
-    if (typeof tag === 'undefined' || tag === null) {
+function myInstanceOf(obj, classFunction) {
+    if (obj === null || typeof obj === 'undefined' || classFunction === null || typeof classFunction === 'undefined') {
         return false;
     }
-
-    while (tag) {
-        if (tag.constructor === src) {
-            return true;
-        }
-        tag = Object.getPrototypeOf(tag);
+    // 不使用obj作为判断，可能obj是假类型无法进入while
+    while (Object.getPrototypeOf(obj) && Object.getPrototypeOf(obj) !== classFunction.prototype) {
+        console.log(obj.__proto__)
+        obj = Object.getPrototypeOf(obj);
     }
-    return false;
+    return Object.getPrototypeOf(obj) === classFunction.prototype
 }
+
+// 类
+{
+    class Person {
+        static type = "Person";
+        constructor(name) {
+            this._name = name;
+        }
+        get name() {
+            return this._name;
+        }
+        set name(value) {
+            this._name = value;
+        }
+        static getType() {
+            console.log("class:", this)
+            return this.type;
+        }
+    }
+    const Animal = class { };
+    function exists() {
+        console.log("YES", typeof Animal)
+    }
+
+    const p = new Person("xxyCoder");
+    console.log(Person.getType())
+
+    // 类继承
+    class xxy extends Person {
+        constructor(name) {
+            super(name);
+        }
+        static getType() {
+            console.log("xxy");
+            return super.getType()
+        }
+    }
+    const dog = class extends Animal { }
+
+    const x = new xxy("xxyCoder");
+    console.log(xxy.getType())
+}
+exists();
