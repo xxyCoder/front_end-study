@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表示一个对话框或其他交互式组件</title>
+</head>
+
+<body>
+    <dialog id="dialog">
+        <p>Greetings, one and all!</p>
+        <button id="cacel">OK</button>
+    </dialog>
+    <button id="btn">打开弹窗</button>
+    <script>
+        const dialog = document.getElementById("dialog");
+        const btn = document.getElementById("btn");
+        const cacel = document.getElementById("cacel")
+
+        btn.onclick = () => {
+            dialog.open = true;
+        }
+        cacel.onclick = () => {
+            dialog.open = false
+        }
+    </script>
+</body> 
+
+</html>
+
+<!-- 
+    open为false在CSS中即为display:none
+ -->

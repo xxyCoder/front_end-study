@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>定义元素表示术语的一个定义</title>
+</head>
+
+<body>
+    <p>
+        <dfn id="def-internet">The Internet</dfn> is a global system of interconnected
+        networks that use the Internet Protocol Suite (TCP/IP) to serve billions of
+        users worldwide.
+    </p>
+    <dl>
+        <dt>
+            <dfn>
+                <abbr title="World-Wide Web">WWW</abbr>
+            </dfn>
+        </dt>
+        <dd>
+            The World-Wide Web (WWW) is a system of interlinked hypertext documents
+            accessed on <a href="#def-internet">the Internet</a>.
+        </dd>
+    </dl>
+</body>
+
+</html>
+
+<!-- 
+    术语定义应该在p、section或定义列表dt、dd对给出
+    被定义术语的值由下列规则确定：
+        如果 <dfn> 元素有一个 title 属性，那么该术语的值就是该属性的值。
+        否则，如果它仅包含一个 <abbr> 元素，该元素拥有 title 属性，那么该术语的值就是该属性的值。
+        否则，<dfn> 元素的文本内容就是该术语的值。
+ -->

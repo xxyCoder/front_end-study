@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>创建一个组件，仅在被切换成展开状态时</title>
+</head>
+
+<body>
+    <details id="details">
+        <summary>xxyCoder</summary>
+        author:xxy;
+    </details>
+
+    <script>
+        const details = document.getElementById('details');
+        details.addEventListener("toggle", () => {
+            if (details.open) {
+                console.log("打开")
+            } else {
+                console.log("关闭")
+            }
+        })
+    </script>
+</body>
+
+</html>
+
+<!-- 
+    open属性，默认为false即不展开
+    可监听toggel事件
+ -->
