@@ -92,8 +92,11 @@
   - 配合forwardRef，获取函数子组件内部某个元素
 
 ## setState
+- 第一个参数传递回调函数或对象
 - 接受第二个参数（回调函数），在componentDidUpdate之后触发
 - 即使shouldComponentUpdate阻止了更新，但回调函数仍然会执行
 - 异步更新，多次修改视图只更新一次
   - 减少视图更新次数，降低渲染的性能消耗
   - 利用更新队列机制处理，在相同的时间段内遇到setState会立即放入更新队列当中
+  - react18的setState不论任何地方执行都是异步的，而react16在基于JSX的事件绑定、生命周期函数中setState才是异步的
+  - flushSync操作结束之后可以刷新update更新队列，也就是让更新队列立即执行

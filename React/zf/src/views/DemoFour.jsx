@@ -1,4 +1,5 @@
 import React from 'react'
+import { flushSync } from 'react-dom'
 
 class DemoFour extends React.Component {
     state = {
@@ -23,6 +24,11 @@ class DemoFour extends React.Component {
             z: z + 1
         }, () => {
             console.log("z update end")
+            this.setState({
+                z: z + 1.1
+            }, () => {
+                console.log("z update end version 0.1")
+            })
         });
         Promise.resolve().then(() => {
             this.setState({
@@ -68,6 +74,23 @@ class DemoFour extends React.Component {
         }, 2001)
     }
 
+    handleTwo = () => {
+        const { x, y } = this.state;
+        this.setState({
+            x: x + 1
+        })
+        flushSync(() => {
+            this.setState({
+                y: y + 1
+            })
+            console.log(this.state)
+        })
+        // 确保x和y已经更新完，拿到了最新值
+        this.setState({
+            z: this.state.x + this.state.y
+        })
+    }
+
     shouldComponentUpdate() {
         console.log("shouldComponentUpdate");
         return true;
@@ -83,7 +106,8 @@ class DemoFour extends React.Component {
         return <div>
             {x} - {y} - {z}
             <br />
-            <button onClick={this.handle}>按钮</button>
+            <button onClick={this.handle}>按钮1</button>
+            <button onClick={this.handleTwo}>按钮2</button>
         </div>
     }
 }
