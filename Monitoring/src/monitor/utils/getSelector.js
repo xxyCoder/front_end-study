@@ -14,9 +14,15 @@ function getSelectors(path) {
         .join(' ');
 }
 
-export default function (path) {
-    console.log(path)
-    if (Array.isArray(path)) {
+export default function (pathOrTarget) {
+    if (Array.isArray(pathOrTarget)) {
+        return getSelectors(pathOrTarget);
+    } else {
+        const path = [];
+        while (pathOrTarget) {
+            path.push(pathOrTarget);
+            pathOrTarget = pathOrTarget.parent;
+        }
         return getSelectors(path);
     }
 }
