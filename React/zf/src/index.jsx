@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactDom from 'react-dom/client'
-import DemoFive from './views/DemoFive';
+import DemoSix from './views/DemoSix';
 
 const root = ReactDom.createRoot(document.getElementById("root"));
 root.render(
     <>
-        <DemoFive />
+        <DemoSix />
     </>
 )
 
