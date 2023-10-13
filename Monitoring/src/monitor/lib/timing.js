@@ -27,12 +27,20 @@ export function timing() {
                 requestStart,
                 responseStart,
                 responseEnd,
-                domLoading,
                 domInteractive,
                 domContentLoadedEventStart,
                 domContentLoadedEventEnd,
                 loadEventStart,
-            } = performance.timing
+                domComplete
+            } = window.performance.getEntries()[0];
+
+            console.log("连接时间:", connectEnd - connectStart);
+            console.log("首字节达到时间:", responseStart - requestStart);
+            console.log("响应读取:", responseEnd - requestStart);
+            console.log("DOM解析完成:", loadEventStart - responseEnd);
+            console.log("资源加载时间:", domComplete - domContentLoadedEventEnd);
+            console.log("首次交互时间:", domInteractive - fetchStart);
+            console.log("完整加载时间:", loadEventStart - fetchStart);
 
             const log = {
                 kind: "experience",
