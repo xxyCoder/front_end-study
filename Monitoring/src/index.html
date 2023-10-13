@@ -29,6 +29,14 @@
             }
             xhr.send();
         }
+
+        setTimeout(() => {
+            const h1 = document.createElement("h1");
+            h1.innerHTML = "我是这个页面最有意义的内容";
+            h1.setAttribute("elementtiming", "meaningful");
+            const content = document.querySelector('.content');
+            content.appendChild(h1);
+        }, 2000);
     </script>
 </body>
 
