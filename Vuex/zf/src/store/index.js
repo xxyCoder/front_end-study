@@ -22,5 +22,40 @@ export default createStore({
     }
   },
   modules: {
+    aCount: {
+      namespaced: true,
+      state: {
+        count: 0
+      },
+      mutations: {
+        add(state, payload) {
+          state.count += payload;
+        }
+      },
+      modules: {
+        cCount: {
+          namespaced: true,
+          state: {
+            count: 0
+          },
+          mutations: {
+            add(state, payload) {
+              state.count += payload;
+            }
+          }
+        }
+      }
+    },
+    bCount: {
+      namespaced: true,
+      state: {
+        count: 0
+      },
+      mutations: {
+        add(state, payload) {
+          state.count += payload;
+        }
+      }
+    }
   }
 })

@@ -4,6 +4,12 @@
   <button @click="add">同步+</button>
   <br>
   <button @click="addAsync">异步+</button>
+  <hr>
+  a模块: {{ aCount }}
+  <button @click="addA">++a</button>
+  <br>
+  b模块: {{ bCount }}
+  <button @click="addB">++b</button>
 </template>
 
 <script>
@@ -21,11 +27,21 @@ export default {
     function addAsync() {
       store.dispatch("addAsync", 1);
     }
+    function addA() {
+      store.commit("aCount/add", 1);
+    }
+    function addB() {
+      store.commit("bCount/add", 1);
+    }
     return {
       count: computed(() => store.state.count),
       double: computed(() => store.getters.double),
+      aCount: computed(() => store.state.aCount.count),
+      bCount: computed(() => store.state.bCount.count),
       add,
-      addAsync
+      addAsync,
+      addA,
+      addB
     }
   }
 }
