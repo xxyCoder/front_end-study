@@ -37,7 +37,7 @@ export function timing() {
             const log = {
                 kind: "experience",
                 type: "timing",
-                connectTime: connectEnd - connectStart, // 连接事件
+                connectTime: connectEnd - connectStart, // 连接时间
                 ttfbTime: responseStart - requestStart,  // 首字节达到时间
                 responseTime: responseEnd - responseStart,  // 响应读取时间
                 parseDOMTime: loadEventStart - domLoading,  // DOM解析时间
