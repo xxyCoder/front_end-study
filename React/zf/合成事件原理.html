@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>合成事件原理</title>
+    <style>
+        .outter {
+            width: 300px;
+            height: 300px;
+            background-color: aqua;
+        }
+
+        .inner {
+            width: 100px;
+            height: 100px;
+            background-color: bisque;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root" class="center">
+        <div class="outter">
+            <div class="inner"></div>
+        </div>
+    </div>
+
+    <script>
+        const root = document.getElementById("root"),
+            outter = document.querySelector(".outter"),
+            inner = document.querySelector(".inner");
+        // 经过视图渲染解析，outter、inner都有onXxx和onXxxCapture
+        outter.onClick = () => {
+            console.log("outter 冒泡");
+        };
+        outter.onClickCapture = () => {
+            console.log("outter 捕获");
+        }
+        inner.onClick = () => {
+            console.log("inner 冒泡");
+        };
+        inner.onClickCapture = () => {
+            console.log("inner 捕获");
+        }
+        // 给root做事件绑定
+        root.addEventListener("click", (ev) => {
+            const path = ev.composedPath(); // [事件源,....,windows]
+            path.forEach(elem => {
+                const handler = elem.onClick;
+                if (handler) {
+                    handler(ev);
+                }
+            })
+            console.log("root 冒泡");
+        }, false);
+        root.addEventListener("click", (ev) => {
+            const path = ev.composedPath(); // [事件源,....,windows]
+            path.reverse().forEach(elem => {
+                const handler = elem.onClickCapture;
+                if (handler) {
+                    handler(ev);
+                }
+            })
+            console.log("root 捕获");
+        }, true);
+    </script>
+</body>
+
+</html>

@@ -40,8 +40,10 @@ class DemoSix extends React.Component {
             <button onClick={this.handle}>按钮</button>
             <button onClick={this.handle2.bind(null, 10)}>按钮2</button>
 
-            <div style={{ width: 500, height: 500, backgroundColor: "lightgreen" }} className="outter" onClick={() => {
+            <div style={{ width: 500, height: 500, backgroundColor: "lightgreen" }} className="outter" onClick={(e) => {
                 console.log("outter 冒泡");
+                e.stopPropagation();    // 阻止原生事件&合成事件
+                e.nativeEvent.stopPropagation() // 阻止原生事件
             }} onClickCapture={() => {
                 console.log("outter 捕获");
             }}>

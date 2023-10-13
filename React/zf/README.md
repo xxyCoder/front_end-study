@@ -104,5 +104,8 @@
 # 合成事件处理原理
 - 不是基于addEventListener做的事件绑定，React中的合成事件都是基于事件委托处理
 - 在React17之后，都是委托给#root这个容器（冒泡和捕获都做了委托）
+  - 因为所有组件中渲染的内容，最后都会插入#root容器，这样点击页面中的任何一个元素，都会触发#root的触发
+  - 通过event.composePath()拿到事件流对象
 - React17之前，都是委托给document容器（只做了冒泡阶段的委托）
 - 对于没有实现事件传播机制的事件，才是单独族做事件绑定（onMouseEnter或onMouseLeave等）
+- 在组件渲染的时候，发现属性有onXxx或onXxxCapture这样的属性，只是将其绑定的方法赋值给元素相关的属性
