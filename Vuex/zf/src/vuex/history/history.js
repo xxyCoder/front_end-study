@@ -1,5 +1,5 @@
 import { reactive } from 'vue';
-import { forEachValue } from './utils';
+import { forEachValue } from '../utils';
 
 export default class Store {
     constructor(options) {

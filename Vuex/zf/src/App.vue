@@ -10,6 +10,9 @@
   <br>
   b模块: {{ bCount }}
   <button @click="addB">++b</button>
+  <br>
+  c模块: {{ cCount }}
+  <button @click="addC">++c</button>
 </template>
 
 <script>
@@ -33,15 +36,20 @@ export default {
     function addB() {
       store.commit("bCount/add", 1);
     }
+    function addC() {
+      store.commit("aCount/cCount/add", 1);
+    }
     return {
       count: computed(() => store.state.count),
       double: computed(() => store.getters.double),
       aCount: computed(() => store.state.aCount.count),
       bCount: computed(() => store.state.bCount.count),
+      cCount: computed(() => store.state.aCount.cCount.count),
       add,
       addAsync,
       addA,
-      addB
+      addB,
+      addC
     }
   }
 }

@@ -1,5 +1,5 @@
 import Module from "./module";
-import { forEachValue } from "./utils";
+import { forEachValue } from "../utils";
 
 export default class ModuleCollection {
     constructor(rootModule) {
@@ -22,5 +22,12 @@ export default class ModuleCollection {
                 this.register(rawChildModule, path.concat(key));
             })
         }
+    }
+    getNamespaced(path) {
+        let module = this.root;
+        return path.reduce((namespacedStr, key) => {
+            module = module.getChild(key);
+            return namespacedStr + (module.namespaced ? key + '/' : '');
+        }, '');
     }
 }
