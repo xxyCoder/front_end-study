@@ -8,16 +8,16 @@ export default class Axios {
     }
     dispatchRequest<T>(config: AxiosRequestConfig): Promise<AxiosResponse<T>> {
         return new Promise<AxiosResponse<T>>((resolve, reject) => {
-            let { method, url, params } = config;
+            let { method = "GET", url, params, headers, data, timeout } = config;
             const request = new XMLHttpRequest();
-            if (params && typeof params === 'object') {
+            if (params) {
                 // {name:"xxyCoder",age:21} ==> name=xxyCoder&age=21
                 params = qs.stringify(params);
+                url += (url!.indexOf("?") !== -1 ? '&' : '?') + params;
             }
-            url += (url.indexOf("?") !== -1 ? '&' : '?') + params;
-            request.open(method, url, true);
+            request.open(method, url!, true);
             request.onreadystatechange = function () {
-                if (request.readyState === 4) {
+                if (request.readyState === 4 && request.status !== 0) {
                     if (request.status >= 200 && request.status < 300) {
                         const response: AxiosResponse<T> = {
                             data: request.response ? request.response : request.responseText,
@@ -29,11 +29,29 @@ export default class Axios {
                         }
                         resolve(response);
                     } else {
-                        reject("请求失败");
+                        reject(`Error: Request failed with status of code ${request.status}`);
                     }
                 }
             }
-            request.send();
+            if (headers) {
+                for (const key in headers) {
+                    request.setRequestHeader(key, headers[key]);
+                }
+            }
+            let body: string | null = null;
+            if (data) {
+                body = JSON.stringify(data);
+            }
+            if (timeout) {
+                request.timeout = timeout;
+                request.ontimeout = function () {
+                    reject(`Error:timeout of ${timeout}ms exceeded`);
+                }
+            }
+            request.onerror = function () {
+                reject("net:ERR_INTERNET_DISCONNECTED");
+            }
+            request.send(body);
         })
     }
 }

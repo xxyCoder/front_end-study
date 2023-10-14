@@ -1,0 +1,8 @@
+class AxiosInterceptorManager {
+    use() {
+
+    }
+    eject() {
+        
+    }
+}
