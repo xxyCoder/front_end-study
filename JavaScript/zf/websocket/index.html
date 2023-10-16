@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>websocket</title>
+</head>
+
+<body>
+    <script>
+        const ws = new WebSocket("ws://localhost:3000");
+        ws.onopen = function () {
+            console.log("connection open!");
+            ws.send("Hello server");
+        }
+        ws.onmessage = function (e) {
+            console.log("recive from server:", e.data);
+        }
+    </script>
+</body>
+
+</html>
