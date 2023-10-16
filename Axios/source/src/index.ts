@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "./axios";
+import axios, { AxiosResponse, AxiosRequestConfig } from "./axios";
 
 const baseURL = "http://localhost:8080";
 
@@ -10,6 +10,40 @@ let user: User = {
     name: "xxyCoder",
     password: "123456"
 }
+
+// 拦截器
+axios.interceptors.request.use((config: AxiosRequestConfig): AxiosRequestConfig => {
+    config.headers && (config.headers.name += '1');
+    return config;
+}, (err: any) => Promise.reject(err));
+let request = axios.interceptors.request.use((config: AxiosRequestConfig): AxiosRequestConfig => {
+    config.headers && (config.headers.name += "2");
+    return config;
+})
+axios.interceptors.request.use((config: AxiosRequestConfig): AxiosRequestConfig | Promise<AxiosRequestConfig> => {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            config.headers && (config.headers.name += "3");
+            resolve(config);
+        }, 2000);
+    })
+})
+axios.interceptors.request.eject(request);
+
+axios.interceptors.response.use((response: AxiosResponse) => {
+    response.data.name += "1";
+    return response;
+}, (err: any) => Promise.reject(err));
+let response = axios.interceptors.response.use((response: AxiosResponse) => {
+    response.data.name += "2";
+    return response;
+})
+axios.interceptors.response.use((response: AxiosResponse) => {
+    response.data.name += "3";
+    return response;
+})
+axios.interceptors.response.eject(response);
+
 // GET请求
 axios<User>({
     method: "GET",

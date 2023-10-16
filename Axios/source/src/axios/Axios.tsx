@@ -1,10 +1,30 @@
 import qs from 'qs'
 import parseHeaders from 'parse-headers';
 import { AxiosRequestConfig, AxiosResponse } from "./types";
+import AxiosInterceptorManager, { Interceptors } from './AxiosInterceptorManager';
 
-export default class Axios {
-    request<T>(config: AxiosRequestConfig): Promise<AxiosResponse<T>> {
-        return this.dispatchRequest(config);
+export default class Axios<T> {
+    public interceptors = {
+        request: new AxiosInterceptorManager<AxiosRequestConfig>(),
+        response: new AxiosInterceptorManager<AxiosResponse<T>>()
+    }
+    request(config: AxiosRequestConfig): Promise<AxiosRequestConfig | AxiosResponse<T>> {
+        const chain: Array<Interceptors<AxiosRequestConfig> | Interceptors<AxiosResponse<T>>> = [{
+            onFullfilled: this.dispatchRequest
+        }];
+        this.interceptors.request.interceptors.reverse().forEach((interceptor: Interceptors<AxiosRequestConfig> | null) => {
+            interceptor && chain.unshift(interceptor);
+        });
+        this.interceptors.response.interceptors.forEach((interceptor: Interceptors<AxiosResponse<T>> | null) => {
+            interceptor && chain.push(interceptor);
+        });
+
+        let promise: Promise<AxiosRequestConfig | AxiosResponse<T>> = Promise.resolve(config);
+        while (chain.length > 0) {
+            const { onFullfilled, onRejected } = chain.shift()!;
+            promise = promise.then(onFullfilled, onRejected);
+        }
+        return promise;
     }
     dispatchRequest<T>(config: AxiosRequestConfig): Promise<AxiosResponse<T>> {
         return new Promise<AxiosResponse<T>>((resolve, reject) => {

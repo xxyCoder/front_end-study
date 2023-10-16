@@ -1,3 +1,4 @@
+import AxiosInterceptorManager from "./AxiosInterceptorManager";
 
 export type Methods = 'GET' | 'get' | "post" | "POST" | "put" | "PUT" | "delete" | "DELETE" | "options" | "OPTIONS";
 
@@ -24,7 +25,7 @@ export interface AxiosResponse<T = any> {
     data: T;
     status: number;
     statusText: string;
-    headers?: Record<string, string | string[]>;
+    headers?: Record<string, string>;
     config?: AxiosRequestConfig;
     request?: XMLHttpRequest;
 }
