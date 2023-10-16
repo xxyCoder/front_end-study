@@ -1,6 +1,10 @@
-const RegExObject = /([0-9]+)|(\+)|(\*)/g;
+const RegExObject = /([0-9]+)|(\+)|(\*)|(\-)|(\/)|(\()|(\))/g;
 const tokenTypes = require('./tokenTypes');
-const tokenNames = [tokenTypes.NUMBER, tokenTypes.PLUS, tokenTypes.MULTIPLY];
+const tokenNames = [
+    tokenTypes.NUMBER, tokenTypes.PLUS, tokenTypes.MULTIPLY,
+    tokenTypes.MINUS, tokenTypes.DIVISION, tokenTypes.LEFT_PARA,
+    tokenTypes.RIGHT_PARA
+];
 
 function* tokenizer(script) {
     while (true) {

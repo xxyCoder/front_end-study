@@ -1,6 +1,6 @@
 const parser = require('./parser')
 const evaluate = require('./evaluate')
-const sourceCode = "2+3*4";
+const sourceCode = "(2-1)*3*(2+2)";
 const ast = parser(sourceCode);
 
 console.log(JSON.stringify(ast, null, 2));
