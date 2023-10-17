@@ -1,6 +1,7 @@
 # 函数组件
 - 在src目录下,创建以jsx为后缀名的文件,即创建一个组件,在组件中返回一个JSX视图
 - 基于ES6 module规范
+- 没有实例的概念，而是把函数执行，产生一个私有的上下文
 - 渲染机制
   1. 基于babel-preset-react-app把调用的组件转换为createElement格式
   2. 执行createElement,创建virtualDOM
@@ -117,3 +118,30 @@
     - reacr17之后就移除了这种做法
 - 对于没有实现事件传播机制的事件，才是单独族做事件绑定（onMouseEnter或onMouseLeave等）
 - 在组件渲染的时候，发现属性有onXxx或onXxxCapture这样的属性，只是将其绑定的方法赋值给元素相关的属性
+
+# Hooks
+
+## UseState
+- 目的是在函数中使用状态，并且可以让组件更新
+- 传入初始值，返回一个数组
+  - 第一个是变量，值为初始值
+  - 第二个是改变变量的方法，调用可以更新组件
+- 第一次执行函数，产生私有上下文，执行setState传递初始值，调用改变变量方法
+  - 改变状态
+  - 控制视图更新
+- 第二次执行函数，产生私有上下文，执行setState传递的不是初始值而是新修改的状态值，改变变量的方法也是新函数
+  - 与第一次不想等，创建新的函数
+```js
+var _state;
+function _useState(initialValue) {
+    if (typeof _state === 'undefined') {
+        _state = initialValue;
+    }
+    var _setState = function setState(value) {
+        _state = value;
+        // 通知视图更新
+    }
+
+    return [_state, _setState];
+}
+```

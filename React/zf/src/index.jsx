@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactDom from 'react-dom/client'
-import DemoSix from './views/DemoSix';
+import FuncFirst from './views/FuncFirst';
 
 const root = ReactDom.createRoot(document.getElementById("root"));
 root.render(
     <>
-        <DemoSix />
+        <FuncFirst />
     </>
 )
 
