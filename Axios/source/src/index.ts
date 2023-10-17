@@ -7,8 +7,8 @@ interface User {
     password: string;
 }
 let user: User = {
-    name: "xxyCoder",
-    password: "123456"
+    "name": "xxyCoder",
+    "password": "123456"
 }
 
 // 拦截器
@@ -31,7 +31,7 @@ axios.interceptors.request.use((config: AxiosRequestConfig): AxiosRequestConfig 
 axios.interceptors.request.eject(request);
 
 axios.interceptors.response.use((response: AxiosResponse) => {
-    response.data.name += "1";
+    response.data = JSON.parse(response.data);
     return response;
 }, (err: any) => Promise.reject(err));
 let response = axios.interceptors.response.use((response: AxiosResponse) => {
@@ -44,22 +44,27 @@ axios.interceptors.response.use((response: AxiosResponse) => {
 })
 axios.interceptors.response.eject(response);
 
+// cancelToken
+const cancelToken = axios.cancelToken;
+const isCancel = axios.isCancel;
+const source = cancelToken.source();
+
 // GET请求
-axios<User>({
-    method: "GET",
-    url: baseURL + "/get",
-    params: user
-})
-    .then((response: AxiosResponse<User>) => {
-        console.log("response:", response);
-        return response.data;
-    })
-    .then((data: User) => {
-        console.log("data:", data);
-    })
-    .catch((err: any) => {
-        console.log(err);
-    })
+// axios<User>({
+//     method: "GET",
+//     url: baseURL + "/get",
+//     params: user
+// })
+//     .then((response: AxiosResponse<User>) => {
+//         console.log("response:", response);
+//         return response.data;
+//     })
+//     .then((data: User) => {
+//         console.log("data:", data);
+//     })
+//     .catch((err: any) => {
+//         console.log(err);
+//     })
 
 // POST请求
 axios<User>({
@@ -67,57 +72,58 @@ axios<User>({
     url: baseURL + "/post",
     data: user,
     headers: {
-        "Content-Type": "application/json"
-    }
+        "Content-Type": "application/json",
+        "name": "xxyCoder"
+    },
+    CancelToken: source.token
 })
     .then((response: AxiosResponse<User>) => {
         console.log("response:", response);
         return response.data;
     })
-    .then((data: User) => {
-        console.log("data:", data);
-    })
     .catch((err: any) => {
         console.log(err);
     })
+
+    // source.cancel("取消");
 
 // 超时错误
-axios<User>({
-    method: "POST",
-    url: baseURL + "/post_timeout?timeout=2000",
-    data: user,
-    headers: {
-        "Content-Type": "application/json"
-    },
-    timeout: 1000
-})
-    .then((response: AxiosResponse<User>) => {
-        console.log("response:", response);
-        return response.data;
-    })
-    .then((data: User) => {
-        console.log("data:", data);
-    })
-    .catch((err: any) => {
-        console.log(err);
-    })
+// axios<User>({
+//     method: "POST",
+//     url: baseURL + "/post_timeout?timeout=2000",
+//     data: user,
+//     headers: {
+//         "Content-Type": "application/json"
+//     },
+//     timeout: 1000
+// })
+//     .then((response: AxiosResponse<User>) => {
+//         console.log("response:", response);
+//         return response.data;
+//     })
+//     .then((data: User) => {
+//         console.log("data:", data);
+//     })
+//     .catch((err: any) => {
+//         console.log(err);
+//     })
 
 // code
-axios<User>({
-    method: "POST",
-    url: baseURL + "/post_state?code=400",
-    data: user,
-    headers: {
-        "Content-Type": "application/json"
-    }
-})
-    .then((response: AxiosResponse<User>) => {
-        console.log("response:", response);
-        return response.data;
-    })
-    .then((data: User) => {
-        console.log("data:", data);
-    })
-    .catch((err: any) => {
-        console.log(err);
-    })
+// axios<User>({
+//     method: "POST",
+//     url: baseURL + "/post_state?code=400",
+//     data: user,
+//     headers: {
+//         "Content-Type": "application/json"
+//     }
+// })
+//     .then((response: AxiosResponse<User>) => {
+//         console.log("response:", response);
+//         return response.data;
+//     })
+//     .then((data: User) => {
+//         console.log("data:", data);
+//     })
+//     .catch((err: any) => {
+//         console.log(err);
+//     })
