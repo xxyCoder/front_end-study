@@ -1,0 +1,9 @@
+exports.Program = 'Program';
+exports.ExpressionStatement = "ExpressionStatement";
+exports.JSXElement = "JSXElement";
+exports.JSXOpeningElement = "JSXOpeningElement";
+exports.JSXIdentifier = "JSXIdentifier";
+exports.JSXAttribute = "JSXAttribute";
+exports.Literal = "Literal";
+exports.JSXClosingElemennt = "JSXClosingElement";
+exports.JSXText = "JSXTest";

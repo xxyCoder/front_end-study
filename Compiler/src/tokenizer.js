@@ -1,3 +1,4 @@
+const tokenTypes = require('./tokenTypes');
 const LETTERS = /[a-zA-Z1-9]/;
 let currentToken = { type: '', value: '' };
 const tokens = [];
@@ -9,7 +10,7 @@ function emit(token) {
 
 function start(char) {
     if (char === '<') {
-        emit({ type: "LeftParenthese", value: "<" });
+        emit({ type: tokenTypes.LeftParenthese, value: "<" });
         return foundLeftParentheses;
     }
     throw new Error("第一个字符必须是'<'");
@@ -17,11 +18,11 @@ function start(char) {
 
 function foundLeftParentheses(char) {
     if (LETTERS.test(char)) {
-        currentToken.type = "Identifier";
+        currentToken.type = tokenTypes.Identifier;
         currentToken.value += char;
         return identifer;
     } else if (char === '/') {
-        emit({ type: "BackSlash", value: "/" });
+        emit({ type: tokenTypes.BackSlash, value: "/" });
         return foundLeftParentheses;
     }
 }
@@ -35,14 +36,14 @@ function identifer(char) {
         return attribute;
     } else if (char === '>') {
         emit(currentToken);
-        emit({ type: "RightParentheses", value: ">" });
+        emit({ type: tokenTypes.RightParentheses, value: ">" });
         return foundRightParentheses;
     }
 }
 
 function attribute(char) {
     if (LETTERS.test(char)) {
-        currentToken.type = "AttributeKey";
+        currentToken.type = tokenTypes.AttributeKey;
         currentToken.value += char;
         return attributeKey;
     }
@@ -55,14 +56,13 @@ function attributeKey(char) {
         return attributeKey;
     } else if (char === '=') {
         emit(currentToken);
-        emit({ type: "Equal", value: "=" });
         return attributeValue;
     }
 }
 
 function attributeValue(char) {
     if (char === '"' || char === "'") {
-        currentToken.type = "AttributeValue";
+        currentToken.type = tokenTypes.AttributeValue;
         currentToken.value = "";
         return attributeStringValue;
     }
@@ -83,7 +83,7 @@ function tryLeaveAttribute(char) {
     if (char === ' ') { // 说明后面是新属性
         return attribute;
     } else if (char === '>') {
-        emit({ type: "RightParentheses", value: ">" });
+        emit({ type: tokenTypes.RightParentheses, value: ">" });
         return foundRightParentheses;
     } else {
         throw new Error("Error");
@@ -92,10 +92,10 @@ function tryLeaveAttribute(char) {
 
 function foundRightParentheses(char) {
     if (char === '<') {
-        emit({ type: "LeftParenthese", value: "<" });
+        emit({ type: tokenTypes.LeftParenthese, value: "<" });
         return foundLeftParentheses;
     } else {
-        currentToken.type = "Text";
+        currentToken.type = tokenTypes.Text;
         currentToken.value += char;
         return text;
     }
@@ -104,7 +104,7 @@ function foundRightParentheses(char) {
 function text(char) {
     if (char === '<') {
         emit(currentToken);
-        emit({ type: "LeftParenthese", value: "<" });
+        emit({ type: tokenTypes.LeftParenthese, value: "<" });
         return foundLeftParentheses;
     } else {
         currentToken.value += char;
@@ -130,5 +130,3 @@ function tokenizer(input) {
 module.exports = {
     tokenizer
 }
-const sourceCode = `<h1 id="title"><span>hello</span> world</h1>`;
-console.log(tokenizer(sourceCode));
