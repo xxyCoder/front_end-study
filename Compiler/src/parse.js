@@ -14,7 +14,6 @@ function parse(sourceCode) {
     function walk(parent) {
         let token = tokens[pos];
         let nextToken = tokens[pos + 1];
-        debugger;
         // JSXElement -> <JSXIdentifier attribute*>child*</JSXIdentifier>
         if (token.type === tokenTypes.LeftParenthese && nextToken.type === tokenTypes.Identifier) { // 开始符号
             const node = {
@@ -66,7 +65,7 @@ function parse(sourceCode) {
         } else if (token.type === tokenTypes.Text) {
             ++pos;
             return {
-                type: nodeTypes.Text,
+                type: nodeTypes.JSXText,
                 value: token.value
             };
         } else if (parent && token.type === tokenTypes.LeftParenthese && nextToken.type === tokenTypes.BackSlash) {
@@ -79,7 +78,7 @@ function parse(sourceCode) {
                 throw new Error(`开始${parent.openingElement.name.name}和结束标签${token.value}不匹配`);
             }
             return {
-                type: nodeTypes.JSXClosingElemennt,
+                type: nodeTypes.JSXClosingElement,
                 name: {
                     type: nodeTypes.JSXIdentifier,
                     name: token.value
@@ -99,9 +98,6 @@ function parse(sourceCode) {
     }
     return ast;
 }
-
-const sourceCode = `<h1 id="title"><span>hello</span> world</h1>`;
-console.log(JSON.stringify(parse(sourceCode), null, 2));
 
 module.exports = {
     parse
