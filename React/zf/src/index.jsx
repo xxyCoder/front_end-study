@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactDom from 'react-dom/client'
-import FuncFirst from './views/FuncFirst';
+import FuncSecond from './views/FuncSecond';
 
 const root = ReactDom.createRoot(document.getElementById("root"));
 root.render(
     <>
-        <FuncFirst />
+        <FuncSecond />
     </>
 )
 

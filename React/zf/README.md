@@ -145,3 +145,5 @@ function _useState(initialValue) {
     return [_state, _setState];
 }
 ```
+- 如果传入是对象，不支持部分更新
+- 执行也是异步的，采用update更新队列，实现批处理操作
