@@ -54,7 +54,7 @@ function resetStoreState(store, state) {
             enumerable: true
         })
     });
-    if (store._commiting) {
+    if (store.strict) {
         enableStrictMode();
     }
 }
