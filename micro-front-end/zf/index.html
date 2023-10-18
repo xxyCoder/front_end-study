@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/single-spa/5.9.3/umd/single-spa.min.js"></script> -->
+    <script type="module">
+        // const { registerApplication, start } = singleSpa;
+        import { registerApplication, start } from './single-spa/single-spa.js'
+        const app1 = {
+            bootstrap: [
+                async (props) => console.log("app1 bootstrap1", props),
+                async () => console.log("app1 bootstrap2")
+            ],
+            mount: async (props) => {
+                console.log("app1 mount", props);
+            },
+            unmount: async () => {
+                console.log("app1 unmount");
+            },
+        },
+            app2 = {
+                bootstrap: async () => console.log("app2 bootstrap"),
+                mount: async () => {
+                    console.log("app1 mount");
+                },
+                unmount() {
+                    console.log("app1 unmount");
+                }
+            }
+
+        // 加载应用
+        registerApplication("a", async () => app1, location => location.hash.startsWith("#/a"), { a: 1 });
+        registerApplication("b", async () => app2, location => location.hash.startsWith("#/b"), { b: 1 });
+        start();
+    </script>
+</body>
+
+</html>
