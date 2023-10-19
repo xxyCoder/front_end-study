@@ -36,7 +36,7 @@ export default class Axios<T> {
         const chain: Array<Interceptors<AxiosRequestConfig> | Interceptors<AxiosResponse<T>>> = [{
             onFullfilled: this.dispatchRequest
         }];
-        this.interceptors.request.interceptors.reverse().forEach((interceptor: Interceptors<AxiosRequestConfig> | null) => {
+        this.interceptors.request.interceptors.forEach((interceptor: Interceptors<AxiosRequestConfig> | null) => {
             interceptor && chain.unshift(interceptor);
         });
         this.interceptors.response.interceptors.forEach((interceptor: Interceptors<AxiosResponse<T>> | null) => {
