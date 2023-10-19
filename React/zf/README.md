@@ -138,6 +138,7 @@ function _useState(initialValue) {
         _state = initialValue;
     }
     var _setState = function setState(value) {
+      if(Object.is(value,_state)) return;
         _state = value;
         // 通知视图更新
     }
@@ -147,3 +148,6 @@ function _useState(initialValue) {
 ```
 - 如果传入是对象，不支持部分更新
 - 执行也是异步的，采用update更新队列，实现批处理操作
+- 自带性能优化  
+  - 每一次修改状态的时候，会将新旧值对比（Object.is），没有改变则不更新
+  - 但是改变值之后，后续再次改变为相同值也会更新一次，但也只冗余更新一次
