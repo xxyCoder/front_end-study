@@ -34,7 +34,7 @@ export default class Axios<T> {
     request(config: AxiosRequestConfig): Promise<AxiosRequestConfig | AxiosResponse<T>> {
         config.headers = Object.assign(this.defaults.headers!, config.headers);
         const chain: Array<Interceptors<AxiosRequestConfig> | Interceptors<AxiosResponse<T>>> = [{
-            onFullfilled: this.dispatchRequest
+            onFulfilled: this.dispatchRequest
         }];
         this.interceptors.request.interceptors.forEach((interceptor: Interceptors<AxiosRequestConfig> | null) => {
             interceptor && chain.unshift(interceptor);
@@ -45,8 +45,8 @@ export default class Axios<T> {
 
         let promise: any = Promise.resolve(config);
         while (chain.length > 0) {
-            const { onFullfilled, onRejected } = chain.shift()!;
-            promise = promise.then(onFullfilled, onRejected);
+            const { onFulfilled, onRejected } = chain.shift()!;
+            promise = promise.then(onFulfilled, onRejected);
         }
         return promise;
     }
