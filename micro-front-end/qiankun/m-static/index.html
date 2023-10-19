@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>静态应用</title>
+</head>
+
+<body>
+    <div id="static"></div>
+
+    <script>
+        const app = document.getElementById("static");
+
+        window["m-static"] = {
+            bootstrap: async () => {
+                console.log("static bootstrap");
+            },
+            mount: async () => {
+                app.innerHTML = "static";
+            },
+            unmount: async () => {
+                app.innerHTML = "";
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -5,7 +5,7 @@ export async function toMountPromise(app) {
         if (app.status !== NOT_MOUNTED) {
             return app;
         }
-        return app.bootstrap(app.customProps).then(() => {
+        return app.mount(app.customProps).then(() => {
             app.status = MOUNTED;
             return app;
         });

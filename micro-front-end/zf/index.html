@@ -8,6 +8,8 @@
 </head>
 
 <body>
+    <a href="#/a">a应用</a>
+    <a href="#/b">b应用</a>
     <!-- <script src="https://cdn.bootcdn.net/ajax/libs/single-spa/5.9.3/umd/single-spa.min.js"></script> -->
     <script type="module">
         // const { registerApplication, start } = singleSpa;
@@ -27,10 +29,15 @@
             app2 = {
                 bootstrap: async () => console.log("app2 bootstrap"),
                 mount: async () => {
-                    console.log("app1 mount");
+                    return new Promise((resolve) => {
+                        setTimeout(() => {
+                            console.log("app2 mount");
+                            resolve();
+                        }, 1000);
+                    })
                 },
                 unmount() {
-                    console.log("app1 unmount");
+                    console.log("app2 unmount");
                 }
             }
 
@@ -38,6 +45,10 @@
         registerApplication("a", async () => app1, location => location.hash.startsWith("#/a"), { a: 1 });
         registerApplication("b", async () => app2, location => location.hash.startsWith("#/b"), { b: 1 });
         start();
+
+        window.addEventListener("hashchange", () => {
+            console.log("change ---");
+        })
     </script>
 </body>
 

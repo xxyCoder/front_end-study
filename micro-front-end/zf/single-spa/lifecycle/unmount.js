@@ -6,7 +6,7 @@ export async function toUnloadPromise(app) {
             return app;
         }
         app.status = UNMOUNTED;
-        return app.unmounted(app.customProps).then(() => {
+        return app.unmount(app.customProps).then(() => {
             app.status = NOT_MOUNTED;
         });
     })
