@@ -150,4 +150,15 @@ function _useState(initialValue) {
 - 执行也是异步的，采用update更新队列，实现批处理操作
 - 自带性能优化  
   - 每一次修改状态的时候，会将新旧值对比（Object.is），没有改变则不更新
-  - 但是改变值之后，后续再次改变为相同值也会更新一次，但也只冗余更新一次
+  - 但是改变值之后，后续再次改变为相同值也会更新一次，但也只冗余更新一次，但是不触发生命周期函数
+
+### useEffect
+- 函数组件的生命钩子函数
+- 传入callback
+  - 第一次渲染完毕后执行callback，可以拿到dom元素，等价于componentDidMount
+  - 在组件每一次更新完也会执行callback，等价于componentDidUpdate
+  - 返回一个函数，在组件释放的时候执行
+    - 有一个effect列表，存放返回的函数
+- 第二个参数传递数组
+  - 空数组，只有第一次渲染才执行callback，等价于componentDidMount
+  - 有内容则是依赖项，当依赖项中有一个改变则触发callback

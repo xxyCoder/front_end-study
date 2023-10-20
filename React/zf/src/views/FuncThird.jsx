@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { flushSync } from 'react-dom'
 
 const FuncThird = function (props) {
@@ -36,7 +36,29 @@ const FuncThird = function (props) {
         setNum(1000);
     }
 
-    return <div>
+    useEffect(() => {
+        console.log(document.querySelector(".box"));
+        console.log("拿到最新的x:", x);
+        return () => {
+            console.log("函数释放，更新执行下一次函数", x)
+        }
+    })
+
+    useEffect(() => {
+        console.log("[]");
+        return () => {
+            console.log("没内容")
+        }
+    }, []);
+
+    useEffect(() => {
+        console.log("x:", x);
+        return () => {
+            console.log("x的上一次状态:", x);
+        }
+    }, [x]);
+
+    return <div className="box">
         <span>{x}</span><br />
         <button onClick={handle}>新增</button>
         <button onClick={same}>不变</button>
