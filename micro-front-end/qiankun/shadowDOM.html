@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="outer">abc</div>
+    <script>
+        const template = `<div id="qiankun-xxx">
+                <div id="inner">bcd</div>
+                <style>
+                    div { color: red }    
+                </style>
+            </div>`
+
+        const container = document.createElement("div");
+        container.innerHTML = template;
+
+        const appElement = container.firstChild;
+        let oldContent = appElement.innerHTML;
+        appElement.innerHTML = null;
+
+        const shadow = appElement.attachShadow({ mode: "closed" });
+        shadow.innerHTML = oldContent;
+
+        document.body.appendChild(appElement);
+    </script>
+</body>
+
+</html>

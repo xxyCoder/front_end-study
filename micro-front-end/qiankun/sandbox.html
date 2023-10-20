@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 沙箱   
+        防止应用加载的时候，对window造成污染
+        给window拍照比较耗内存
+     -->
+
+    <script>
+        class SnapshotSandbox {
+            constructor() {
+                this.modifyPropMap = {};    // 存储全局哪些属性被修改了
+            }
+            active() {
+                this.windowSnapshot = {};
+                // 给window拍照
+                Object.keys(window).forEach(prop => {
+                    this.windowSnapshot[prop] = window[prop];
+                })
+            }
+            inactive() {
+                this.modifyPropMap = {};
+                Object.keys(window).forEach(prop => {
+                    if (window[prop] !== this.windowSnapshot[prop]) {
+                        this.modifyPropMap[prop] = window[prop];
+                        window[prop] = this.windowSnapshot[prop];
+                    }
+                })
+            }
+        }
+
+        class LegacySandbox {
+            constructor() {
+                this.modifyPropsMap = new Map();
+                this.addPropsMap = new Map();
+                this.currentPropsMap = new Map();
+
+                const fakeWindow = Object.create(null);
+                const proxy = new Proxy(fakeWindow, {
+                    get(target, key, receiver) {
+                        return window[key];
+                    },
+                    set(target, key, value) {
+                        if (!window.hasOwnProperty(key)) {
+                            this.addPropsMap.set(key, value);   // 添加的属性
+                        } else if (!this.modifyPropMap.has(key)) {
+                            this.modifyPropMap.set(key, window[key]);   // 保存修改前的原值
+                        }
+                        this.currentPropsMap.set(key, value);
+                        window[key] = value;
+                    }
+                });
+                this.proxy = proxy;
+            }
+            setWindowProp(key, value) {
+                if (value === undefined) {
+                    delete window[key];
+                } else {
+                    window[key] = value;    // 覆盖修改前的
+                }
+            }
+            active() {
+                this.currentPropsMap.forEach((value, key) => {
+                    this.setWindowProp(key, value);
+                })
+            }
+            inactive() {
+                this.modifyPropsMap.forEach((value, key) => {
+                    this.setWindowProp(key, value);
+                });
+                this.addPropsMap.forEach((value, key) => {
+                    this.setWindowProp(key, undefined);
+                })
+            }
+        }
+
+    </script>
+</body>
+
+</html>

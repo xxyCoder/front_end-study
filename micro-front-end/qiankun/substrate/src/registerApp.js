@@ -1,8 +1,17 @@
-import { registerMicroApps, start } from 'qiankun';
+import { registerMicroApps, start, initGlobalState } from 'qiankun';
 
 const loader = (loading) => {
     console.log("加载状态:", loading);
 }
+
+const actions = initGlobalState({
+    name: "xxyCoder",
+    age: 21
+});
+
+actions.onGlobalStateChange((newValue, oldValue) => {
+    console.log(newValue, oldValue, " value");
+})
 
 registerMicroApps([
     {
@@ -44,4 +53,10 @@ registerMicroApps([
     }
 })
 
-start();
+start({
+    // 沙箱
+    sandbox: {
+        // 实现了动态样式表
+        experimentalStyleIsolation: true,   // 缺点是子应用挂载到最外层，会导致样式不生效
+    }
+});

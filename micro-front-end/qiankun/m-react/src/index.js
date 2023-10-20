@@ -26,6 +26,10 @@ export async function bootstrap(props) {
 }
 
 export async function mount(props) {
+  props.onGlobalStateChange((newValue, oldValue) => {
+    console.log("child:", oldValue, newValue);
+  })
+  props.setGlobalState({ "name": "xxy" });
   console.log(props);
   render(props);
 }
