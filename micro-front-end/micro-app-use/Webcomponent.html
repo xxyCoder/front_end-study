@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- 
+    1. 允许用户自定义一个元素
+    2. shadow，支持样式隔离
+    3. 可以支持组件特点：模板、插槽、生命周期、属性等
+ -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .xx {
+            background: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <my-button type="primary">我是按钮</my-button>
+    <my-button>按钮</my-button>
+    <template id="btn">
+        <button class="my-button">
+            <slot>按钮</slot>
+        </button>
+    </template>
+
+    <script>
+        class MyButton extends HTMLElement {
+            connectedCallback() {   // vue组件中的mounted
+                console.log("元素加载完毕");
+                // 获取传入的属性，并且使用对应的模板来渲染
+                this.shadow = this.attachShadow({ mode: "closed" });
+                const btn = document.getElementById("btn");
+
+                const btnType = this.getAttribute("type") || "default";
+                const types = {
+                    primary: {
+                        background: 'blue'
+                    },
+                    default: {
+                        background: "#ccc"
+                    }
+                };
+                const style = document.createElement("style");
+                style.innerHTML = `
+                    .my-button {
+                        background: ${types[btnType].background}
+                    }
+                `;
+                const tpl = btn.content.cloneNode(true);
+                this.shadow.appendChild(style); // 样式隔离
+                this.shadow.appendChild(tpl);   // DOM隔离
+                console.log(this.shadow.querySelector(".my-button"))
+            }
+            static get observedAttributes() {
+                return ["type"];
+            }
+            attributeChangedCallback(name, newValue, oldValue) {
+                if (this.shadow) {  // 第一次挂载前也会触发，过滤掉
+                    console.log(name, oldValue, newValue);
+                }
+            }
+            disconnectedCallback() {
+                console.log("DOM卸载了")
+            }
+        }
+        window.customElements.define("my-button", MyButton);
+    </script>
+</body>
+
+</html>
