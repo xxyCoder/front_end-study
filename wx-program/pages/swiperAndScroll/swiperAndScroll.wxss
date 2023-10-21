@@ -1,0 +1,11 @@
+.container {
+  border: 1px solid red;
+  height: 300rpx;
+}
+.container view {
+  height: 100rpx;
+
+  background-color: aqua;
+  text-align: center;
+  margin: 10rpx 0;
+}

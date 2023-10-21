@@ -1,0 +1,13 @@
+<scroll-view 
+  class="container" 
+  scroll-y="true" 
+  scroll-top="20px" 
+>
+  <view>a</view>
+  <view>b</view>
+  <view>c</view>
+  <view>d</view>
+  <view>e</view>
+  <view>f</view>
+  <view>g</view>
+</scroll-view>
