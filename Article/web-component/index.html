@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Component</title>
+</head>
+
+<body>
+    <user-card image="https://semantic-ui.com/images/avatar2/large/kristy.png" name="xxyCoder">
+        fontEndEr
+        <div slot="addr">China</div>
+    </user-card>
+    <template id="userCardTemplate">
+        <style>
+            :host {
+                display: flex;
+                align-items: center;
+                width: 450px;
+                height: 180px;
+                background-color: #d4d4d4;
+                border: 1px solid #d5d5d5;
+                box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+                border-radius: 3px;
+                overflow: hidden;
+                padding: 10px;
+                box-sizing: border-box;
+                font-family: 'Poppins', sans-serif;
+            }
+
+            .image {
+                flex: 0 0 auto;
+                width: 160px;
+                height: 160px;
+                vertical-align: middle;
+                border-radius: 5px;
+            }
+
+            .container {
+                box-sizing: border-box;
+                padding: 20px;
+                height: 160px;
+            }
+
+            .container>.name {
+                font-size: 20px;
+                font-weight: 600;
+                line-height: 1;
+                margin: 0;
+                margin-bottom: 5px;
+            }
+
+            .container>.intro {
+                font-size: 16px;
+                font-weight: 600;
+                line-height: 1;
+                margin: 10px 0;
+                margin-bottom: 5px;
+            }
+
+            .container>.button {
+                padding: 10px 25px;
+                font-size: 12px;
+                border-radius: 5px;
+                text-transform: uppercase;
+            }
+        </style>
+        <img class="image">
+        <div class="container">
+            <p class="name">NULL</p>
+            <div class="intro">
+                <slot>个人简介...</slot>
+            </div>
+            <slot name="addr"></slot>
+            <button class="button">Follow</button>
+        </div>
+    </template>
+    <script>
+        class UserCard extends HTMLElement {
+            constructor() {
+                super();
+
+                // 开启
+                const shadow = this.attachShadow({ mode: "closed" });
+
+                const templateElem = document.getElementById("userCardTemplate");
+                const content = templateElem.content.cloneNode(true);
+                content.querySelector(".image").setAttribute("src", this.getAttribute("image"));
+                content.querySelector(".name").innerText = this.getAttribute("name");
+                // this.appendChild(content);
+                shadow.appendChild(content);
+
+                // 与用户互动
+                this.$button = shadow.querySelector("button");
+                this.$button.addEventListener("click", () => {
+                    console.log("Follow!");
+                })
+            }
+
+            connectedCallback() {
+                console.log("mounted");
+            }
+            disconnectedCallback() {
+                console.log("unmount");
+            }
+            adoptedCallback() {
+                console.log("move");
+            }
+            attributeChangedCallback(name, oldValue, newValue) {
+                console.log(name, oldValue, newValue);
+            }
+            // 必须监听这个属性，需要定义一下方法
+            static get observedAttributes() { return ['image', 'name']; }
+        }
+        window.customElements.define("user-card", UserCard);
+    </script>
+</body>
+
+</html>
