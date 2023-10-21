@@ -167,3 +167,9 @@ function _useState(initialValue) {
 ### useLayoutEffect
 - 用法和useEffect一样，但是在创建virtualDOM就执行回调
 - useEffect会在virtualDOM创建转换为真实DOM之后挂载之前才执行回调
+
+### useRef
+- 函数组件可以使用变量+(ref) => var=ref或者React.createRef
+- 在每次更新函数重新执行的时候，和之前使用的useRef对象一致，即不会重新创建
+  - 而createRef每次重新创建都会新建，拿到不是之前的ref；类组件不会有这样的问题（类组件更新仅仅是将render重新执行）
+  - 故对于函数组件useRef性能比createRef好
