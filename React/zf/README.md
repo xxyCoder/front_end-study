@@ -162,3 +162,8 @@ function _useState(initialValue) {
 - 第二个参数传递数组
   - 空数组，只有第一次渲染才执行callback，等价于componentDidMount
   - 有内容则是依赖项，当依赖项中有一个改变则触发callback
+- callback不能是async，因为需要返回一个函数或undefined而不是promise
+
+### useLayoutEffect
+- 用法和useEffect一样，但是在创建virtualDOM就执行回调
+- useEffect会在virtualDOM创建转换为真实DOM之后挂载之前才执行回调
