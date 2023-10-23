@@ -1,0 +1,10 @@
+<view>
+  <button>普通按钮</button>
+  <button type="primary">主色按钮</button>
+  <button type="warn">警告按钮</button>
+  <button size="mini">mini按钮</button>
+  <button type="warn" size="mini">警告按钮</button>
+  <button type="primary" size="mini">主色按钮</button>
+  <button plain>镂空按钮</button>
+
+</view>

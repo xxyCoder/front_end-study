@@ -27,7 +27,7 @@
 - WXSS仅支持部分CSS选择器
   - class、id、element、并集、后代、::after和::before等选择器
 
-## 宿主环境
+# 宿主环境
 - 手机微信是小程序的宿主环境
 - 提供了通信模型
   - 渲染层和逻辑层的通信、逻辑层和第三方服务器的通信
@@ -35,3 +35,9 @@
   - 将代码下载到本地，解析app.json，执行App函数，渲染页面
   - 加载解析页面的.json文件，加载.wxml和.wsxx，执行Page函数创建页面实例完成渲染
 - 提供了组件和API
+  - 事件监听API
+    - 以on开头，监听某些事件的触发
+  - 同步API
+    - 以Sync结尾的API
+  - 异步API
+    - 需要通过success、fail、complete接收回调结果

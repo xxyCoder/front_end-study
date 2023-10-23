@@ -11,3 +11,17 @@
   <view>f</view>
   <view>g</view>
 </scroll-view>
+
+<swiper 
+class="item-wrapper" 
+indicator-dots="true" 
+indicator-color="red"
+indicator-active-color="yellow"
+autoplay="true"
+interval="3000"
+circular="true"
+>
+  <swiper-item><view class="item">A</view></swiper-item>
+  <swiper-item><view class="item">B</view></swiper-item>
+  <swiper-item><view class="item">C</view></swiper-item>
+</swiper>

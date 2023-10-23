@@ -1,0 +1,6 @@
+<view>
+  <text>{{info}}</text>
+  <view>{{ Math.random() > 5 ? "Greater than five": "No" }}</view>
+  <button bind:tap="onClick">按钮</button>
+  <input type="text" bindinput="onInput" />
+</view>

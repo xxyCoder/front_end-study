@@ -1,0 +1,11 @@
+<view>
+  <text selectable="true">xxyCoder</text>
+  <rich-text nodes="<h1>标题一</h1>" />
+</view>
+
+<!-- 
+  text
+    selectable允许长按选中
+  rich-text
+    nodes属性节点把html字符串渲染为对应的UI结构
+ -->

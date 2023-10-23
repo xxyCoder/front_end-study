@@ -2,10 +2,32 @@
   border: 1px solid red;
   height: 300rpx;
 }
+
 .container view {
   height: 100rpx;
-
   background-color: aqua;
   text-align: center;
   margin: 10rpx 0;
+}
+
+.wrapper-item {
+  height: 150rpx;
+}
+
+.item {
+  height: 100%;
+  line-height: 150rpx;
+  text-align: center;
+}
+
+swiper-item:nth-child(1)  {
+  background-color:chocolate;
+}
+
+swiper-item:nth-child(2) {
+  background-color: beige;
+}
+
+swiper-item:nth-child(3) {
+  background-color: chartreuse;
 }
