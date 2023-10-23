@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>基座的代码，不被子应用样式所污染</div>
+    <div class="container"></div>
+
+    <script>
+        const container = document.querySelector(".container");
+        const strTmplWithCSS = `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>iframe</title>
+        </head>
+        <body>
+            <div id="inner">Hello xxyCoder</div>
+            <style>
+                div {
+                    color: red;
+                }
+            </style>
+        </body>
+        </html>`;
+
+        const strScript = `
+            window.a = 100; // 此属性不影响父属性
+            console.log(window.a);
+            const elem = document.querySelector("#inner");
+            console.log(elem);
+        `
+
+        function createIframe() {
+            const iframe = document.createElement("iframe");
+            iframe.src = "about:blank";
+            document.body.appendChild(iframe);
+
+            return iframe;
+        }
+
+        function createSandBox() {
+            const sandBox = {
+                iframe: createIframe(),
+                shadowRoot: null
+            };
+            return sandBox;
+        }
+
+        function injectTemplate(sandBox, template) {
+            const wrapper = document.createElement("div");
+            wrapper.innerHTML = template;
+            sandBox.shadowRoot.appendChild(wrapper);
+        }
+
+        function runScriptInSandBox(sandBox, script) {
+            const iframeWindow = sandBox.iframe.contentWindow;
+            const scriptElem = document.createElement("script");
+            const headElem = iframeWindow.document.querySelector("head");
+
+            // 希望有些方法是父应用执行的
+            Object.defineProperty(iframeWindow.Document.prototype, "querySelector", {
+                get() {
+                    return new Proxy(sandBox.shadowRoot["querySelector"], {
+                        apply(target, thisArgs, args) {
+                            return thisArgs.querySelector.apply(sandBox.shadowRoot, args);
+                        }
+                    })
+                }
+            })
+
+            scriptElem.textContent = script;
+            headElem.appendChild(scriptElem);
+        }
+
+        // 定义一个组件使用
+        function createCustomElement() {
+            class WujieApp extends HTMLElement {
+                connectedCallback() {
+                    console.log("end");
+                    // 1. 创建沙箱
+                    const sandBox = createSandBox();
+                    // 2. 创建shadowDOM
+                    sandBox.shadowRoot = this.attachShadow({ mode: "open" });
+                    // 3. 将html、css放入shadowDOM
+                    injectTemplate(sandBox, strTmplWithCSS);
+                    // 4. 将JS放入沙箱执行
+                    runScriptInSandBox(sandBox, strScript);
+                }
+            }
+            window.customElements.define("wujie-app", WujieApp);
+            container.appendChild(document.createElement("wujie-app"));
+        }
+
+        createCustomElement();
+    </script>
+</body>
+
+</html>

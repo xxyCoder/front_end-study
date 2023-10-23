@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="防止应用加载到时候对window造成污染">
+    <title>沙箱实现原理</title>
+</head>
+
+<body>
+    <script>
+        // 缺点：浪费内存
+        class SnapShotSandbox {
+            constructor() {
+                this.modifyPropsMap = {};   // 存储有哪些全局属性更改
+            }
+            active() {
+                this.windowSnapShot = {};
+                // 给window拍照
+                Object.keys(window).forEach(prop => this.windowSnapShot[prop] = window[prop]);
+                // 将之前修改的赋值回来
+                Object.keys(this.modifyPropsMap).forEach(prop => window[prop] = this.modifyPropsMap[prop]);
+            }
+            inactive() {
+                this.modifyPropsMap = {};
+                Object.keys(window).forEach(prop => {
+                    if (window[prop] !== this.windowSnapShot[prop]) {
+                        this.modifyPropsMap[prop] = window[prop];
+                        window[prop] = this.windowSnapShot[prop];
+                    }
+                })
+            }
+        }
+        const sandbox1 = new SnapShotSandbox();
+        sandbox1.active();
+        window.a = 100;
+        window.b = 200;
+        sandbox1.inactive();
+        console.log(window.a, window.b);
+        sandbox1.active();
+        console.log(window.a, window.b);
+        sandbox1.inactive();
+
+        // 缺点：基于单例，多个沙箱但是只有一个window，不能相互隔离
+        class LegacySandbox {
+            constructor() {
+                // 1) 修改的内容 2) 新增的内容 3) 无论新增还是修改的内容
+                this.modifyPropsMap = new Map();
+                this.addPropsMap = new Map();
+                this.currentPropsMap = new Map();
+
+                const fakeWindow = Object.create(null);
+                const proxy = new Proxy(fakeWindow, {
+                    get: (target, key, recevier) => {
+                        return window[key];
+                    },
+                    set: (target, key, value, recevier) => {
+                        if (!window.hasOwnProperty(key)) {
+                            this.addPropsMap.set(key, value);
+                        } else if (!this.modifyPropsMap.has(key)) {
+                            this.modifyPropsMap.set(key, window[key]);  // 保存修改前的原值
+                        }
+                        this.currentPropsMap.set(key, value);
+                        window[key] = value;
+                    }
+                });
+                this.proxy = proxy;
+            }
+            active() {
+                this.currentPropsMap.forEach((value, key) => {
+                    this.setWindowProp(key, value);
+                })
+            }
+            setWindowProp(key, value) {
+                if (value === undefined) {
+                    delete window[key];
+                } else {
+                    window[key] = value;     // 覆盖修改前的
+                }
+            }
+            inactive() {
+                this.modifyPropsMap.forEach((value, key) => {
+                    this.setWindowProp(key, value);
+                });
+                this.addPropsMap.forEach((value, key) => {
+                    this.setWindowProp(key, undefined);
+                });
+            }
+        }
+        const sandbox2 = new SnapShotSandbox();
+        sandbox2.active();
+        window.a = 200;
+        window.b = 300;
+        sandbox2.inactive();
+        console.log(window.a, window.b);
+        sandbox2.active();
+        console.log(window.a, window.b);
+        sandbox2.inactive();
+
+        // 多例实现
+        class ProxySandbox {
+            constructor() {
+                this.running = false;
+                const fakeWindow = Object.create(null);
+                this.proxy = new Proxy(fakeWindow, {
+                    get: (target, key, recevier) => {
+                        if (!this.running) {
+                            return window[key];
+                        }
+                        return key in target ? target[key] : window[key];
+                    },
+                    set: (target, key, value, recevier) => {
+                        if (this.running) {
+                            target[key] = value;
+                        }
+                        return true;
+                    }
+                });
+            }
+            active() {
+                if (!this.running) {
+                    this.running = true;
+                }
+            }
+            inactive() {
+                this.running = false;
+            }
+        }
+
+        const sandbox3 = new ProxySandbox();
+        const sandbox4 = new ProxySandbox();
+        sandbox3.active();
+        sandbox3.proxy.a = 100;
+        console.log(sandbox4.proxy.a, sandbox3.proxy.a);
+        sandbox3.inactive();
+        sandbox4.active();
+        sandbox4.proxy.b = 100;
+        console.log(sandbox4.proxy.b);
+        sandbox4.inactive();
+        console.log(sandbox4.proxy.b, sandbox3.proxy.a);
+    </script>
+</body>
+
+</html>
