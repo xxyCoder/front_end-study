@@ -152,7 +152,7 @@ function _useState(initialValue) {
   - 每一次修改状态的时候，会将新旧值对比（Object.is），没有改变则不更新
   - 但是改变值之后，后续再次改变为相同值也会更新一次，但也只冗余更新一次，但是不触发生命周期函数
 
-### useEffect
+## useEffect
 - 函数组件的生命钩子函数
 - 传入callback
   - 第一次渲染完毕后执行callback，可以拿到dom元素，等价于componentDidMount
@@ -164,12 +164,29 @@ function _useState(initialValue) {
   - 有内容则是依赖项，当依赖项中有一个改变则触发callback
 - callback不能是async，因为需要返回一个函数或undefined而不是promise
 
-### useLayoutEffect
+## useLayoutEffect
 - 用法和useEffect一样，但是在创建virtualDOM就执行回调
 - useEffect会在virtualDOM创建转换为真实DOM之后挂载之前才执行回调
 
-### useRef
+## useRef
 - 函数组件可以使用变量+(ref) => var=ref或者React.createRef
 - 在每次更新函数重新执行的时候，和之前使用的useRef对象一致，即不会重新创建
   - 而createRef每次重新创建都会新建，拿到不是之前的ref；类组件不会有这样的问题（类组件更新仅仅是将render重新执行）
   - 故对于函数组件useRef性能比createRef好
+
+## useMemo
+- 具有缓存，第一次执行函数会执行，后续只有依赖项改变才执行，类似vue的watch
+
+## useCallback
+- 具有缓存，缓存函数，如果依赖项没改变就不需要每次更新都重新创建相同的函数了
+- 建议不要乱用，缓存和处理逻辑都要耗时
+- 建议在父组件将函数以某个属性传递给子组件的时候可用使用useCallback包裹该函数
+
+## 自定义Hooks
+- 创建一个函数，名字需要以use开头
+- use开头有自己的校验规则，只能在最外层使用，不能在条件判断中使用，如果不使用use开头则没有校验规则
+
+# React.memo
+- 对新老属性进行浅比较，和PureComponent类似
+
+

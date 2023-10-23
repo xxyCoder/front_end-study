@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactDom from 'react-dom/client'
-import FuncFourth from './views/FuncFourth';
+import FuncSixth from './views/FuncSixth';
 
 const root = ReactDom.createRoot(document.getElementById("root"));
 root.render(
     <>
-        <FuncFourth y={10} z={20} />
+        <FuncSixth />
     </>
 )
 
