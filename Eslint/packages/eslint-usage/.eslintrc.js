@@ -7,9 +7,9 @@ module.exports = {
         "node": true
     },
     "extends": "eslint:recommended",    // 继承他人的规则
-    "override": [   // 进行特定文件的规则覆盖
+    "overrides": [   // 进行特定文件的规则覆盖
         {
-            "files": ['*-test.js', '*.spec.js'],
+            "files": ["test.js"],
             "rules": {
                 "no-unused-expressions": 2
             }
@@ -25,12 +25,13 @@ module.exports = {
         }
     },
     "rules": {  // 添加规则，可覆盖extends的规则
-        "quotes": ["error", "double"]
+        "quotes": ["error", "double"],
+        "zlint/no-var": ["error"]
     },
     "globals": {
         custom: "readonly",
         b: "writable"
     },
-    "plugins": ["@typescript-eslint/eslint-plugin"],    // rules不能满足要求，使用plugins扩展处理需求
-    "parser": "@ypescript-eslint/parser"  // 指定解析器
+    "plugins": ["@typescript-eslint/eslint-plugin","zlint"],    // rules不能满足要求，使用plugins扩展处理需求
+    // "parser": "@ypescript-eslint/parser"  // 指定解析器
 }

@@ -1,0 +1,30 @@
+# 规则结构
+- meta包含规则的元数据
+  - type规则的类型
+    - problem识别将导致错误或混淆的代码，具有最高优先级
+    - suggestion说明可以以更好的方式完成的事情，但不更改就不会发送错误
+    - layout识别外观如空格、逗号等
+  - docs
+    - description为规则简短描述
+    - recommended指定配置文件中"extends:recommended"是否启用该规则
+    - url完整文档的地址
+  - fixable如果命令行添加--fix选项自动修复规则报告问题
+    - code或whitespace
+  - schema指定选项，避免无效规则配置
+- create函数，接收context参数，返回一个对象，其中包含遍历AST语法树时候调用visitor节点的方法
+  - context对象
+    - filename与源文件关联的文件名
+    - cwd当前工作目录路径
+    - options此规则的配置选项数组
+    - report(description)报告代码中的问题
+    - getScope(node)返回当前节点的scope
+    - sourceCode返回SourceCode对象
+      - getText(node)返回当前node的源代码
+      - getFirstToken(node,skipOptions) 返回给定节点的第一个标记
+      - getLastToken(node,skipOptions)
+      - getTokens(node)返回所有节点的标记
+  - fixer对象
+    - insertTextAfter(nodeOrToken,text)
+    - insertTextBefore(nodeOrToken,text)
+    - remove(nodeOrToken)
+    - replace(nodeOrToken,text)
