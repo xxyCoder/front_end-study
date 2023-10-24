@@ -35,5 +35,23 @@ function babelLoader(sourceCode,options) {
 - @babel/plugin-transform-runtime
   - 智能化引入
 
-# EsLint
-- 
+# EsLint工作流程
+1. 开始文件eslint/bin/eslint.js执行require("../lib/cli").execute() 去解析参数
+  - 第一个参数是命令行提供的参数
+  - 第二个是命令行中--stdin后面的文本，如果没有则为null
+  - 第三个参数标记，调用值设置为true
+  - 在execute的过程中会拿到files即第一个参数提供的文件名数组和useStdin是否有第二个参数，经过allowFlatConfig && await shouldUseFlatConfig()之后判断创建的是FlatESLint 还是 ESLint，赋值给ActiveESLint（一般都是ESLint）
+2. 之后创建ActiveESLint实例（即ESLint），调用自身方法lintFiles，将files作为参数传入
+   - 拿到cliEngine，执行executeOnFiles方法
+     - 执行verifyText遍历文件内容
+       - 执行linter.verifyAndFix校验文件内容和修改
+         - 有个passNumber记录修补次数，如果修补次数大于10次或修补成功就跳出循环
+         - 执行linter.verify去校验
+           - 执行_verifyWithConfigArray方法，传入源代码和config配置项
+             - 拿到用户写在eslint配置文件中的内容
+             - 有process则执行
+             - 然后执行_verifyWithoutProcessors解析代码为ast语法树，调用runRules将ast语法树节点拍平，进行traverse遍历，并调用规则
+               - 遍历每个规则，拿到编写插件需要提供的meta信息和create函数，并调用create函数返回了一个visitor对象
+                 - 继续遍历visitor对象，拿到方法属性，以属性名作为键，监听该属性名触发对应方法
+               - 遍历拍平的每个节点，触发对应事件
+   - 如果有fix选项，那么就将result.output赋值为修复后的output
