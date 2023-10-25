@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactDom from 'react-dom/client'
-import DemoSeven from './views/DemoSeven';
+import App from './views/StyleOne';
 
 const root = ReactDom.createRoot(document.getElementById("root"));
 root.render(
     <>
-        <DemoSeven />
+        <App />
     </>
 )
 
