@@ -1,0 +1,22 @@
+<!-- block并不是一个组件，只是一个包裹性容器，不会在页面做任何渲染 -->
+<!-- 
+  条件渲染
+  wx:if 动态创建和移除元素的方式
+  hidden  切换样式(display)控制显式与隐藏
+ -->
+<block>
+  <view hidden="{{ type === 0 }}">性别:</view>
+</block>
+<block>
+  <view wx:if="{{ type === 1 }}">男</view>
+  <view wx:elif="{{ type === 2 }}">女</view>
+  <view wx:else>保密</view>
+</block>
+<block>
+  <view wx:for="{{ list }}" wx:key="index">
+    当前索引{{index}},当前项{{item}}
+  </view>
+  <view wx:for="{{ list }}" wx:for-index="idx" wx:for-item="l" wx:key="idx">
+    {{idx}} --- {{l}}
+  </view>
+</block>

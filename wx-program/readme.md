@@ -41,3 +41,6 @@
     - 以Sync结尾的API
   - 异步API
     - 需要通过success、fail、complete接收回调结果
+
+# rpx
+- rpx将所有设备的屏幕，在宽度上等分为750份rpx

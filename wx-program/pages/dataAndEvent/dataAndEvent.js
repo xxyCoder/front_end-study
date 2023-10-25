@@ -5,7 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    info: "Hello xxyCoder"
+    info: "Hello xxyCoder",
+    count: 0,
+    msg: ""
   },
 
   /**
@@ -68,5 +70,22 @@ Page({
   },
   onInput(event) {
     console.log("input: ", event.detail);
+    this.setData({
+      msg: event.detail.value
+    })
+  },
+  addCount(event) {
+    this.setData({
+      count: this.data.count + 1
+    });
+  },
+  btnHandler(event) {
+    console.log(event.target);
+    const {
+      cnt
+    } = event.target.dataset;
+    this.setData({
+      count: this.data.count + cnt
+    })
   }
 })

@@ -2,5 +2,7 @@
   <text>{{info}}</text>
   <view>{{ Math.random() > 5 ? "Greater than five": "No" }}</view>
   <button bind:tap="onClick">按钮</button>
-  <input type="text" bindinput="onInput" />
+  <input value="{{msg}}" type="text" bindinput="onInput" />
+  <button bind:tap="addCount">{{ count }}</button>
+  <button bind:tap="btnHandler" data-cnt="{{2}}">事件传递参数</button>
 </view>

@@ -1,5 +1,6 @@
 {
   "pages":[ 
+    "pages/render/render",
     "pages/dataAndEvent/dataAndEvent",
     "pages/button/button",
     "pages/text/text",
