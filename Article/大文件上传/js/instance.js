@@ -1,3 +1,4 @@
+import axios from 'axios';
 // 二次封装axios
 axios.defaults.baseURL = "http://localhost:8080";
 axios.defaults.headers["Content-Type"] = "multipart/form-data"
@@ -12,3 +13,5 @@ axios.interceptors.response.use(function (response) {
 }, function (reason) {
     return Promise.reject(reason);
 })
+
+export default axios;
