@@ -44,3 +44,12 @@
 
 # rpx
 - rpx将所有设备的屏幕，在宽度上等分为750份rpx
+
+# 样式导入
+- @import
+
+# 小程序窗口组成部分
+- navigationBar导航区域
+- background背景区域，默认不可见，下拉才显示
+- 页面主体区域
+- tarBar 最少2个，最多5个，其list的第一个页面必须在最前面pages配置第一个
