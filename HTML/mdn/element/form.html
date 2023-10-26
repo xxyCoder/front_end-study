@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表单</title>
+</head>
+
+<body>
+    <form onsubmit="return false">
+        <input name="username" type="text" placeholder="只能输入数字和字母" autofocus pattern="[0-9a-zA-Z]*" /><br>
+        <input type="password" readonly><br>
+        <input name="image" type="file" accept="image/gif,image/jpeg,image/jpg"><br>
+        <input height="100px" type="image" alt="测试图片" src="./avatar.jpg"><br>
+        <input type="file" multiple name="file" /><br>
+        <input type="radio" name="sex" value="女"> 女
+        <input type="radio" name="sex" value="男"> 男
+        <br>
+        <input type="checkbox" name="fav" value="足球">足球
+        <input type="checkbox" name="fav" value="游戏">游戏
+        <br>
+        <input type="number" max="10" min="1" step="0.5" name="number"><br>
+        <input type="range" max="10" min="1" step="0.5" name="range"><br>
+
+        <button onclick="handler()">提交</button>
+    </form>
+
+    <script>
+        function handler(e) {
+            console.log("sex:", fav[0].value, fav[1].value);
+            console.log("file", file.files, file.value);
+        }
+        const form = document.getElementsByTagName("form")[0];
+        const username = document.getElementsByName("username")[0];
+        const fav = document.getElementsByName("fav");
+        const file = document.getElementsByName("file")[0];
+        username.addEventListener("input", () => {
+            console.log("username input:", username.value, username.type);
+        });
+        username.addEventListener("change", function () {
+            console.log("username change:", username.value);
+        });
+
+    </script>
+</body>
+
+</html>
+
+<!-- 
+    name 用于提交服务器后表单数据的标识，或者通过JS引用表单
+    accept 规定能够通过文件上传进行提交的类型，只能与type=file搭配
+    alt 图像输入规定替代文本，只能与type=image搭配
+    readonly 输入字段只能只读，可以选中或者拷贝，只能与type=text|password搭配
+    maxlength 输入字段的最大长度，以字符计数，只能与type=text|password搭配
+    src 属性作为提交按钮显示图像的URL，只能与type=image搭配
+    value type=button|reset|submit用于定义按钮的文本，type=text|password|hidden用于定义输入字段的初始值 type=checkbox|radio|image用于定义相关联的值
+    autofocus 自动获得焦点，多个只有第一个有效
+    novalidate 规定提交表单时候不验证form或input域
+    height 只有type=image有效，定义image的高度
+    width 同上，定义image的宽度
+    multiple 可以选择多个，适用于type=email|file
+    pattern 正则表达式，适用input
+    required 必填，适用input
+ -->
