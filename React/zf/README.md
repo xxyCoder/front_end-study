@@ -189,4 +189,7 @@ function _useState(initialValue) {
 # React.memo
 - 对新老属性进行浅比较，和PureComponent类似
 
-
+# Redux
+- 创建容器的时候，存储两部分内容
+- 第一部分是数据，各组件之间共享
+- 第二部分是事件池，存放一些方法，可以让组件更新的方法
