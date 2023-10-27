@@ -1,12 +1,14 @@
 import React from 'react'
 import ReactDom from 'react-dom/client'
-import App from './views/StyleOne';
+import StoreOne from './views/StoreOne';
+import store from './store';
+import ThemeContext from './ThemeContext'
 
 const root = ReactDom.createRoot(document.getElementById("root"));
 root.render(
-    <>
-        <App />
-    </>
+    <ThemeContext.Provider value={{ store }}>
+        <StoreOne />
+    </ThemeContext.Provider>
 )
 
 // root.render(
