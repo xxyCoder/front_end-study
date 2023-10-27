@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button>1</button>
+    <button>2</button>
+    <button>3</button>
+    <button>4</button>
+    <button>5</button>
+    <script>
+        let a = 0, b = 0;
+        let A = function (a) {
+            A = function (b) {
+                console.log(a + b++);
+            };
+            console.log(a++);
+        }
+        A(1);
+        A(2);
+
+        // 闭包应用
+        const btns = document.getElementsByTagName("button");
+        for (var i = 0; i < btns.length; ++i) {
+            (function (i) {
+                btns[i].onclick = function () {
+                    console.log(i); 
+                }
+            })(i);
+        }
+    </script>
+</body>
+
+</html>
