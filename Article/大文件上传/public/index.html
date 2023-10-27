@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ::file-selector-button {
+            display: block;
+            border: none;
+            background-color: cyan;
+            width: 150px;
+            height: 50px;
+        }
+
+        button {
+            display: block;
+            border: none;
+            padding: 6px;
+            background-color: dodgerblue;
+            box-shadow: 0 0 3px dodgerblue;
+            margin: 5px 0;
+        }
+
+        progress {
+            opacity: 0;
+        }
+
+    </style>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <div class="upload_file">
+        <input id="selected" type="file" />
+        <button id="uploadFormData">上传表单文件</button>
+        <button id="uploadBase64">上传base64文件</button>
+        <progress id="progress" max="100" value="0"></progress>
+    </div>
+    <div class="upload_mul_file">
+        <input multiple id="selectedMul" type="file" />
+        <button id="uploadFormDataMul">上传表单文件</button>
+        <progress id="progressMul" max="100" value="0"></progress>
+    </div>
+    <script type="module" src="../js/upload.js"></script>
+</body>
+
+</html>
