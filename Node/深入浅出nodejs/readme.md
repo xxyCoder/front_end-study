@@ -44,3 +44,23 @@
 - 老生代主要采用Mark-Sweep和Mark-Compact相结合的方式进行垃圾回收
   - Mark-Sweep是标记清除的意思，分为标记和清除两个阶段，遍历堆所有对象，并标记活着的对象，在清除阶段只清除没有被标记的对象
   - Mark-Compact将活着的对象往一端移动，移动后清理边界外的（让内存在清理之后连续），但是在内存不足以对从新生代中晋升的对象分配时才使用Mark-Compact
+
+# 网络编程
+- 提供了net、dgram、http、https分别处理TCP、UDP、HTTP、HTTPS
+
+## TCP事件
+- 通过createServer()创建服务器
+  - listen绑定端口
+  - connection每个客户端连接到服务器触发
+  - close当服务器关闭时触发
+  - error服务器出现错误
+- createServer传递的第二个参数即函数，在函数中写服务器对于客户端连接的事件
+  - data当一端调用write发送数据
+  - end其中一段发送了FIN数据
+  - connect用于客户端，当套接字与服务器连接成功触发
+  - timeout当连接不再活跃该事件会触发，通知用户该连接已经被闲置
+
+## UDP事件
+- message，当UPD接到消息触发
+- listening，当UDP开始监听触发
+- close，当UDP调用close方法
