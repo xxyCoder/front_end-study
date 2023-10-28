@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作用域</title>
+</head>
+
+<body>
+    <script>
+        debugger;
+        var a = 1;
+        b = 2;
+        if (1 === 1) {
+            var c = 2;
+            d = 3;
+        }
+        function F() {
+            var e = 1;
+            f = 1;
+        }
+        F();
+
+        debugger
+        function G(v = 1) {
+            function H() {
+                console.log(v);
+            }
+            function J() { };
+            if (1 === 1) {
+                function I() { }
+                I = 1;
+                console.log(I);
+            }
+            H();
+        }
+        G(2);
+    </script>
+</body>
+
+</html>
