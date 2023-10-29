@@ -6,8 +6,8 @@ w.postMessage({ method: "echo", args: ["work"] })
 // 监听worker发送消息
 w.onmessage = function (e) {
     console.log("接收消息:", e.data);
-    // 结束worker
     w.postMessage("done!")
+    // 结束worker
     w.terminate();
 }
 // 监听错误处理
