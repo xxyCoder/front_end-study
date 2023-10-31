@@ -1,7 +1,14 @@
 # EventTarget接口
 - addEventListener() 绑定事件的监听函数
+  - 第三个参数可以是布尔值也可以是对象
+    - 布尔值表示useCapture
+    - 配置对象
+      - capture 冒泡
+      - once  只执行一次
+      - passive 禁止调用preventDefault()
+      - signal  为AbortSignal对象，可以移除监听函数
 - removeEventListener() 移除事件的监听函数
-  - 函数必须是同一个函数，不能是相同函数内容，第三个参数也必须相同
+  - 函数必须是同一个函数，不能是相同函数内容，第三个参数的capture也必须相同
 - dispatchEvent() 触发事件
   - 接受一个event事件
   - 返回值可以判断事件是否被取消了
@@ -20,6 +27,10 @@
     - cancelable，表示是否可以被取消，默认为false
 - bubbles 表示是否是冒泡
 - eventPhase 属性返回一个整数常量，表示事件所处的阶段，只读
+  - 0 事件没有发生
+  - 1 捕获阶段
+  - 2 到达目标节点
+  - 3 冒泡阶段
 - currentTarget 和 target
   - currentTarget 属性返回当前所在的节点，即事件当前正在通过的节点，也就是当前执行监听函数的节点
   - target 属性返回原始触发事件的那个节点
@@ -31,6 +42,16 @@
   
 # 鼠标事件
 - MouseEvent接口继承了Event
+- click
+- dbclick
+- mousedown
+- mouseup
+- mousemove鼠标在一个节点移动触发
+- mouseenter鼠标进入节点触发，进入其子节点不会再次触发
+- mouseleave鼠标离开一个节点触发，离开其父节点不触发
+- mouseover鼠标进入一个节点触发，进入其子节点再次触发
+- mouseout鼠标离开一个节点触发，离开其父节点再次触发
+- wheel鼠标滚动滚动触发
 - button
   - 0 表示按下鼠标左键
   - 1 表示按下鼠标滚轮
@@ -39,11 +60,11 @@
   - 1 按下左键
   - 2 按下滚轮
   - 4 按下右键
-- movementX movementY 返回当前位置与上一个mousemove事件之间的距离
-- clientX 返回鼠标相对于浏览器位置
-- screenX 返回鼠标相对于屏幕位置
-- offsetX 返回鼠标相对于目标节点左侧padding边缘水平距离
-- pageX 返回鼠标相对于文档左侧边缘距离
+- movementX/movementY 返回当前位置与上一个mousemove事件之间的距离
+- clientX/clientY 返回鼠标相对于浏览器位置
+- screenX/screenY 返回鼠标相对于屏幕位置
+- offsetX/offsetY 返回鼠标相对于目标节点padding边缘水平距离
+- pageX/pageY 返回鼠标相对于文档距离（包括不可见部分）
 
 # 表单事件
 - input事件，当input、select、textarea的值发送变化触发，对于复选框或单选框改变选项时，也会触发
@@ -70,3 +91,14 @@
     - add(file)增加一个文件
     - remove(index)移除指定位置的成员
     - clear()清空所有
+
+# 其他常见事件
+- load事件在页面某个资源加载成功触发，如果页面资源是从缓存中获取并不会触发load
+- error是页面加载资源失败触发
+- abort是用户取消加载时触发
+- 上面三个属于进度事件，不仅发送在document，还发生在外部资源上
+- DOMContentLoaded事件当网页下载并解析完成之后，浏览器会在document对象身上触发该事件，此时网页仅仅完成解析，外部资源可能还没有下载结束
+- pageshow事件在页面加载时触发，包括第一次加载和缓存中加载
+  - persisted属性，返回一个布尔值，页面第一次加载返回false，从缓存中加载返回true
+- pagehide当用户点击前进或后退离开当前页面触发，与unload区别在于unload被绑定页面不会缓存，但是pagehide被绑定页面会缓存
+  - persisted属性，设置为true表示页面需要缓存，设为false表示页面不需要缓存

@@ -4,64 +4,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>浏览器事件</title>
+    <style>
+        div {
+            height: 100vh;
+        }
+    </style>
 </head>
 
 <body>
-    <div id="btn">
-        btn
-    </div>
-    <div id="box">
-        box
-    </div>
-    <ul>
-        <li>item1</li>
-        <li>item2</li>
-        <li>item3</li>
-    </ul>
-
-    <div draggable="true">
-        此区域可以拖放
-    </div>
-
+    <p>不允许复制</p>
+    <a href="./readme.md">隐藏当前页面</a>
+    <div></div>
     <script>
-        const btn = document.getElementById('btn');
-        btn.addEventListener('click', {
-            handleEvent: function (event) {
-                console.log('添加监听函数的另一种方式')
-                console.log("this", this)
-                console.log(event.composedPath())
+        console.log("readystate:", document.readyState);
+        document.addEventListener("readystatechange", (event) => {
+            console.log("readystatechange:", document.readyState)
+        });
+        window.addEventListener("DOMContentLoaded", (event) => {
+            console.log("DOMContentLoaded");
+        })
+        window.addEventListener("load", (event) => {
+            console.log("load")
+        })
+        window.addEventListener("pageshow", event => {
+            console.log("pageshow");
+            if (event.persisted) {
+                console.log("从缓存中获取");
+            } else {
+                console.log("第一次加载");
             }
-        }, {
-            once: true,
-            capture: false,
-            passive: true,  // 表示禁止监听调用preventDefault方法
+        })
+        window.addEventListener("pagehide", event => {
+            console.log("pagehide");
+            event.persisted = true;
         })
 
-        const box = document.getElementById('box');
-        box.onclick = function () {
-            console.log("this", this)
-        }
-
-        const ev = new Event("click", {
+        window.addEventListener("cut", event => {
+            console.log("cut");
+            event.preventDefault();
+        })
+        window.addEventListener("copy", (event) => {
+            console.log("copy");
+            event.preventDefault();
+        });
+        window.addEventListener("scroll", event => {
+            console.log(document.body.scrollTop);
+        })
+        // 自定义事件
+        const myEvent = new CustomEvent("build", {
+            detail: {
+                name: "xxyCoder"
+            },
             bubbles: true,
             cancelable: true
-        });
-        btn.dispatchEvent(ev)
-
-        const ul = document.querySelector('ul');
-        ul.addEventListener('mouseenter', (e) => {
-            console.log("mousee enter")
-        });
-        ul.addEventListener('mouseover', (e) => {
-            console.log("mouse over");
         })
-        const li = document.querySelector('li');
-        li.addEventListener('mouseenter', (e) => {
-            console.log("li mousee enter")
+        const abort = new AbortController();
+        window.addEventListener("build", event => {
+            console.log("自定义事件:", event.detail);
+        }, {
+            signal: abort.signal
+        })
+        window.dispatchEvent(myEvent);
+        abort.abort();
+        window.dispatchEvent(myEvent);
+
+        const fn = event => {
+            console.log("click", event.bubbles, event.eventPhase, event.button, event.clientX, event.screenX);
+            if (event.cancelable) {
+                event.preventDefault();
+            }
+        };
+        document.addEventListener("click", fn, {
+            passive: true,
+            capture: true
         });
-        li.addEventListener('mouseover', (e) => {
-            console.log("li mouse over");
+        // document.removeEventListener("click", fn, true)
+        window.addEventListener("wheel", event => {
+            console.log(event.deltaY)
         })
     </script>
 </body>
