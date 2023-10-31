@@ -193,3 +193,11 @@ function _useState(initialValue) {
 - 创建容器的时候，存储两部分内容
 - 第一部分是数据，各组件之间共享
 - 第二部分是事件池，存放一些方法，可以让组件更新的方法
+- redux改变组件状态不负责更新组件
+
+# react-redux
+- 不需要自己提供上下文对象了
+- 使用connect(mapStateToProps,mapDispatchToProps)(Component)
+  - mapStateToProps获取redux中的公共状态作为组件属性
+  - mapDispatchToProps
+- 不需要自己手动更新了，react-redux更改组件状态会更新组件

@@ -1,26 +1,31 @@
 import { useContext, useEffect, useState } from 'react'
 import ThemeContext from '../ThemeContext';
+import actions from '../store/actions'
+
 const StoreOne = function () {
     const { store } = useContext(ThemeContext);
     console.log("store:", store);
-    const { supNum, oppNum } = store.getState();
+    const { supNum, oppNum, num } = store.getState().vote;
+    const { num: num1 } = store.getState().person;
 
-    const [num, setNum] = useState(0);
+
+    const [x, setX] = useState(0);
     const update = () => {
-        setNum(num + 1);
+        setX(x + 1);
     }
     useEffect(() => {
         const unsubscribe = store.subscribe(update);
         return () => {
             unsubscribe();
         }
-    }, [num]);
+    }, [x]);
 
     return <div>
-        {supNum} --- {oppNum}
+        {supNum} --- {oppNum} --- {num} --- {num1}
         <br />
-        <button onClick={() => store.dispatch({ type: "OPP" })}>opp</button>
-        <button onClick={() => store.dispatch({ type: "SUP" })}>sup</button>
+        <button onClick={() => store.dispatch(actions.vote.opp())}>opp</button>
+        <button onClick={() => store.dispatch(actions.vote.sup())}>sup</button>
+        <button onClick={() => store.dispatch(actions.vote.num())}>num</button>
     </div>
 }
 

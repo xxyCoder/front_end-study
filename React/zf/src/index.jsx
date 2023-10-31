@@ -1,15 +1,22 @@
 import React from 'react'
 import ReactDom from 'react-dom/client'
-import StoreOne from './views/StoreOne';
-import store from './store';
-import ThemeContext from './ThemeContext'
+import StoreTwo from './views/StoreTwo';
+import store from './store/reducers';
+// import ThemeContext from './ThemeContext'
+import { Provider } from 'react-redux'
 
 const root = ReactDom.createRoot(document.getElementById("root"));
 root.render(
-    <ThemeContext.Provider value={{ store }}>
-        <StoreOne />
-    </ThemeContext.Provider>
+    <Provider store={store}>
+        <StoreTwo />
+    </Provider>
 )
+
+// root.render(
+//     <ThemeContext.Provider value={{ store }}>
+//         <StoreOne />
+//     </ThemeContext.Provider>
+// )
 
 // root.render(
 //     <>
