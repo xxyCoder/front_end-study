@@ -1,0 +1,2 @@
+<button bind:tap="getInfo">发起GET请求</button>
+<button bind:tap="postInfo">发起POST请求</button>

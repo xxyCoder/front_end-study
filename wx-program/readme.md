@@ -53,3 +53,15 @@
 - background背景区域，默认不可见，下拉才显示
 - 页面主体区域
 - tarBar 最少2个，最多5个，其list的第一个页面必须在最前面pages配置第一个
+
+# 网络请求限制
+- 只能请求HTTPS类型的接口
+- 必须将接口的域名添加到信任列表
+- 提供wx.request方法发起GET请求
+- 跨域问题只存在于浏览器的web开发中，而小程序的宿主环境不是浏览器，而是微信客户端，所以不存在跨域问题
+
+# 导航
+- 声明式导航，页面声明<navigation>导航组件
+  - 条件到tatBar页面，url必须是/开头，open-type="switchTab"
+- 编程式导航，调用小程序API，实现跳转
+- 传递参数类似query方式 ?name=xxyCoder&age=21，在onload的方法中使用options形参接参数

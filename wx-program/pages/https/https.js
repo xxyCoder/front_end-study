@@ -1,18 +1,39 @@
-// pages/text/text.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
 
   },
-
+  getInfo() {
+    wx.request({
+      url: 'https://localhost:3000/api',
+      method: "GET",
+      data: {
+        name: "xxyCoder"
+      },
+      success(res) {
+        console.log("success:", res);
+      },
+      fail(err) {
+        console.log("fail:", err);
+      }
+    })
+  },
+  postInfo() {
+    wx.request({
+      url: 'https://localhost:3000/api',
+      method: "POST",
+      data: {
+        name: "xxyCoder"
+      },
+      success(res) {
+        console.log("success:", res)
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    console.log(options);
+
   },
 
   /**
