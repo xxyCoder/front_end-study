@@ -73,6 +73,16 @@
 - reset事件，当表单重置触发
 - submit事件，当表单向服务器提交时触发
 
+# 进度事件
+- 描述资源加载的进度，主要由AJAX请求、img、audio、video、style、link等外部资源加载触发，继承了ProgressEvent接口
+- abort，外部资源中止加载，如果发生错误导致中止不会触发该事件
+- error，由于外部资源错误导致无法加载触发
+- load，外部资源加载完成
+- loadend，外部资源停止加载，发生顺序在error、abort、load之后
+- loadstart，外部资源开始加载触发
+- progress，外部资源不断加载中
+- timeout，加载超时触发
+
 # 拖拉事件
 - 拖拉是用户在某个对象按下鼠标不放，拖到另一个位置然后释放鼠标键，将对象放在哪里
 - draggable属性设为true表示该属性可拖拉，但是img和a不需要设置也可以拖拉
