@@ -65,3 +65,22 @@
   - 条件到tatBar页面，url必须是/开头，open-type="switchTab"
 - 编程式导航，调用小程序API，实现跳转
 - 传递参数类似query方式 ?name=xxyCoder&age=21，在onload的方法中使用options形参接参数
+
+# 生命周期
+- 应用生命周期
+  - onLauch小程序车初始化完成执行
+  - onShow小程序从后台进入前台或启动时执行
+  - onHide小程序从前台进入后台时触发
+- 页面生命周期
+  - onLoad页面加载时
+  - onShow页面显示时
+  - onReady页面初次渲染完成，一个页面只调用一次，此时可以和页面内容进行交互
+  - onHide页面隐藏触发
+  - onUnload页面卸载触发
+
+# WXS脚本
+- wxml可以调用wxs中定义的函数
+- 语法类似JS，但是有自己的数据类型、不支持ES6及其以上的语法、遵循CommonJS规范
+- wxs中定义的函数不能作为组件的事件回调函数，只能用在{{}}中
+- wxs的运行环境与JS的运行环境的相互隔离的，即wxs不能调用JS中定义的函数
+- 在IOS设备上，wxs性能比JS快，但是在安卓上没有太大区别

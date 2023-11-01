@@ -5,3 +5,15 @@
 <button bind:tap="goToTabBar">编程式跳转到tabBar</button>
 <button bind:tap="gotoText">编程式跳转到Text</button>
 <button bind:tap="goBack">编程式后退</button>
+
+<view>
+  {{m1.toUpper(username)}}
+</view>
+<wxs module="m1">
+  module.exports.toUpper = function (str) {
+    return str.toUpperCase()
+  }
+</wxs>
+
+<wxs src="../../utils/tool.wxs" module="m2" />
+<view>{{m2.toLower(company)}}</view>
