@@ -201,3 +201,12 @@ function _useState(initialValue) {
   - mapStateToProps获取redux中的公共状态作为组件属性
   - mapDispatchToProps
 - 不需要自己手动更新了，react-redux更改组件状态会更新组件
+
+## redux-thunk
+- 重写dispatch方法，没有type属性也不会报错，同时也不会通知reducer执行
+- 实现异步，返回一个函数，内部会给这个函数增加type属性，属性值不会和reducer中的逻辑进行匹配
+- 将返回的函数执行，把派发方法dispatch传递给函数
+- 总共派发两次
+
+## redux-promise
+- 相比redux-thunk更方便，可以返回promise对象，但是也派发两次

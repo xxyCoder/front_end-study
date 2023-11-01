@@ -7,6 +7,7 @@ const initial = {
 }
 // 第一次派发是redux内部派发的，type=****与任何逻辑都不匹配，目的是为了给state赋初始值
 export default function voteReducer(state = initial, action) {
+    console.log("reducer");
     state = { ...state };
     switch (action.type) {
         case types.VOTE_SUP:

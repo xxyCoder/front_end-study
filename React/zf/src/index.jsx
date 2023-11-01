@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDom from 'react-dom/client'
 import StoreTwo from './views/StoreTwo';
-import store from './store/reducers';
+import store from './store';
 // import ThemeContext from './ThemeContext'
 import { Provider } from 'react-redux'
 
