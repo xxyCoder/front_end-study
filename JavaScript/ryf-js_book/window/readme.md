@@ -1,0 +1,14 @@
+# window对象
+- 指的是当前浏览器的窗口
+- opener属性表示打开当前窗口的父窗口，没有父窗口则返回null
+- self指向窗口本身
+- frames返回一个类数组对象，成员为所有框架窗口，包括frame和iframe元素
+  - 如果iframe设置了id或name属性，则可以使用该属性值引用这个iframe窗口
+  - frames属性其实是window对象的别名
+- top指向最顶层窗口，用于frame里面获取最顶层窗口
+- parent指向父窗口，如果没有父窗口则指向自身
+- devicePixelRadio返回一个数值，表示一个CSS像素的大小与一个物理像素的大小之间的比率，即一个CSS像素是由多少个物理像素组成
+- scrollX/scrollY返回页面的滚动距离
+- requestAnimationFrame，推迟回调函数执行，直到下一次重流执行
+- requestIdleCallback，推迟回调函数执行，直到系统资源空闲
+  - 可以指定配置对象最长推迟时间，过了改时间无论系统是否空闲都执行回调
