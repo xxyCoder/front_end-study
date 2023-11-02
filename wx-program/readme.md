@@ -84,3 +84,20 @@
 - wxs中定义的函数不能作为组件的事件回调函数，只能用在{{}}中
 - wxs的运行环境与JS的运行环境的相互隔离的，即wxs不能调用JS中定义的函数
 - 在IOS设备上，wxs性能比JS快，但是在安卓上没有太大区别
+
+# 组件
+- 局部引用，在页面的.json文件的usingComponents写对应的键值对
+- 全局引用，在app.json文件的usingComponents写对应的键值对
+- 与页面的区别
+  - .json需要声明component:true
+  - .js文件中调用的是Component()函数
+  - 组件的事件处理函数需要定义methods节点中
+- 组件样式隔离，外部不会影响组件，组件不会影响外部
+  - app.wxss的全局样式对组件无效
+  - 只有class选择有样式隔离效果
+- 修改组件的样式隔离选项
+  - 在.js或.json文件添加styleisolation修改组件样式隔离
+    - isolated 表示启用样式隔离
+    - apply-shared 表示页面wxss将影响到自定义组件，但组件不会影响页面
+    - shared 表示页面wxss影响到组件，组件也可以影响页面
+- properties 是外部传递给组件的数据，与vue不同，是可写的，且data === properties

@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/component/component",
     "pages/navigation/navigation",
     "pages/https/https",
     "pages/render/render",
@@ -36,5 +37,6 @@
     ]
   },
   "style": "v2",
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "usingComponents": {}
 }

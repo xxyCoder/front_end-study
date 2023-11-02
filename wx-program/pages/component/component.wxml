@@ -1,0 +1,4 @@
+<view>
+  <my-test1 maxCount="5"></my-test1>
+</view>
+
