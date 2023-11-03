@@ -1,4 +1,15 @@
 <view>
-  <my-test1 maxCount="5"></my-test1>
+  {{ count }}
+  <my-test1 maxCount="5" bind:update="updateCount">
+    <view slot="before">我是before</view>
+    我是组件默认插槽1
+    <view slot="after">我是after</view>
+  </my-test1>
+  <my-test1 id="child2" maxCount="5" bind:update="updateCount">
+    <view slot="before">我是before</view>
+    我是组件默认插槽2
+    <view slot="after">我是after</view>
+  </my-test1>
 </view>
 
+<button bind:tap="getChild">拿到子组件实例</button>

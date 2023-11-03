@@ -1,9 +1,13 @@
-<!--components/test/test.wxml-->
-<text>components/test/test.wxml</text>
-
 <button bind:tap="add">{{ count }}</button>
 
 <block>
   <button style="display: inline;" bind:tap="addN1">{{ n1 }}</button> <text>+</text>
   <button style="display: inline;" bind:tap="addN2">{{ n2 }}</button> <text>=</text> {{ sum }}
 </block>
+
+<view>
+  <slot name="before"></slot>
+  <slot>默认占位符</slot>
+  <button bind:tap="modifyParentData">update parent count</button>
+  <slot name="after"></slot>
+</view>

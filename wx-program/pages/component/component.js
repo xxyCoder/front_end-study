@@ -5,9 +5,17 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    count: 0
   },
-
+  updateCount(e) {
+    this.setData({
+      count: this.data.count + e.detail.payload
+    })
+  },
+  getChild() {
+    const child2 = this.selectComponent("#child2");
+    child2.modifyParentData();
+  },
   /**
    * 生命周期函数--监听页面加载
    */
