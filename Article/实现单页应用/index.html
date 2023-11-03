@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>单页应用</title>
+</head>
+
+<body>
+    <ul>
+        <li><a href="/">首页</a></li>
+        <li><a href="/about">关于</a></li>
+        <li><a href="/shop">商城</a></li>
+    </ul>
+    <div id="app"></div>
+
+    <script>
+        const routes = [
+            {
+                path: "/",
+                template: "<div>首页</div>"
+            },
+            {
+                path: "/about",
+                template: "<div>关于</div>"
+            },
+            {
+                path: "/shop",
+                template: "<div>商城</div>"
+            }
+        ];
+        const ul = document.getElementsByTagName("ul")[0];
+        const app = document.getElementById("app");
+        ul.addEventListener("click", function (e) {
+            e.preventDefault();
+            if (e.target.nodeName.toLowerCase() === "a") {
+                const path = e.target.pathname;
+                const idx = routes.findIndex(route => route.path === path);
+                if (idx !== -1) {
+                    window.history.pushState({}, "", path);
+                    app.innerHTML = routes[idx].template;
+                }
+            }
+        }, true);
+    </script>
+</body>
+
+</html>
