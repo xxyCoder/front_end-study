@@ -11,3 +11,11 @@
   <button bind:tap="modifyParentData">update parent count</button>
   <slot name="after"></slot>
 </view>
+
+<view>
+  <view>
+    {{ num1 }} + {{ num2 }} = {{sum}}
+  </view>
+  <button bind:tap="updateNum1" data-payload="{{1}}">updateNum1</button>
+  <button bind:tap="updateNum2" data-payload="{{1}}">updateNum2</button>
+</view>

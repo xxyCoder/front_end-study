@@ -1,0 +1,17 @@
+{
+  "name": "wx-program",
+  "version": "1.0.0",
+  "description": "- pages存放所有小程序的页面\r - utils用来存放工具性质的模块\r - app.js小程序入口文件\r - app.json小程序的全局配置文件\r - app.wxss小程序的全局样式文件\r - project.config.json项目的配置文件\r - sitemap.json用来配置小程序以及页面是否允许被微信索引",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "miniprogram-recycle-view": "^0.1.5",
+    "mobx-miniprogram": "^4.13.2",
+    "mobx-miniprogram-bindings": "^1.2.1"
+  }
+}

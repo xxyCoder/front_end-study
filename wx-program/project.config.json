@@ -18,7 +18,7 @@
     "minified": true,
     "autoAudits": false,
     "newFeature": false,
-    "uglifyFileName": false,
+    "uglifyFileName": true,
     "uploadWithSourceMap": true,
     "useIsolateContext": true,
     "nodeModules": false,
@@ -30,7 +30,7 @@
     "packNpmManually": false,
     "enableEngineNative": false,
     "packNpmRelationList": [],
-    "minifyWXSS": true,
+    "minifyWXSS": false,
     "showES6CompileOption": false,
     "minifyWXML": true,
     "babelSetting": {

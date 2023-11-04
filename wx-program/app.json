@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/store/store",
     "pages/component/component",
     "pages/navigation/navigation",
     "pages/https/https",
@@ -23,7 +24,7 @@
   "tabBar": {
     "list": [
       {
-        "pagePath": "pages/navigation/navigation",
+        "pagePath": "pages/store/store",
         "text": "首页",
         "iconPath": "",
         "selectedIconPath": ""
@@ -32,7 +33,7 @@
         "text": "我的",
         "iconPath": "",
         "selectedIconPath": "",
-        "pagePath": "pages/logs/logs"
+        "pagePath": "pages/component/component"
       }
     ]
   },

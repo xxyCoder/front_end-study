@@ -5,6 +5,8 @@
     "@babel/traverse": "^7.22.15",
     "@babel/types": "^7.22.15",
     "crypto": "^1.0.1",
+    "mobx-miniprogram": "^4.13.2",
+    "mobx-miniprogram-bindings": "^1.2.1",
     "nodejs-websocket": "^1.7.2",
     "vue-router": "^4.2.5"
   }

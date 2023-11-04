@@ -138,3 +138,12 @@
   - 子组件调用
 - 获取属性实例，this.selectComponent(id或class选择器)获取子组件实例对象
   - 可以调用任意方法和数据
+
+# 组件之间代码共享
+- behaviors，类似vue.js中的mixins
+- 可以包含一组属性、数据、生命周期和方法，组件引用它，其代码会被合并到组件中
+- behaviors也可以引用其他的behavior
+- 使用require导入behavior，挂载在behaviors字段中即可使用
+- 同名字段的覆盖和组合规则
+  - 同名字段是对象，则进行对象合并
+  - 同名字段的其他情况，组件 > 父behavior > 子behavior 、靠后的behavior > 靠前的behavior 按优先级覆盖

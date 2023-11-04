@@ -1,5 +1,25 @@
+const myBehavior = require("../../behavior/my-behavior");
+import {
+  storeBindingsBehavior
+} from 'mobx-miniprogram-bindings';
+import {
+  store
+} from '../../store/index';
 // components/test/test.js
 Component({
+  behaviors: [myBehavior, storeBindingsBehavior],
+  storeBindings: {
+    store,
+    fields: {
+      num1: () => store.num1, // 数据绑定方式一
+      num2: () => store.num2,
+      sum: "sum" // 数据绑定方式二
+    },
+    actions: {
+      addNum1: "addNum1",
+      addNum2: "addNum2"
+    }
+  },
   options: {
     pureDataPattern: /^_/,
     multipleSlots: true
@@ -13,7 +33,7 @@ Component({
       value: 10 // 默认值
     }
   },
-  
+
   /**
    * 组件的初始数据
    */
@@ -56,6 +76,12 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    updateNum1(e) {
+      this.addNum1(e.target.dataset.payload);
+    },
+    updateNum2(e) {
+      this.addNum2(e.target.dataset.payload)
+    },
     add() {
       console.log(this.data === this.properties);
       if (this.data.count < this.properties.maxCount) {
