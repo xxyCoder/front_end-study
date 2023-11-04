@@ -28,3 +28,9 @@ const lastEnvConfig = {...baseEnvConfig,...modeEnvConfig}
 - 对于客户端，会注入到import.meta.env中
   - 但vite做了一个拦截，防止将隐私性的变量直接放入import.meta.env中，如果环境变量以VITE_开头，则不会拦截
   - 配置文件中 envPrefix 去修改这个开头
+
+# css文件处理
+- 对于引入.css文件，使用fs模块读取文件
+- 创建一个style标签，将.css文件内容赋值给style标签内容
+- 将style插入到index.html文件的head中
+- 将该css文件中内容直接替换为js脚本，设置content-type为text/javascript，让浏览器以JS方式解析该css文件
