@@ -1,16 +1,19 @@
 import React from 'react'
 import ReactDom from 'react-dom/client'
-import StoreTwo from './views/StoreTwo';
-import store from './store';
+// import StoreThree from './views/StoreThree';
+// import store from './store/toolkit';
 // import ThemeContext from './ThemeContext'
-import { Provider } from 'react-redux'
+// import { Provider } from 'react-redux'
+import App from './App';
 
 const root = ReactDom.createRoot(document.getElementById("root"));
-root.render(
-    <Provider store={store}>
-        <StoreTwo />
-    </Provider>
-)
+root.render(<App />)
+
+// root.render(
+//     <Provider store={store}>
+//         <StoreThree />
+//     </Provider>
+// )
 
 // root.render(
 //     <ThemeContext.Provider value={{ store }}>
