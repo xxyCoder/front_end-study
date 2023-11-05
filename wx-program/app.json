@@ -12,6 +12,30 @@
     "pages/index/index",
     "pages/logs/logs"
   ],
+  "subPackages": [
+    {
+      "root": "packageA",
+      "pages": [
+        "pages/cat/cat",
+        "pages/dog/dog"
+      ]
+    },
+    {
+      "root": "packageB",
+      "name": "pack-b",
+      "pages": [
+        "pages/apple/apple",
+        "pages/banana/banana"
+      ],
+      "independent": true
+    }
+  ],
+  "preloadRule": {
+    "pages/component/component": {
+      "network": "all",
+      "packages": ["packageA"]
+    }
+  },
   "window": {
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#000",
