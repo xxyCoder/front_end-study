@@ -34,3 +34,5 @@ const lastEnvConfig = {...baseEnvConfig,...modeEnvConfig}
 - 创建一个style标签，将.css文件内容赋值给style标签内容
 - 将style插入到index.html文件的head中
 - 将该css文件中内容直接替换为js脚本，设置content-type为text/javascript，让浏览器以JS方式解析该css文件
+
+# vite处理css
