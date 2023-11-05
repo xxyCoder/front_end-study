@@ -212,4 +212,6 @@ function _useState(initialValue) {
 - 相比redux-thunk更方便，可以返回promise对象，但是也派发两次
 
 # react-router-dom
-- 
+- 路径匹配规则
+  - 默认非精准匹配，非完全匹配，如果地址是/login，那么路由地址/也能匹配成功，但是/a2无法匹配/a/b的；地址的最后一个/可以忽略
+- 匹配子级路需要带上父级的路径，不能省略
