@@ -1,8 +1,6 @@
-import { HashRouter, Route, Link, Switch } from 'react-router-dom';
-import RouterOne from './views/RouterOne';
-import RouterTwo from './views/RouterTwo';
-import RouterThree from './views/RouterThree';
-import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
+import { HashRouter, Link, } from 'react-router-dom';
+import RouterView from './router';
+import routes from './router/routes';
 
 const App = function () {
     /**
@@ -16,16 +14,10 @@ const App = function () {
         <div>
             <Link to="/one">One</Link><br />
             <Link to="/two">Two</Link><br />
-            <Link to="/three">Three</Link><br/>
+            <Link to="/three">Three</Link><br />
             <Link to="/four">Four</Link>
         </div>
-        <Switch>
-            <Route path="/one" component={RouterOne} />
-            <Route exact path="/two" component={RouterTwo} />
-            <Route exact path="/three" component={RouterThree} />
-            <Route exact path="/four" render={() => <div>Four</div>} />
-            <Redirect to="/one" />
-        </Switch>
+        <RouterView routes={routes} />
     </HashRouter>
 }
 
