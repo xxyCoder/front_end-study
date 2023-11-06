@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite'
+const postcssPresetEnv = require('postcss-preset-env');
 
 export default defineConfig({
     optimizeDeps: {
@@ -20,6 +21,9 @@ export default defineConfig({
                 }
             }
         },
-        devSourcemap: true
+        devSourcemap: true,
+        postcss: {  // postcss配置文件
+            plugins: [postcssPresetEnv()]
+        }
     }
 })
