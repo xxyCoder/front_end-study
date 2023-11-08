@@ -21,3 +21,11 @@
 - from(data)
 - isBuffer(obj)
 - isEncoding(encoding)
+
+# File类
+- 继承Blob类
+- new buffer.File(source,filename[,options])
+  - source将存储在File中的字符串数组
+  - filename 文件名
+  - options 和Blob类options定义一致
+- lastModified 最后修改日期
