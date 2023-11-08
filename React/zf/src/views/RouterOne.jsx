@@ -3,7 +3,8 @@ import one from '../router/one';
 import RouterView from "../router";
 
 
-const RouterOne = function () {
+const RouterOne = function (props) {
+    console.log("props:",props);
     return <div>
         One
         <div>

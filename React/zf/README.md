@@ -215,3 +215,18 @@ function _useState(initialValue) {
 - 路径匹配规则
   - 默认非精准匹配，非完全匹配，如果地址是/login，那么路由地址/也能匹配成功，但是/a2无法匹配/a/b的；地址的最后一个/可以忽略
 - 匹配子级路需要带上父级的路径，不能省略
+- 组件可以拿到三个属性值：history、location、match
+  - component会自动传入，如果是render则需通过回调函数传入组件
+  - 函数组件可以通过useHistory、useLocation、useMatch方法拿到
+  - 对于在HashRoutet或BrowserRoute中渲染组件都可以使用钩子函数拿到
+  - 只有基于Route渲染的组件，才可以基于props获取三个属性
+    - 类组件可以通过高阶组件+钩子函数拿到三个属性，withRouter可以解决该问题
+```js
+function withRouter(Component) {
+  return HOC(props) {
+    const history = useHistory(),match = useMatch(),location = useLocation;
+    props = {history,match,location,...props};
+    return <Component {...props} />
+  }
+}
+```

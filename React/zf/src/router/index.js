@@ -15,7 +15,7 @@ function RouterView(props) {
                     return <Redirect key={index} {...config} />
                 }
 
-                if (Component) config.component = () => <Suspense fallback={() => <>loading...</>}><Component /></Suspense>;
+                if (Component) config.component = (props) => <Suspense fallback={() => <>loading...</>}><Component {...props} /></Suspense>;
                 else config.render = render;
                 config.path = path;
                 return <Route key={index} {...config} />
