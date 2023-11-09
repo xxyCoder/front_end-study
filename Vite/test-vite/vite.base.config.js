@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 const postcssPresetEnv = require('postcss-preset-env');
 
 export default defineConfig({
+    root: "",
     optimizeDeps: {
         exclude: [] // 哪些模块不需要预处理
     },

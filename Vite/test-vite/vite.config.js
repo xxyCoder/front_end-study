@@ -9,7 +9,6 @@ const envResolver = {
 }
 
 export default defineConfig(({ command, mode }) => {
-
     const env = loadEnv(mode, process.cwd(), "");   // 第三个参数为文件名，默认为 .env
     console.log("env:", env);
     return envResolver[command]();

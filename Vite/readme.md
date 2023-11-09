@@ -30,9 +30,13 @@ Vite意在提供开箱即用的配置
   - 包管理器的lockfile，例如package-lock.json
   - 在vite.config.js相关字段配置过
 
+# index.html与根目录
+- 在一个Vite项目中，index.html在项目最外层而不是public文件夹下，这是有意而为之的：在开发期间 Vite 是一个服务器，而 index.html 是该 Vite 项目的入口文件
+- Vite 将 index.html 视为源码和模块图的一部分
+  
 # 环境变量
 - vite内置了dotenv第三方库
-  - 但不会预先读取env配置文件，因为vite.config.js的配置文件中envDir可以改变配置文件的地址，预先读取.env没有意义
+  - 但不会预先读取env配置文件，因为vite.config.js的配置文件中envDir可以改变配置文件的地址，以及root会影响项目根目录位置，预先读取.env没有意义
 - 调用loadEnv，手动确定环境变量文件位置
   1. 找到.env文件 解析其中环境变量，并放进一个对象中
   2. 根据传入的mode对这个文件进行拼接 `.env.${mode}`，并根据结果去解析对应的配置文件进行解析，并放入一个对象里
