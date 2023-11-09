@@ -21,7 +21,7 @@ const routes = [{
     exact: true,
     component: lazy(() => import("../views/RouterTwo"))
 }, {
-    path: "/three",
+    path: "/three/:id?/:name?",
     exact: true,
     component: lazy(() => import("../views/RouterThree"))
 }, {

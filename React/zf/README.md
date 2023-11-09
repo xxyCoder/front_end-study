@@ -217,16 +217,41 @@ function _useState(initialValue) {
 - 匹配子级路需要带上父级的路径，不能省略
 - 组件可以拿到三个属性值：history、location、match
   - component会自动传入，如果是render则需通过回调函数传入组件
-  - 函数组件可以通过useHistory、useLocation、useMatch方法拿到
+  - 函数组件可以通过useHistory、useLocation、useRouteMatch方法拿到
   - 对于在HashRoutet或BrowserRoute中渲染组件都可以使用钩子函数拿到
   - 只有基于Route渲染的组件，才可以基于props获取三个属性
     - 类组件可以通过高阶组件+钩子函数拿到三个属性，withRouter可以解决该问题
 ```js
 function withRouter(Component) {
   return HOC(props) {
-    const history = useHistory(),match = useMatch(),location = useLocation;
+    const history = useHistory(),match = useRouteMatch(),location = useLocation;
     props = {history,match,location,...props};
     return <Component {...props} />
   }
 }
 ```
+- 动态参数/path/:param1/:param2
+  - param1和param2都是动态参数
+  - 隐式传递参数，路径中不会显示动态参数的值，但是可以在locaton.state中拿到，弊端是一刷新location.state也拿不到了
+
+# NavLink vs Link
+- 都是实现路由跳转的
+- NavLink每一次页面加载或切换，都会拿最新的路由地址和NavLink的to指定地址匹配，匹配成功会默认设置active类名
+  - 可以基于activeClass重新设定选中的active类名
+
+# router6
+- 所有路由规则都放在Routes下，且二级或多级路由匹配规则不再分配到各个组件中编写，而是统一写在一起处理
+```jsx
+<Routes>
+  <Route path="/one" element={<A/>} >
+    <Route path="/one/a" element={<Aa />} />
+    <Route path="/one/b" element={<Ab />} />
+  </Route>
+</Routes >
+```
+- 路由匹配成功，不再基于component/render渲染，而是基于element
+- 不再需要Switch，默认就是一个匹配成功就不继续匹配下去
+- 不再需要exact，默认每一项都是精准匹配
+- 原有的Redirect操作，被<Route element={<Navigate to=""/> />}取代
+  - to的值可以是对象，pathname需要跳转的地址，search问号传递信息
+- outlet 路由容器，用于渲染二级或多级路由匹配的规则
