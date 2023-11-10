@@ -45,3 +45,30 @@
   - write(chunk[,encoding[,callback]])
 - 属性
   - writableLength 准备写入的字节数量
+
+## 可读流
+- 事件
+  - close
+  - data  stream.read()时才触发
+  - end
+  - error
+  - pause 调用pause()方法并且readableFlowing不是false则触发
+  - readable  表明流有新的信息，比data优先级高
+  - resume  调用resume()并且readableFlowing不是true触发
+- 方法
+  - isPause()
+  - pause() 处于流动模式的流停止触发 'data' 事件，切换出流动模式。 任何可用的数据都将保留在内部缓冲区中
+  - pipe()  
+    - 第一个参数是目的地，流要往哪里去
+    - options
+      - end 读取结束时结束写入，默认为true
+  - read()  没有内容从缓冲区可读，则返回null
+    - size  指定读取的数据量，必须小于1gib
+  - setEncoding()
+  - unpipe()  分离之前使用pipe()的流
+    - 没有设置参数，则剥离所有流
+  - unshift(chunk[,encoding]) 将一大块数据推回内部缓冲区
+    - 触发end之后不能调用该方法
+  - push(chunk[,encoding])
+    - 
+  - [Symbol.asyncIterator]()  使用await for...of消费流 
