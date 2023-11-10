@@ -255,3 +255,26 @@ function withRouter(Component) {
 - 原有的Redirect操作，被<Route element={<Navigate to=""/> />}取代
   - to的值可以是对象，pathname需要跳转的地址，search问号传递信息
 - outlet 路由容器，用于渲染二级或多级路由匹配的规则
+- 不再基于属性将history、location、match传递给组件，只能使用hooks，当hooks只能在Route内部包着使用
+- 编程式导航不再通过history，而是navigator(useNavigator()方法)
+```jsx
+const navigator = useNavigator();
+navigator("/c");
+navigator("/c",{ replace: true });
+navigator({
+  pathname:"/c",
+  search:"?name=xxyCoder"
+})
+navigator({
+  pathname:"/c",
+  state: {
+    name: "xxyCoder"
+  }
+})
+```
+- 使用useSearchParams()拿到search参数
+```jsx
+const [params,setParams] = useSearchParams();
+params.get("name");
+```
+- useMatch(pathname) 代替版本5的useRouteMatch（可以基于params获取路径参数匹配信息），但是这个Hooks的params不会解析
