@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "uni-app",
+  "usingComponents": {
+    "my-search": "/components/my-search/my-search"
+  }
+}
