@@ -211,11 +211,27 @@ function _useState(initialValue) {
 ## redux-promise
 - 相比redux-thunk更方便，可以返回promise对象，但是也派发两次
 
+## useReducer
+```js
+const initialState = {};
+function reducer(state,action) {
+  state = {...state};
+  switch(action.type) {
+
+  }
+  return state;
+}
+const app = function() {
+  const [state,dispatch] = useReducer(reducer,initialState);
+}
+```
+- 在组件中创建局部store，适合处理大量数据
+
 # react-router-dom
 - 路径匹配规则
   - 默认非精准匹配，非完全匹配，如果地址是/login，那么路由地址/也能匹配成功，但是/a2无法匹配/a/b的；地址的最后一个/可以忽略
 - 匹配子级路需要带上父级的路径，不能省略
-- 组件可以拿到三个属性值：history、location、match
+- Route渲染组件可以拿到三个属性值：history、location、match
   - component会自动传入，如果是render则需通过回调函数传入组件
   - 函数组件可以通过useHistory、useLocation、useRouteMatch方法拿到
   - 对于在HashRoutet或BrowserRoute中渲染组件都可以使用钩子函数拿到
