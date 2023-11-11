@@ -66,7 +66,7 @@ component.options.__file = "pages/cate/index.vue"
 /*!*************************************************************************************************************************!*\
   !*** C:/Program Files/vscode-project/front_end-study/uni-app/heima/pages/cate/index.vue?vue&type=template&id=333e524b& ***!
   \*************************************************************************************************************************/
-/*! no static exports found */
+/*! exports provided: render, staticRenderFns, recyclableRender, components */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -101,7 +101,7 @@ var components
 try {
   components = {
     mySearch: function () {
-      return __webpack_require__.e(/*! import() | components/my-search/my-search */ "components/my-search/my-search").then(__webpack_require__.bind(null, /*! @/components/my-search/my-search.vue */ 81))
+      return __webpack_require__.e(/*! import() | components/my-search/my-search */ "components/my-search/my-search").then(__webpack_require__.bind(null, /*! @/components/my-search/my-search.vue */ 78))
     },
   }
 } catch (e) {
@@ -242,6 +242,11 @@ var _default = {
     activeChange: function activeChange(idx) {
       this.active = idx;
       this.cateLevel2 = this.cateList[idx].children;
+    },
+    gotoSearch: function gotoSearch() {
+      uni.navigateTo({
+        url: "/subpks/search/search"
+      });
     }
   }
 };

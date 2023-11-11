@@ -1,5 +1,5 @@
 <template>
-	<view class="my-search-container">
+	<view @click="handleClick" class="my-search-container">
 		<view class="my-search-box">
 			<uni-icons type="search" size="17"></uni-icons>
 			<text class="placeholder" >搜索</text>
@@ -14,6 +14,11 @@
 			return {
 				
 			};
+		},
+		methods: {
+			handleClick() {
+				this.$emit("click");
+			}
 		}
 	}
 </script>

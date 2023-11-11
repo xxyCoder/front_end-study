@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<my-search></my-search>
+		<my-search @click="gotoSearch"></my-search>
 		<view class="scroll-view-container">
 			<scroll-view class="left-scroll-view" scroll-y="true" :style="{height: wh+'px'}">
 				<block v-for="(item,i) in cateList" :key="i">
@@ -55,6 +55,11 @@
 			activeChange(idx) {
 				this.active = idx;
 				this.cateLevel2 = this.cateList[idx].children;
+			},
+			gotoSearch() {
+				uni.navigateTo({
+					url: "/subpks/search/search"
+				})
 			}
 		}
 	}

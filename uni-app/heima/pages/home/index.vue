@@ -1,5 +1,8 @@
 <template>
 	<view>
+		<view class="search-box">
+			<my-search  @click="gotoSearch"></my-search>
+		</view>
 		<!-- 轮播图区域 -->
 		<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000">
 			<swiper-item v-for="item in swiperList" :key="item.good_id">
@@ -24,8 +27,9 @@
 							:style="{width:item.product_list[0].image_width + 'rpx'}" mode="widthFix"></image>
 					</navigator>
 					<view class="right-img-box">
-						<navigator class="right-img-item" v-for="(item2,j) in item.product_list" :url="item2.url" :key="j" v-if="j !== 0">
-							<image :src="item2.image_src" :style="{width:item2.image_width + 'rpx'}" mode="widthFix"/>
+						<navigator class="right-img-item" v-for="(item2,j) in item.product_list" :url="item2.url"
+							:key="j" v-if="j !== 0">
+							<image :src="item2.image_src" :style="{width:item2.image_width + 'rpx'}" mode="widthFix" />
 						</navigator>
 					</view>
 				</view>
@@ -80,21 +84,32 @@
 					data
 				} = await uni.$http.get("/api/public/v1/home/floordata");
 				if (data.meta.status !== 200) return uni.$showMessage();
-				
+
 				data.message.forEach(floor => {
 					floor.product_list.forEach(prod => {
 						prod.url = '/subpks/goods_list/goods_list?' + prod.navigator_url.split("?")[1]
 					})
 				})
-				
+
 				this.floorList = data.message;
-				
+
+			},
+			gotoSearch() {
+				uni.navigateTo({
+					url: "/subpks/search/search"
+				})
 			}
 		}
 	}
 </script>
 
 <style lang="scss">
+	.search-box {
+		position: sticky;
+		top: 0;
+		z-index: 9999;
+	}
+
 	swiper {
 		height: 330rpx;
 
@@ -120,11 +135,13 @@
 		width: 100%;
 		height: 60rpx;
 	}
+
 	.right-img-box {
 		display: flex;
-		flex-wrap:wrap;
+		flex-wrap: wrap;
 		justify-content: space-around;
 	}
+
 	.floor-img-box {
 		display: flex;
 		padding-left: 10rpx;

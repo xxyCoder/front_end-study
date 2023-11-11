@@ -10,7 +10,8 @@
       "root": "subpks",
       "pages": [
         "good_detail/good_detail",
-        "goods_list/goods_list"
+        "goods_list/goods_list",
+        "search/search"
       ]
     }
   ],
