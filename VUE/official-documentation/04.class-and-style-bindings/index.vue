@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 
-const isActive = ref(false);
+const isActive = ref(true);
 const classObj = {
     active: true
 };
@@ -15,17 +15,25 @@ const activeStyle = {
     color: 'red'
 }
 const staticStyle = {
-    position: 'static'
+    backgroundColor: '#ccc'
 }
 </script>
+<style>
+.active {
+    color: red;
+}
+
+.static {
+    background-color: #ccc;
+}
+</style>
 
 <template>
     <div>
-        <div :class="{ active: isActive }"></div>
-        <div :class="classObj"></div>
-        <div :class="classCom"></div>
-        <div :class="[activeClass, staticClass]"></div>
-        <div :class="[isActive ? active : '', staticClass]" :style="[activeStyle, staticStyle]"></div>
-        <div :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }">样式多值</div>
+        <div :class="{ active: isActive }">1</div>
+        <div :class="[isActive ? activeClass : '', staticClass]">Hello</div>
+        <button @click="() => isActive = !isActive">active</button>
+        <div :style="activeStyle">world</div>
+        <div :style="[activeStyle, staticStyle]">Hello World</div>
     </div>
 </template>
