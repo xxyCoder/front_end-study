@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自定义loading效果</title>
+    <style>
+        body {
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .spiners {
+            position: relative;
+        }
+        .spiner {
+            position: absolute;
+            width: 5px;
+            height: 20px;
+            background-color: rgba(0,0,0,0.1);
+            display: inline-block;
+        }
+        @keyframes s1 {
+            0% {
+                background-color: orange;
+            }
+        }
+        @keyframes s2 {
+            10% {
+                background-color: orange;
+            }
+        }
+        @keyframes s3 {
+            20% {
+                background-color: orange;
+            }
+        }
+        @keyframes s4 {
+            30% {
+                background-color: orange;
+            }
+        }
+        @keyframes s5 {
+            40% {
+                background-color: orange;
+            }
+        }
+        @keyframes s6 {
+            50% {
+                background-color: orange;
+            }
+        }
+        @keyframes s7 {
+            60% {
+                background-color: orange;
+            }
+        }
+        @keyframes s8 {
+            70% {
+                background-color: orange;
+            }
+        }
+        @keyframes s9 {
+            80% {
+                background-color: orange;
+            }
+        }
+        @keyframes s10 {
+            90% {
+                background-color: orange;
+            }
+        }
+        .spiner:nth-child(1) {
+            animation: s1 1s linear infinite;
+        }
+        .spiner:nth-child(2) {
+            transform: translate(15px,-3px) rotate(-36deg);
+            animation: s2 1s linear infinite; 
+        }
+        .spiner:nth-child(3) {
+            transform: translate(25px,-13px) rotate(-72deg);
+            animation: s3 1s linear infinite; 
+        }
+        .spiner:nth-child(4) {
+            transform: translate(25px, -26px) rotate(-108deg);
+            animation: s4 1s linear infinite; 
+        }
+        .spiner:nth-child(5) {
+            transform: translate(15px, -36px) rotate(-144deg);
+            animation: s5 1s linear infinite; 
+        }
+        .spiner:nth-child(6) {
+            transform: translate(0, -40px) rotate(-180deg);
+            animation: s6 1s linear infinite; 
+        } 
+        .spiner:nth-child(7) {
+            transform: translate(-15px,-36px) rotate(-216deg);
+            animation: s7 1s linear infinite; 
+        } 
+        .spiner:nth-child(8) {
+            transform: translate(-25px, -26px) rotate(-252deg);
+            animation: s8 1s linear infinite; 
+        } 
+        .spiner:nth-child(9) {
+            transform: translate(-25px, -13px) rotate(-288deg);
+            animation: s9 1s linear infinite; 
+        } 
+        .spiner:nth-child(10) {
+            transform: translate(-15px,-3px) rotate(-324deg);
+            animation: s10 1s linear infinite; 
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div class="spiners">
+        <i class="spiner"></i>
+        <i class="spiner"></i>
+        <i class="spiner"></i>
+        <i class="spiner"></i>
+        <i class="spiner"></i>
+        <i class="spiner"></i>
+        <i class="spiner"></i>
+        <i class="spiner"></i>
+        <i class="spiner"></i>
+        <i class="spiner"></i>
+    </div>
+</body>
+
+</html>
