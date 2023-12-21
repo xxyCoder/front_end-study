@@ -16,11 +16,41 @@ module.exports = {
     "react-vendor": ["react"],
     depend: "./depend.js"
   },
+  resolveLoader: {
+    modules: ["./src/loaders", "node_modules"]
+  },
   module: {
+    parser: {
+      javascript: {
+        exportsPresence: "error"
+      }
+    },
+    noParse: /lodash/,
     rules: [
       {
+        test: /\.xxy$/,
+        use: ["loader-b", "loader-a"]
+      },
+      {
+        enforce: "pre",
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: "eslint-loader",
+        resolve: {
+          fullySpecified: true
+        }
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: "babel-loader"
+      },
+      {
         test: /\.webp$/,
-        type: 'asset/resource'
+        type: 'asset/resource',
+        generator: {
+          filename: "static/[contenthash:8][ext][query]"
+        }
       },
       {
         test: /\.css$/,
@@ -47,6 +77,9 @@ module.exports = {
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "./index.html")
+    }),
+    new MiniCssExtractPlugin({
+      filename: "external.css"
     })
   ],
   devServer: {

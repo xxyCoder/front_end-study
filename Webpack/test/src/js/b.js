@@ -3,10 +3,6 @@ import("./import-async.js")
 
 console.log("b.js")
 
-function sub(a ,b) {
+export function sub(a ,b) {
   return a - b;
-}
-
-module.exports = {
-  sub
 }

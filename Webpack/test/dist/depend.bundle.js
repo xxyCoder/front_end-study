@@ -13,9 +13,10 @@
 /*!*******************!*\
   !*** ./depend.js ***!
   \*******************/
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("const a = __webpack_require__(/*! ./js/a.js */ \"./js/a.js\")\nconst b = __webpack_require__(/*! ./js/b.js */ \"./js/b.js\")\n\nconsole.log(a.add(1, 2), b.sub(2, 1))\n\n//# sourceURL=webpack:///./depend.js?");
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _js_b_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./js/b.js */ \"./js/b.js\");\nconst a = __webpack_require__(/*! ./js/a.js */ \"./js/a.js\");\n\nconsole.log(a.add(1, 2), (0,_js_b_js__WEBPACK_IMPORTED_MODULE_0__.sub)(2, 1));\n\n//# sourceURL=webpack:///./depend.js?");
 
 /***/ }),
 
@@ -25,7 +26,7 @@ eval("const a = __webpack_require__(/*! ./js/a.js */ \"./js/a.js\")\nconst b = _
   \*****************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("__webpack_require__.e(/*! require.ensure */ \"js_require-async_js\").then((function() {\n  const m = __webpack_require__(/*! ./require-async.js */ \"./js/require-async.js\");\n  console.log(\"end2\", m)\n}).bind(null, __webpack_require__))['catch'](__webpack_require__.oe)\nconsole.log(\"a.js\")\n\nfunction add(a, b) {\n  return a + b;\n}\n\nmodule.exports = {\n  add\n}\n\n//# sourceURL=webpack:///./js/a.js?");
+eval("__webpack_require__.e(/*! require.ensure */ \"js_require-async_js\").then((function () {\n  const m = __webpack_require__(/*! ./require-async.js */ \"./js/require-async.js\");\n  console.log(\"end2\", m);\n}).bind(null, __webpack_require__))['catch'](__webpack_require__.oe);\nconsole.log(\"a.js\");\nfunction add(a, b) {\n  return a + b;\n}\nmodule.exports = {\n  add\n};\n\n//# sourceURL=webpack:///./js/a.js?");
 
 /***/ }),
 
@@ -33,9 +34,10 @@ eval("__webpack_require__.e(/*! require.ensure */ \"js_require-async_js\").then(
 /*!*****************!*\
   !*** ./js/b.js ***!
   \*****************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.e(/*! import() */ \"js_import-async_js\").then(__webpack_require__.t.bind(__webpack_require__, /*! ./import-async.js */ \"./js/import-async.js\", 23))\n.then(() => { console.log(\"end2\") })\n\nconsole.log(\"b.js\")\n\nfunction sub(a ,b) {\n  return a - b;\n}\n\nmodule.exports = {\n  sub\n}\n\n//# sourceURL=webpack:///./js/b.js?");
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   sub: () => (/* binding */ sub)\n/* harmony export */ });\n__webpack_require__.e(/*! import() */ \"js_import-async_js\").then(__webpack_require__.t.bind(__webpack_require__, /*! ./import-async.js */ \"./js/import-async.js\", 23)).then(() => {\n  console.log(\"end2\");\n});\nconsole.log(\"b.js\");\nfunction sub(a, b) {\n  return a - b;\n}\n\n//# sourceURL=webpack:///./js/b.js?");
 
 /***/ })
 
@@ -174,6 +176,15 @@ eval("__webpack_require__.e(/*! import() */ \"js_import-async_js\").then(__webpa
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
 /******/ 			return "" + chunkId + ".bundle.js";
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/get mini-css chunk filename */
+/******/ 	(() => {
+/******/ 		// This function allow to reference async chunks
+/******/ 		__webpack_require__.miniCssF = (chunkId) => {
+/******/ 			// return url for filenames based on template
+/******/ 			return undefined;
 /******/ 		};
 /******/ 	})();
 /******/ 	

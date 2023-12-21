@@ -19,3 +19,32 @@
 - hotUpdateChunkFilename自定义热更新chunk的文件名
 - iife是否用立即执行函数包裹代码，默认为true
 - library输出一个库，为入口文件做导入
+
+## module
+- 处理项目中不同类型的模块
+- parser.javascript.exportsPresence指出在 “import...from...”和”export...from...“中无效导出名称行为
+  - 对于commonjs语法导出导入不正确不会报任何错误
+  - 即使该属性设置为false，es6的export导出了不正确的也会报错
+- noParse告诉webpack不解析这些模块，但是仍然会构建在产物中，适用于第三方或者不需要处理的模块进行解析，这些模块内部没有import、require、define等调用或者已经被预处理过
+- rules创建模块时，匹配请求的规则数组，这些规则匹配上则应用对应的loader或parser进行解析
+  - rule可以分为三个部分：条件、结果和嵌套规则
+    - 条件分为资源文件的绝对路径和请求者文件的绝对路径
+    - 结果只在匹配条件后使用
+    - 嵌套rule可以通过rules或oneOf指定
+  - include 引入符合模块，进一步限制test等
+  - exclude 排除符合的模块，优先级高于include
+  - oneOf当规则匹配的时候，只应用第一个被匹配的
+  - loader是use:[ { loader } ]的别名
+  - generator.filename覆盖output.assetModuleFilename
+  - resourceQuery资源查询匹配的条件（?后面的字段）
+  - fullySpecified表示是否需要为文件提供扩展名
+
+## webpack中loader有两个执行阶段 normal和pitching
+
+### normal阶段
+- 在loader文件中导出的函数就是normal loader
+- 会安装规则依次应用对应的loader，先前置(pre) -> 普通(normal) -> 行内(inline) -> 后置(post)
+
+### pitching阶段
+- 是normale阶段执行loader的逆序，导出的loader中有可选选项pitch，该选项赋值的函数就是pitching loader
+- 会在normal阶段前执行，如果该pitching loader有返回值则跳过后续pitching loader进入前一个loader的normal阶段（即后续的normal loader不执行）

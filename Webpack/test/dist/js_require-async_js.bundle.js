@@ -14,7 +14,7 @@
   \*****************************/
 /***/ (() => {
 
-eval("console.log(\"require async\")\n\n//# sourceURL=webpack:///./js/require-async.js?");
+eval("console.log(\"require async\");\n\n//# sourceURL=webpack:///./js/require-async.js?");
 
 /***/ })
 
