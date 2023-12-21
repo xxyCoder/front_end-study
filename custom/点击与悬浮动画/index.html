@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: cadetblue;
+            height: 100vh;
+        }
+
+        #nav {
+            position: relative;
+            display: flex;
+            list-style: none;
+            background-color: #f5f5f5;
+            border-radius: 10em;
+            padding: 10px;
+            box-shadow: 10px 20px 40px #00000033;
+        }
+
+        #nav a {
+            display: inline-block;
+            outline: none;
+            text-decoration: none;
+            z-index: 3;
+            padding: 15px 20px;
+            color: rgba(70, 100, 100);
+        }
+
+        .slide-1,
+        .slide-2 {
+            position: absolute;
+            display: inline-block;
+            height: 60px;
+            width: 80px;
+            border-radius: 10em;
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1.05);
+        }
+
+        .slide-1 {
+            background-color: rgba(170, 190, 255, .5);
+            z-index: 2;
+            left: 10px;
+            top: 5px;
+        }
+
+        .slide-2 {
+            background-color: rgba(173, 203, 135, 0.5);
+            z-index: 1;
+            box-shadow: 0 0 20px #ffffffaa inset;
+            left: 10px;
+            top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <ul id="nav">
+        <li class="slide-1"></li>
+        <li class="slide-2"></li>
+        <li><a href="#">Alpha</a></li>
+        <li><a href="#">Beta</a></li>
+        <li><a href="#">Gamma</a></li>
+        <li><a href="#">Delta</a></li>
+        <li><a href="#">Epsilan</a></li>
+    </ul>
+
+    <script>
+        const nav = document.getElementById("nav");
+        const slide_1 = document.querySelector(".slide-1");
+        const slide_2 = document.querySelector(".slide-2");
+
+        nav.addEventListener("click", function (e) {
+            const t = e.target;
+            if (t.nodeName === 'A' || t.nodeName === 'LI') {
+                slide_1.style.left = t.offsetLeft + 5 + "px"
+            }
+        })
+        nav.addEventListener("mouseover", function(e) {
+            const t = e.target;
+            if (t.nodeName === 'A') {
+                slide_2.style.left = t.offsetLeft + 5 + "px";
+            }
+        })
+    </script>
+</body>
+
+</html>
