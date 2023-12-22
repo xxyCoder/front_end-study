@@ -66,6 +66,21 @@ module.exports = {
       },
     ]
   },
+  resolve: {
+    alias: {
+      js: path.resolve(__dirname, "./src/js"),
+      xxy$: path.resolve(__dirname, "./src/xxy/index.xxy"),
+      xxy: path.resolve(__dirname, "./src/xxy")
+    },
+    conditionNames: ["import", "require"],
+    enforceExtension: false,
+    extensionAlias: {
+      ".xxxy": [".xxy"]
+    },
+    extensions: [".js", ".css"],
+    modules: ["node_modules"],
+    restrictions: [/\.(css|js|xxy|webp|html)$/]
+  },
   output: {
     clean: true,
     path: path.resolve(__dirname, "dist"),

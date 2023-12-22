@@ -15,7 +15,7 @@
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"../node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _css_index_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./css/index.css */ \"./css/index.css\");\n/* harmony import */ var _css_external_css_external__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./css/external.css?external */ \"./css/external.css?external\");\n/* harmony import */ var _xxy_a_xxy__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./xxy/a.xxy */ \"./xxy/a.xxy\");\n/* harmony import */ var _xxy_a_xxy__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_xxy_a_xxy__WEBPACK_IMPORTED_MODULE_3__);\n\n\n\n\nconst a = __webpack_require__(/*! ./js/a.js */ \"./js/a.js\");\nconst app = document.getElementById(\"app\");\napp.innerText = \"Hello Webpack\";\n\n//# sourceURL=webpack:///./index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"../node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _css_index_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./css/index.css */ \"./css/index.css\");\n/* harmony import */ var _css_external_css_external__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./css/external.css?external */ \"./css/external.css?external\");\n/* harmony import */ var xxy__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! xxy */ \"./xxy/index.xxy\");\n/* harmony import */ var xxy__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(xxy__WEBPACK_IMPORTED_MODULE_3__);\n/* harmony import */ var xxy_a_xxy__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! xxy/a.xxy */ \"./xxy/a.xxy\");\n/* harmony import */ var xxy_a_xxy__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(xxy_a_xxy__WEBPACK_IMPORTED_MODULE_4__);\n\n\n\n\n\nconst a = __webpack_require__(/*! ./js/a.js */ \"./js/a.js\");\nconst app = document.getElementById(\"app\");\napp.innerText = \"Hello Webpack\";\n\n//# sourceURL=webpack:///./index.js?");
 
 /***/ }),
 
@@ -158,6 +158,16 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
 /***/ (() => {
 
 eval("xxy\n\n//# sourceURL=webpack:///./xxy/a.xxy?");
+
+/***/ }),
+
+/***/ "./xxy/index.xxy":
+/*!***********************!*\
+  !*** ./xxy/index.xxy ***!
+  \***********************/
+/***/ (() => {
+
+eval("xxy\n\n//# sourceURL=webpack:///./xxy/index.xxy?");
 
 /***/ }),
 

@@ -16,7 +16,7 @@
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _js_b_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./js/b.js */ \"./js/b.js\");\nconst a = __webpack_require__(/*! ./js/a.js */ \"./js/a.js\");\n\nconsole.log(a.add(1, 2), (0,_js_b_js__WEBPACK_IMPORTED_MODULE_0__.sub)(2, 1));\n\n//# sourceURL=webpack:///./depend.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _js_b_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./js/b.js */ \"./js/b.js\");\nconst a = __webpack_require__(/*! js/a.js */ \"./js/a.js\");\n\nconsole.log(a.add(1, 2), (0,_js_b_js__WEBPACK_IMPORTED_MODULE_0__.sub)(2, 1));\n\n//# sourceURL=webpack:///./depend.js?");
 
 /***/ }),
 

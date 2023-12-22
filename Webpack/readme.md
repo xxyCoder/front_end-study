@@ -48,3 +48,25 @@
 ### pitching阶段
 - 是normale阶段执行loader的逆序，导出的loader中有可选选项pitch，该选项赋值的函数就是pitching loader
 - 会在normal阶段前执行，如果该pitching loader有返回值则跳过后续pitching loader进入前一个loader的normal阶段（即后续的normal loader不执行）
+
+## resolve
+- 设置模块如何被解析
+- alias创建import或require引入资源的别名
+  - 搭配$表示精准匹配
+  - 设置为false告知webpack忽略模块
+- aliasFields指定了解析别名（改别名指定的值也是包）的时候从包的哪个入口文件开始
+- conditionNames定义一个库的入口，匹配列存放在package.json的exports字段
+- enforceExtension表示是否强制引入资源文件要有扩展名
+  - 不建议使用，引入第三方资源会报错要求扩展名
+- extensionAlias将扩展名与别名进行映射
+- extensions如果文件没有后缀名则尝试按该字段给的后缀名顺序去解析
+- fallback是当正常解析失败后，重定向模块请求去其他位置
+  - 可以使用require.resolve拿到模块路径而不是加载
+- mainFields用于解析模块的时候从那个入口字段开始
+- mainFiles用于解析目录时要用的文件名，资源只指定了目录的话则会按照该字段依次匹配进行解析
+- modules告诉webpack解析模块应该搜索的目录
+- preferRelative启用后将更倾向于请求解析为相对请求而不是去modules字段中找
+- restrictions限定解析列表
+
+## resolveLoader
+- 用于解析webpack的loader包路径
