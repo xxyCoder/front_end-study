@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>步骤条</title>
+    <style>
+        .steps {
+            --normal-color: #666;
+            --active-color: #06e;
+            display: flex;
+            list-style: none;
+            justify-content: space-around;
+            align-items: center;
+            padding: 0;
+            margin: 20px 10px;
+            counter-reset: order;
+        }
+
+        .steps>li {
+            counter-increment: order;
+            flex: auto;
+            display: flex;
+            align-items: center;
+            color: var(--active-color);
+        }
+
+        .steps>li:before {
+            content: counter(order);
+            display: inline-block;
+            width: 1.4em;
+            line-height: 1.4em;
+            margin-right: .5em;
+            text-align: center;
+            border-radius: 50%;
+            border: 1px solid;
+            flex-shrink: 0;
+        }
+
+        .steps>li:not(:last-child)::after {
+            content: "";
+            flex: 1;
+            margin: 0 1em;
+            border-bottom: 1px solid;
+            opacity: .6;
+        }
+
+        .steps>.active::before {
+            color: #fff;
+            background-color: var(--active-color);
+            border-color: var(--active-color);
+        }
+
+        .steps>.active::after,
+        .steps>.active~li {
+            color: var(--normal-color);
+        }
+    </style>
+</head>
+
+<body>
+    <ol class="steps">
+        <li>注册</li>
+        <li class="active">域认证</li>
+        <li>身份校验</li>
+        <li>开通账号</li>
+    </ol>
+</body>
+
+</html>
