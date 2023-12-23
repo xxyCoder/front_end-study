@@ -2,6 +2,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const TerserPlugin = require("terser-webpack-plugin")
 
 module.exports = {
   mode: "development",
@@ -81,10 +82,34 @@ module.exports = {
     modules: ["node_modules"],
     restrictions: [/\.(css|js|xxy|webp|html)$/]
   },
+  optimization: {
+    chunkIds: "deterministic",
+    emitOnErrors: false,
+    flagIncludedChunks: true,
+    mangleWasmImports: true,
+    mergeDuplicateChunks: true,
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        parallel: true,
+        terserOptions: {}
+      }),
+      (compiler) => {
+        console.log(compiler)
+      },
+      '...'
+    ],
+    moduleIds: "deterministic",
+    runtimeChunk: {
+      name: (entryPoint) => `runtime-${entryPoint.name}`
+    },
+    usedExports: true,
+    providedExports: true
+  },
   output: {
     clean: true,
     path: path.resolve(__dirname, "dist"),
-    filename: "[name].bundle.js",
+    filename: "[name].bundle.[contenthash:8].js",
     assetModuleFilename: "assets/[contenthash:8][ext][query]",
     asyncChunks: true
   },

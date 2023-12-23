@@ -10,6 +10,11 @@
 - filename比output.filename优先级高
 - dependOn可以与另一个入口chunk共享模块
 
+## runtime chunk
+- 小的js文件，包含了在模块化代码中运行所需要的逻辑和函数
+- 对import和require进行替换
+- 有模块缓存数据结构
+
 ## output
 - assetModuleFilename相比filename，是应用于asset module（静态资源如图片），指定在output.path下的目录
 - publicPath，是html文件中引入chunk、runtime等资源的每个url前缀，以“/”结尾
@@ -70,3 +75,25 @@
 
 ## resolveLoader
 - 用于解析webpack的loader包路径
+
+## Optimization
+- 从webpack4开始，会根据mode执行不同的优化，也可以手动配置了
+- chunkIds告知webpack选择模块id的时候使用哪种算法，如果使用数字id，会影响contenthash导致缓存失效
+  ```js
+    (self["webpackChunk"] = self["webpackChunk"] || []).push([[chunkId],{模块内容...}])
+  ```
+- emitOnErrors，在编译的时候有错误就会发送静态资源，确保出错的静态资源被发送，不终止打包过程，不过会在运行时报错
+- flagIncludedChunks该选项影响了runtime的生成以及在模块变更时需要重新加载全部模块，设置为true表示webpack将要记录哪些块已经被包含，从而在模块变更时只需要加载模块发生变更的，而不是全部加载
+- mangleWasmImports告知webpack修改导入为更短的字符串，来减少Wasm（WebAssembly是一种用于在浏览器中运行高性能代码的二进制指令格式）大小
+- mergeDuplicateChunks合并含有相同模块的chunk
+- minimize使用插件进行压缩
+- minimizer允许定义一个或多个TerserPlugin实例覆盖默认压缩工具
+  - 可以使用 '...' 来访问默认值
+- moduleIds为模块提供id的算法
+- providedExports可以开启对模块导出的自动分析，提供导出的信息给模块使用者，用于优化代码分割
+  - 没有开启而进行代码分割，webpack默认会尝试分析模块的导出，它会尽可能智能地根据模块间的依赖关系和使用情况进行代码分割
+  - 通过明确定义的导出可以更好的控制那些部分应该被分割成单独的块
+- removeEmptyChunks 移除空chunks，默认为true
+- splitChunks对于动态导入的模块，可以进行分割
+- usedExports启用tree-shaking技术，删除导出但是未被使用的代码
+  - tree-shaking通常与es6模块语法一起工作
