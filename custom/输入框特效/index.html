@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>输入框特效</title>
+  <style>
+    html, body, div, input, span {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #1d2b3a;
+    }
+    .inputBox {
+      position: relative;
+      width: 250px;
+    }
+    .inputBox input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid rgba(255, 255, 255, .25);
+      background: #1d2b3a;
+      outline: none;
+      color: #fff;
+      font-size: 16px;
+      border-radius: 5px;
+    }
+    .inputBox span {
+      position: absolute;
+      left: 0;
+      padding: 10px;
+      pointer-events: none;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.25);
+      transition: .5s;
+    }
+    .inputBox input:valid ~ span,
+    .inputBox input:focus ~ span {
+      color: #00dfc4;
+      transform: translate(10px, -7px);
+      font-size: 12px;
+      padding: 0 10px;
+      background: #1d2b3a;
+      border-left: 1px solid #00dfc4;
+      border-right: 1px solid #00dfc4;
+      letter-spacing: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="inputBox">
+    <input type="text" required/>
+    <span>Username</span>
+  </div>
+</body>
+</html>

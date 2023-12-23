@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>流光按钮</title>
+  <style>
+    body {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    a {
+      position: relative;
+      display: inline-block;
+      background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+      background-size: 400%;
+      border-radius: 30px;
+      padding: 6px 12px;
+      color: #fff;
+      text-decoration: none;
+    }
+    a:hover {
+      animation: animate 8s linear infinite;
+    }
+    a:hover::before {
+      filter: blur(20px);
+      opacity: 1;
+      animation: animate 8s linear infinite;
+      transition: opacity 1s;
+    }
+    a::before {
+      content: "";
+      position: absolute;
+      inset: -5px;
+      z-index: -1;
+      background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+      background-size: 400%;
+      border-radius: 30px;
+      opacity: 0;
+    }
+    @keyframes animate {
+      from {
+        background-position: 0%;
+      }
+      to {
+        background-position: 400%
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="#">BUTTON</a>
+</body>
+</html>
