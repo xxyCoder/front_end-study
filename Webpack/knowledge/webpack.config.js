@@ -11,11 +11,10 @@ module.exports = {
     index: {
       import: "./index.js",
       filename: "index.[contenthash:8].js",
-      dependOn: ["react-vendor", "depend"]
+      // dependOn: ["depend"]
     },
     main: "./main.js",
-    "react-vendor": ["react"],
-    depend: "./depend.js"
+    // depend: "./depend.js"
   },
   resolveLoader: {
     modules: ["./src/loaders", "node_modules"]
@@ -43,14 +42,13 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        exclude: /node_modules/,
         loader: "babel-loader"
       },
       {
         test: /\.webp$/,
         type: 'asset/resource',
         generator: {
-          filename: "static/[contenthash:8][ext][query]"
+          filename: "assets/[contenthash:8][ext][query]"
         }
       },
       {
@@ -122,9 +120,41 @@ module.exports = {
       filename: "external.css"
     })
   ],
+  devtool: "source-map",
   devServer: {
+    client: {
+      logging: "info",
+      overlay: {
+        errors: false,
+        warnings: false
+      },
+      reconnect: 3,
+    },
+    compress: true,
     static: {
-      publicPath: "/assets"
+      publicPath: "/assets/"
+    },
+    open: true,
+    port: 3333,
+    onListening: (devServer) => {
+      const port = devServer.server.address().port
+      console.log("port:", port)
+    },
+    headers: [
+      {
+        key: "name",
+        value: "xxyCoder"
+      }
+    ],
+    proxy: {
+      "/api": "http://localhost:3000",
+      pathRewrite: { '^/api': '' },
+      secure: true,
+      bypass: (req, res, proxyOptions) => {
+        if (req.headers.accept.indexOf("html") !== -1) {
+          return "./index.html";
+        }
+      }
     }
   }
 }

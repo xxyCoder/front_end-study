@@ -1,5 +1,4 @@
-import("./import-async.js")
-.then(() => { console.log("end2") })
+import("./import-async.js").then(() => { console.log("end2") })
 
 console.log("b.js")
 

@@ -97,3 +97,24 @@
 - splitChunks对于动态导入的模块，可以进行分割
 - usedExports启用tree-shaking技术，删除导出但是未被使用的代码
   - tree-shaking通常与es6模块语法一起工作
+
+## devServer
+- 影响dev-server的配置选项
+- client.logging允许在浏览器中设置日志级别
+- client.overlay当出现变异错误或警告时是否全屏覆盖
+- client.reconnect尝试重新连接客户端的次数，为true表示无限次尝试
+- client.webSocketURL指定webSocket服务器
+- compress是否启用gzip压缩
+- devMiddleware为webpack-dev-middleware提供处理webpack的资源的配置项
+  - publicPath是dev-server将资源打包放入内存后浏览器通过该路径可以获取，将覆盖output.publicPath
+- headers为所有响应添加响应头
+- hot启用热更新
+- liveReload当监听到文件变化的时候重新加载或刷新页面
+  - 必须禁用hot并且开启watch
+- open打开默认浏览浏览器
+- port监听请求的端口
+- onListening开始监听端口连接执行自定义函数
+- proxy代理
+- static允许从目录提供静态资源的文件
+- watch监听文件改变
+- watchFiles监听那些文件改变

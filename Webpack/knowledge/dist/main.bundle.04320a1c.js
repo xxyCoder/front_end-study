@@ -1,2 +1,0 @@
-/*! For license information please see main.bundle.04320a1c.js.LICENSE.txt */
-(self.webpackChunk=self.webpackChunk||[]).push([[179],{76:()=>{eval('console.log("main.js");\n\n//# sourceURL=webpack:///./main.js?')}},e=>{var s;s=76,e(e.s=s)}]);
