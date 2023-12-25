@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- csp 下面设定self即自己 和 baidu的网址 -->
+  <!-- <meta http-equiv="Content-Security-Policy" content="script-src 'self' http://www.baidu.com"/> -->
+  <title>浏览器环境</title>
+</head>
+<body>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      console.log(document.body.innerHTML)
+    })
+  </script>
+  <a href="javascript:console.log('Hello')">点击</a>
+  <a href="javascript:new Date().toString();">日期</a>
+  <iframe src="http://www.baidu.com" frameborder="0" name="baidu"></iframe>
+  <div style="height: 100vh;"></div>
+  <script>
+    console.log(window == frames, frames.baidu)
+    window.requestIdleCallback(() => {
+      console.log("资源空闲或超时了")
+    }, { timeout: 10 * 1000 })
+  </script>
+</body>
+</html>
