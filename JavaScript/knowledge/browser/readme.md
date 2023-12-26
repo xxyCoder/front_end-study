@@ -39,3 +39,85 @@
     - 将requestAnimationFrame返回值给cancleAnimationFram()来取消回调函数执行
   - requestIdleCallback()将函数推迟到系统资源空闲时执行，或者给定属性超过时间限制执行
     - 将requestIdleCallback返回值给cancelIdleCallback()取消回调函数
+
+## navigator
+- 包含浏览器和系统信息的对象
+- 属性
+  - userAgent表示用户的设备信息以及浏览器的厂商等信息
+  - geolocation包含用户地理位置的信息，只有在https协议下可用，否则调用以下方法报错
+    - Geolocation.getCurrentPosition()得到用户当前位置
+    - Geolocation.watchPosition()监听用户位置变化
+    - Geolocation.clearWatch()取消监听
+  - cookieEnabled表示浏览器的cookie功能是否打开
+- 方法
+  - sendBeancon()该方法为了解决页面在卸载时用ajax或fetch请求可能被取消问题
+    - 异步请求，请求与当前页面的线程脱钩，是作为浏览器进程的任务
+    - 不允许自定义http标头，优先级低，不会占用页面资源
+
+## cookie
+- 是服务器保存在浏览器的一段文本信息，一般大小不超过4kb（超过则忽略），只有哪些需要让服务器知道的信息才应该放在cookie里面
+- 想要改变原本cookie，需要满足key、domain、path、secure都匹配
+- 属性
+  - expires指定一个具体的到期时间
+  - max-age指定存储的时间秒数
+  - domain指定属于那个域，只能设置为当前域名或上级域名，为上级域名不能说顶级域名或公共域名
+  - path指定浏览器发送http请求哪些路径需要携带该cookie
+  - secure指定只有https下才能发送
+  - httpOnly指定无法通过js脚本拿到
+  - sameSite
+    - strict完全禁止第三方cookie
+    - lax禁止第三方cookie除非get（a标签、预加载、get表单）请求
+    - none关闭该属性
+
+## XMLHttpRequest
+- 用于浏览器和服务器之间的通信
+- 属性
+  - readyState表示当前状态，0表示实例已经生成，1表示open方法调用，2表示send调用，3表示数据正在接收，4表示全部接收完成
+  - responseType表示返回的数据类型
+  - response即http的body部分，可能是任意类型，由responseType决定
+  - responseText
+  - responseXML
+  - responseURL表示发送数据的服务器网址
+  - status和statusText表示状态码和信息
+  - timeout多少毫秒后没有得到结果就自动终止，0则表示没有时间限制
+  - withCredentials表示跨域请求是否携带cookie
+  - upload可以拿到一个对象，得知文件上传的进展，有着和xhr一样的监听函数
+- 方法
+  - onreadystatechange监听readystate的变化
+  - ontimeout监听函数，超时触发
+  - onabort监听终止函数
+  - onerror监听错误函数
+  - onload监听请求成功函数
+  - onloadend监听请求完成函数（无论成功或失败）
+  - onprogress监听正在发送和加载的数据函数
+  - onloadstart监听http发出请求的函数
+  - open()指定http请求参数
+  - send()发出请求，给参数就是body
+  - abort()终止请求 => readystate=4,status=0
+  - setRequestHeader()设置请求头
+  - getResponseHeader()拿到响应头
+
+## fetch https://www.ruanyifeng.com/blog/2020/12/fetch-tutorial.html
+- fetch(url, options)
+- 与xhr有三个差异：
+  1. fetch使用promise，而xhr使用回调函数
+  2. fetch使用模块化设计，api分散在多个对象上(Response、Request、Header对象)，而xhr的输入输出都在同一个接口中
+  3. fetch通过数据流对象，可以分块读取，而xhr不支持数据流，只能等数据全部拿到后一次性吐出来
+- 只有网络错误或无法连接才会报错，其余都认为是请求成功（即时服务器返回4xx或5xx状态码）
+- 属性
+  - response.status和response.statusText是同步属性
+  - response.ok表示请求是否成功（即response.statu是200到299之间）
+  - response.url请求的url
+  - response.type请求类型
+  - response.redirected表示是否发生过跳转
+  - response.headers对应http回应所有标头
+    - get(key)
+    - has(key)
+    - for...
+  - body返回一个ReadableStream对象，可以分块读取内容
+- 异步方法，且只能调用一次，多次调用则报错，可以使用response.clone()克隆多次然后调用以下方法
+  - response.text()拿到文本
+  - response.json()拿到json对象
+  - response.blob()拿到二进制对象
+  - response.formData()拿到表单对象
+  - response.arrayBuffer()拿到二进制arrayBuffer对象

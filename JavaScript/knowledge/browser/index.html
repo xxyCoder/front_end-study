@@ -13,15 +13,71 @@
       console.log(document.body.innerHTML)
     })
   </script>
+
   <a href="javascript:console.log('Hello')">点击</a>
   <a href="javascript:new Date().toString();">日期</a>
   <iframe src="http://www.baidu.com" frameborder="0" name="baidu"></iframe>
   <div style="height: 100vh;"></div>
+
   <script>
     console.log(window == frames, frames.baidu)
     window.requestIdleCallback(() => {
       console.log("资源空闲或超时了")
     }, { timeout: 10 * 1000 })
+  </script>
+  <script>
+    // 没有参数
+    const xhr = new XMLHttpRequest();
+    // 第三个参数表示是否异步
+    xhr.open("GET", "http://localhost:3000/xhr", true);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4) {
+        if (200 <= xhr.status && xhr.status < 300) {
+          console.log(xhr.responseText);
+        } else {
+          console.log(xhr.statusText)
+        }
+      } else if (xhr.readyState === 3) {
+        console.log("type: ", xhr.responseType);
+        console.log("content: ", xhr.response);
+      }
+    }
+    xhr.addEventListener("progress", function(e) {
+      if (e.lengthComputable) {
+        const percentComplete = e.loaded / e.total;
+      } else {
+        console.log("无法计算进度")
+      }
+    }) 
+    // 实际发出请求
+    xhr.send(null);
+  </script>
+
+  <script>
+    fetch("http://localhost:3000/fetch/get-json")
+      // 接受一个response流对象，response.json()是一个异步操作
+      .then(response => response.json())
+      .then(console.log)
+      .catch(console.error)
+    
+    async function reader() {
+      const response = await fetch("http://localhost:3000/fetch/read");
+      const reader = response.body.getReader();
+
+      while(true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        
+        console.log(`received ${value.length} bytes`)
+      }
+    }
+    reader();
+
+    const content = "Hello Fetch"
+    fetch("http://localhost:3000/fetch/post-json", {
+      method: "POST",
+      body: content
+    })
   </script>
 </body>
 </html>

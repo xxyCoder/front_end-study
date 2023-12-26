@@ -1,0 +1,12 @@
+{
+  "name": "browser",
+  "version": "1.0.0",
+  "description": "## 加载脚本 - 除了script引入脚本，还可以通过url(javascript:)协议，即在url的位置写入代码，如果写入的是字符，浏览器会创建新文档展示该字符且丢失原文档内容",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
