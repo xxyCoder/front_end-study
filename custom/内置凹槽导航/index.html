@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>内置凹槽导航</title>
+    <link rel="stylesheet" href="http://at.alicdn.com/t/c/font_4144272_3vtq4renm6e.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #222327;
+        }
+        .nav {
+            width: 400px;
+            height: 70px;
+            padding: 0 25px;
+            border-radius: 10px;
+            background-color: #fff;
+            position: relative;
+            display: flex;
+        }
+        .nav li {
+            width: 70px;
+            height: 70px;
+            z-index: 1;
+            position: relative;
+            list-style: none;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .nav li i {
+            display: block;
+            height: 70px;
+            line-height: 70px;
+            font-size: 24px;
+            text-align: center;
+            position: relative;
+            transition: all .5s;
+        }
+        .nav li span {
+            position: absolute;
+            font-size: 12px;
+            letter-spacing: 2px;
+            transition: all .5s;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .active i {
+            transform: translateY(-35px);
+            color: #fff;
+        }
+        .nav .active span {
+            opacity: 1;
+            transform: translateY(10px);
+        }
+        .indicator {
+            position: absolute;
+            top: -50%;
+            width: 60px;
+            height: 60px;
+            background-color: #2196f3;
+            border-radius: 50%;
+            transition: all .5s;
+            border: 6px solid #222327;
+        }
+        li:nth-child(1).active~.indicator {
+            transform: translateX(calc(70px* 0));
+        }
+        li:nth-child(2).active~.indicator {
+            transform: translateX(calc(70px* 1));
+        }
+        li:nth-child(3).active~.indicator {
+            transform: translateX(calc(70px* 2));
+        }
+        li:nth-child(4).active~.indicator {
+            transform: translateX(calc(70px* 3));
+        }
+        li:nth-child(5).active~.indicator {
+            transform: translateX(calc(70px* 4));
+        }
+    </style>
+</head>
+
+<body>
+    <ul class="nav">
+        <li class="active"><i class="iconfont icon-home"></i><span>Home</span></li>
+        <li><i class="iconfont icon-envelope"></i><span>Email</span></li>
+        <li><i class="iconfont icon-comment"></i><span>Message</span></li>
+        <li><i class="iconfont icon-heart"></i><span>Like</span></li>
+        <li><i class="iconfont icon-user"></i><span>Profile</span></li>
+        <div class="indicator"></div>
+    </ul>
+
+    <script>
+        const lis = document.querySelectorAll(".nav li");
+        lis.forEach(li => {
+            li.addEventListener("click", function() {
+                lis.forEach(item => {
+                    item.classList.remove("active");
+                });
+                this.classList.add("active");
+            })
+        })
+    </script>
+</body>
+
+</html>

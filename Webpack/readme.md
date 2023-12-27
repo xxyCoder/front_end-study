@@ -118,3 +118,29 @@
 - static允许从目录提供静态资源的文件
 - watch监听文件改变
 - watchFiles监听那些文件改变
+
+## cache
+- 缓存生成的webpack模块和chunk，设置为false表示禁止使用，开启缓存后在首次构建完将module、chunk、moduleGraph三类对象序列化并记录到缓存文件中，在下次构建开始时尝试恢复从而跳过执行loader链、解析AST等操作
+- type: memory | filesystem
+- buildDependencies额外的依赖文件，当这些文件内容发生变化时，缓存会完全失效而执行完整的编译构建，通常可设置为项目配置文件
+- cacheDirectory type=filesystem的缓存路径
+- compression用于缓存文件的压缩
+- managedPaths指定目录数组，webpack构建时会跳过新旧代码哈希值与时间戳对比，直接使用缓存版本
+- maxAge允许未使用的缓存留在文件系统缓存中的时间，type=filesystem生效
+- maxGenerations定义内存中缓存未使用的生命周期
+  - count 在count次编译中未使用的缓存删除
+  - Infinity 缓存将永远保存
+- profile跟踪并记录type=filesystem缓存项的详细信息
+- version缓存数据的版本，不同版本不会重用缓存和重载当前的内容
+
+## devtool
+- 如何生成source map
+
+## watch和watchOptions
+- 监听文件改变后重新编译
+- watchOptions.aggregateTimeout当第一个文件修改后，会在重新构建前增加延迟，以毫秒为单位
+- watchOptions.ignored排除对某些的监听
+- watchOptions.poll设置轮询时间，以毫秒为单位，为true则启用默认时间5007ms
+
+## external
+- 防止将某些import的包打包到bundle中，而是运行时再去从外部获取这些依赖扩展，列入从CDN引入

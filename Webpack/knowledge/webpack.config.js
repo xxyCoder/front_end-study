@@ -156,5 +156,12 @@ module.exports = {
         }
       }
     }
+  },
+  cache: {
+    type: "filesystem",
+    buildDependencies: {
+      config: [path.join(__dirname, 'webpack.config.js')],
+    },
+    compression: "gzip"
   }
 }
