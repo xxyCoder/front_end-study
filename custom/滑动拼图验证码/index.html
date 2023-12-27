@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>滑动拼图验证码</title>
+    <style>
+        .box {
+            user-select: none;
+            position: relative;
+            width: 375px;
+            margin: 100px auto;
+        }
+        .check {
+            width: 375px;
+            height: 250px;
+            background-size: 100% 100%;
+            background-image: url(./cq.jpg);
+        }
+        .check-content {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: rgba(0, 0, 0, .5);
+            border: 1px solid #fff;
+        }
+        .check-block {
+            width: 50px;
+            height: 50px;
+            border: 1px solid #fff;
+            background-image: inherit;
+            background-repeat: inherit;
+            background-size: 375px 250px;
+            position: absolute;
+            top: 100px;
+            left: 10px;
+        }
+        .drag {
+            width: 375px;
+            height: 50px;
+            background-color: #e3e3e3;
+            margin-top: 10px;
+            position: relative;
+        }
+        .drag-block {
+            width: 50px;
+            height: 50px;
+            background-color: yellowgreen;
+            z-index: 10;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .drag-tips {
+            width: 95%;
+            height: 100%;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 12px;
+            line-height: 50px;
+            color: #8a8a8a;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="check">
+            <div class="check-content"></div>
+            <div class="check-block"></div>
+        </div>
+        <div class="drag">
+            <div class="drag-block"></div>
+            <div class="drag-tips">按住左边按钮向右拖动完成上方图像验证</div>
+        </div>
+    </div>
+
+    <script>
+        const drag = document.querySelector('.drag');
+        const dragBlock = document.querySelector('.drag-block');
+        const content = document.querySelector('.check-content');
+        const check = document.querySelector('.check-block');
+
+        const x = parseInt(Math.random() * 325);
+        const y = parseInt(Math.random() * 200);
+        let animating = false, startX = 0, startY = 0;
+
+        content.style.cssText = `left: ${x}px; top: ${y}px`;
+        check.style.cssText = `background-position: -${x}px -${y}px; top: ${y}px`;
+        let offsetX = 0
+        drag.addEventListener("mousemove", e => {
+            if (!animating) return;
+            offsetX = e.pageX - startX;
+            if (offsetX < 0 || offsetX > 350) return;
+            dragBlock.style.transform = `translateX(${offsetX}px)`;
+            check.style.left = `${offsetX}px`
+        })
+        drag.addEventListener("mousedown", e => {
+            animating = true;
+            startX = e.pageX;
+            console.log(e)
+        })
+        drag.addEventListener("mouseup", () => {
+            animating = false
+            if (offsetX >= x - 2 && offsetX <= x + 2) alert("验证成功");
+            else {
+                dragBlock.style.transform = `translate(0px)`;
+                check.style.left = 0;
+            }
+        })
+    </script>
+</body>
+
+</html>
