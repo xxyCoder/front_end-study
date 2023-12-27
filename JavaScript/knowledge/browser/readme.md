@@ -54,6 +54,32 @@
     - 异步请求，请求与当前页面的线程脱钩，是作为浏览器进程的任务
     - 不允许自定义http标头，优先级低，不会占用页面资源
 
+## history
+- 表示当前窗口的浏览历史，保存了当前窗口访问过所有的网页地址，由于安全原因不允许读写，但可以导航
+- 属性
+  - length表示当前窗口访问过的网址数量
+  - state堆栈最上层状态值
+- 方法
+  - back()回退
+  - forward()前进
+  - go(number) => go(0)表示刷新
+  - pushState(state, title, url) url必须和当前网页在同一个域，设置跨域则报错
+  - replaceState(state, title, url)，同上，但是是替换
+  - popstate事件，当history对象出现变化触发，对于pushState和replaceState不会触发，对于加载不同文档也不会触发
+
+## location
+- window.location或document.location都可以拿到
+- 属性
+  - href整个url，指定url则跳转新地址，指定片段字符串则滚动到锚点
+  - pathname 路径，从根路径/开始
+  - search 查询字符串，从问号?开始
+  - hash 片段字符串，从#开始
+  - origin url当协议、主机和端口 只读
+- 方法
+  - assign(url)
+  - replace(url)
+  - reload()重新加载当前网址
+
 ## cookie
 - 是服务器保存在浏览器的一段文本信息，一般大小不超过4kb（超过则忽略），只有哪些需要让服务器知道的信息才应该放在cookie里面
 - 想要改变原本cookie，需要满足key、domain、path、secure都匹配
@@ -121,3 +147,64 @@
   - response.blob()拿到二进制对象
   - response.formData()拿到表单对象
   - response.arrayBuffer()拿到二进制arrayBuffer对象
+
+## 同源限制
+- 同源是指协议、域名、端口都相同，但是对于不同端口是可以互相读取cookie的
+- 对于非同源页面，只允许接触网页window对象的九个属性和四个方法
+  - window.closed
+  - window.frames
+  - window.location，只允许调用location.replace()和window.href属性
+  - window.opener
+  - window.parent
+  - window.top
+  - window.close()
+  - window.postMessage()
+  - ...
+
+### 规避限制
+- 对于cookie和iframe可以将其设置为最近且相同的域名，比如a: wwww.a.example.com,b: www.b.example.com，则将document.domain设置为example.com，设置了domain会将端口重置为null，因此两个网页都需要设置否则导致两个端口不一样从而还是不同源
+- 对于iframe还可以使用片段识别符（#后面内容），父窗口可以把信息写入子窗口的片段标识符，子窗口通过监听hashchange得知
+- h5新增postMessage允许跨窗口通信了，使得读写其他窗口的localStorage成为可能
+
+## cors通信
+- cors需要服务器和浏览器同时支持，整个过程都是浏览器自动完成，浏览器发现跨域请求会自动添加附加的头信息，有时还会多出一次的附加的请求
+
+### 简单请求
+- 请求方法：HEAD、GET、POST
+- 请求头：Accept、Accept-Language、Content-Language、Content-Type（application/x-www-form-urlencoded、multipart/form-data、text/plain）、Last-Event-ID
+- 对于简单请求浏览器直接发出cors请求，并在头信息中添加origin字段，对于指定的origin不在服务器的许可范围，则服务器返回一个正常的http响应，浏览器收到后发现没有该字段（Access-Control-Allow-Origin）或Origin与字段不匹配则报错
+- Access-Control-
+  - Allow-Origin可以接受的域名
+  - Allow-Credentials是否允许发送cookie
+  - Expose-Headers对于Cors请求只能拿到六个响应头信息，指定该字段可以拿到额外的
+
+### 非简单请求
+- 会在正式通信之前增加一次http查询请求，称之为“预检”。浏览器会先询问服务器当前页面域名是否在白名单内切哪些http方法和请求头信息可以用，给服务器一个提前拒绝的机会，避免收到大量delete和put请求
+- Access-Control-
+  - Request-Method允许的方法
+  - Request-Header允许的头信息
+```预检头信息
+OPTIONS /cors HTTP/1.1
+Origin: http://api.com
+Access-Control-Request-Method: PUT
+Access-Control-Request-Headers: X-Custom-Header
+```
+
+```预检请求的回应
+HTTP/1.1 200 OK
+Access-Control-Allow-Origin: http://api.com
+Access-Control-Allow-Methods: GET,POST,PUT
+Access-Control-Allow-Headers: X-Custom-Header
+Access-Control-Max-Age: 60000
+```
+- Access-Control-Max-Age表示本次预检的有效期，单位为秒，在有效期内对于复杂请求不需要再次发生预检
+
+## storage
+- sessionStorage用于保存浏览器的一次会话，localStorage长期保存
+- 数据以键值对形式存在，数据以文本格式保存，存储量由浏览器而定
+- storage接口存储的数据发生变化会触发storage事件
+  - storageEvent.key 表示发生变动的键名，如果是clear()触发则为null
+  - storageEvent.newValue 表示新的值，如果是clear()触发则为null
+  - storageEvent.oldValue 表示旧的值，如果是新增触发则为null
+  - storageEvent.storageArea 返回键值对所在的整个对象
+  - storageEvent.url表示触发该事件的网页url
