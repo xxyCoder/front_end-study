@@ -79,5 +79,24 @@
       body: content
     })
   </script>
+
+  <script>
+    // URLSearchParams
+    const params1 = new URLSearchParams("?name=xxyCoder");
+    const params2 = new URLSearchParams("name=xxyCoder");
+    const params3 = new URLSearchParams([["name", "xxyCoder"], ["age", 21]]);
+    const params4 = new URLSearchParams({ name: "xxyCoder", age: 21 });
+  </script>
+
+  <script>
+    // Blob
+    const blob = new Blob(["<h1>xxyCoder</h1>"], { type: "text/html" })
+    const newBlob = blob.slice(0, 3, "text/plain")
+  </script>
+
+  <script>
+    // File
+    const file = new File(["foo"], "foo.txt", { type: "text/plain" });
+  </script>
 </body>
 </html>

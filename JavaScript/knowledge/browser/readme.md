@@ -80,6 +80,84 @@
   - replace(url)
   - reload()重新加载当前网址
 
+## URL
+- 元字符：/ ? : @ & = + #
+- 语义字符：a-zA-Z - _ . * '
+- 其他字符都需要转义
+- 方法
+  - encodeURI()转码整个url，将除了元字符和语义字符之外的字符都进行转义
+  - encodeURIComponent()转码url的组成部分（如果转码整个，由于也会转码元字符，导致url不合法报错），转码除了语义字符之外的
+  - decodeURI()解码
+  - decodeURIComponent()解码
+- 构造函数
+- 静态方法
+  - createObjectURL()在内存中生成一个url字符串，指向file或blob文件
+  - revokeObjectURL()释放内存中的url字符串
+- 属性，与Location对象基本一致
+
+## URLSearchParams
+- 用来构造、解析和处理url的查询字符串，对查询字符串会自动编码，也可以作为表单实例发送
+- 可以使用for...of遍历
+- 方法
+  - append(key,value)追加参数，不会判断key是否存在
+  - delete(key)删除指定key
+  - has(key)判断是否存在
+  - set(key,value)添加参数，key存在则覆盖，不存在则添加
+  - get(key)拿到value
+  - getAll(key)拿到全部key的value
+  - sort()
+
+## Blob
+- 表示一个二进制文件的数据内容，通常用于读写文件
+- 属性
+  - size数据大小
+  - type数据类型
+- 方法
+  - slice
+
+## File
+- 代表一个文件，继承了Blob对象
+- 属性
+  - lastModified最后修改时间
+  - name文件名或路径
+  - size大小，单位字节
+  - type文件类型
+
+## FileReader
+- 属性
+  - error读取错误产生的错误对象
+  - readyState当前读取文件状态，2表示加载完成
+  - result读取后的结果
+- 方法
+  - onabort()
+  - onerror()
+  - onload()
+  - onloadstart()
+  - onloadend()
+  - onprogress()
+  - abort()
+  - readAsXXX(file)（可以是ArrayBuffer、DataURL、Text）
+    - 对于base64这个字符串不能直接进行 Base64 解码，必须把前缀data:*/*;base64,从字符串里删除以后，再进行解码。
+
+## FormData
+- 代表表单对象
+- 方法
+  - get(key)
+  - getAll(key)
+  - set(key, value)
+  - delete(key)
+  - append(key, value)
+  - has(key)
+- 自动校验
+  - 控件通过校验触发 :valid伪类，否则触发 :invalid伪类
+  - checkValidity()手动触发校验
+  - willValidate属性表示控件提交时是否进行校验
+  - validationMessage属性返回一个字符串表示不满足校验条件时，浏览器显示的文本，只读
+  - setCustomValidity(message)替换浏览器内置校验不通过报错信息
+  - validity属性返回一个validityState对象，包含当前校验状态信息
+  - 表单的novalidate属性用于关闭浏览器的自动校验
+  - 可以监听空间的invalid属性
+
 ## cookie
 - 是服务器保存在浏览器的一段文本信息，一般大小不超过4kb（超过则忽略），只有哪些需要让服务器知道的信息才应该放在cookie里面
 - 想要改变原本cookie，需要满足key、domain、path、secure都匹配
