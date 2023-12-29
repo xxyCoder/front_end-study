@@ -46,7 +46,7 @@
   - userAgent表示用户的设备信息以及浏览器的厂商等信息
   - geolocation包含用户地理位置的信息，只有在https协议下可用，否则调用以下方法报错
     - Geolocation.getCurrentPosition()得到用户当前位置
-    - Geolocation.watchPosition()监听用户位置变化
+    - Geolocation.watchPosition(fns)监听用户位置变化
     - Geolocation.clearWatch()取消监听
   - cookieEnabled表示浏览器的cookie功能是否打开
 - 方法
@@ -156,7 +156,7 @@
   - setCustomValidity(message)替换浏览器内置校验不通过报错信息
   - validity属性返回一个validityState对象，包含当前校验状态信息
   - 表单的novalidate属性用于关闭浏览器的自动校验
-  - 可以监听空间的invalid属性
+  - 可以监听控件的invalid属性
 
 ## cookie
 - 是服务器保存在浏览器的一段文本信息，一般大小不超过4kb（超过则忽略），只有哪些需要让服务器知道的信息才应该放在cookie里面
@@ -286,3 +286,122 @@ Access-Control-Max-Age: 60000
   - storageEvent.oldValue 表示旧的值，如果是新增触发则为null
   - storageEvent.storageArea 返回键值对所在的整个对象
   - storageEvent.url表示触发该事件的网页url
+- 超出容量限制会出现异常导致程序崩溃，在进行存储的时候使用try...catch捕获
+
+### 与cookie的区别
+- webStorage是完全存储在浏览器中，而cookie会跟随每次http请求发送到服务器
+- webStorage的存储量约为5mb（与浏览器实现相关），而cookie只有2kb
+- webStorage不能设置过期时间（除非把时间也携带中存储对象中），而cookie可以设置
+- 操作webStorage有丰富api，而cookie需要自己封装方法
+- webStorage仅可以中当域中使用，而cookie需要自己设置作用域
+
+## indexedDB
+- cookie大小一般不超4kb且每次请求都会发送回服务器；webStorage不支持搜索功能，不能建立自定义索引；webSQL浏览器支持度过低
+- indexedDB是一种在浏览器中使用的纯客户端本地数据库，允许开发人员存储和检索复杂的数据类型（不仅仅是字符串）
+- 使用异步api来管理数据库，即执行数据库的时候不会阻塞主线程；支持事务；有同源限制；大容量存储（一般不少于250mb）
+
+### IndexedDB对象
+- IndexedDB是全局对象
+- IDBDatabase数据库对象（IndexedDB.open()返回），代表一个数据库
+- IDBObjectStore对象仓库，类似关系型数据库中表格
+- IDBIndex索引
+- IDBTransaction事务
+- IDBRequest操作对象，代表一个异步请求
+- IDBCursor指针，代表了一个游标
+
+## Web Worker
+- 一种在浏览器后台线程中运行js的机制，允许长时间允许的js脚本放在后台线程中，从而不会阻塞ui线程
+- 可以和主线程进行通信，但是无法访问dom和主线程数据，可以使用navigator和location对象
+- 有同源限制，分配给worker线程运行的脚本必须与主线脚本同源
+- 有自己的内存空间，在worker中创建大量数组或对象需释放，避免内存泄漏
+- 可以使用XMLHttpRequest发出ajax请求
+
+## Share Workers
+- 可以被多个页面所共享的线程，可以在多个页面之间传递信息
+
+```html
+<!-- page1 -->
+<script>
+  const worker = new SharedWorker("worker.js");
+  const port = worker.port;
+  port.onmessage = function(e) {
+  	console.log(e.data);
+  }
+  port.start();
+  port.postMessage("hello");
+</script>
+<!-- page2 同上-->
+```
+
+```js
+const connections = [];
+// 当一个页面连接到share worker到时候，触发connect事件
+self.onconnect = function(e) {
+  const port = e.ports[0];
+  connections.push(port);
+  port.onmessage = function(e) {
+    connections.forEach(p => p.postMessage(e.data));
+  }
+}
+```
+
+## 服务器推送事件sse
+- Server-Sent Event，此事件允许网页自动从服务器获取更新，以往所客户端主动发起请求询问，现在通过sse服务进行数据更新的内容可以自动到达客户端
+- 使用单个长连接保持数据流
+- 服务器需要支持sse所依赖的text/event-stream协议
+
+### 核心概念以及api用法
+- 其内部核心是EventSource对象，用于创建服务器发送事件流的连接
+  - 单向通信：只能从服务器接受数据，不能向服务器发送数据
+  - 自动重连：如果断开连接，会自动尝试重新连接服务器，直到连接成功或到达最大重连次数
+  - 事件处理：可以监听来自服务器的事件，并在事件触发的时候触发对应事件处理程序
+
+```js
+// 连接服务器端点
+const eventSource = new EventSource("/backend-path");
+// 成功连接触发open事件
+eventSource.onopen = function(e) {}
+// 收到来自服务器发送的数据
+eventSource.onmessage = function(e) {}
+// 连接发生错误
+eventSource.onerror = function(e) {}
+```
+
+- 服务器后端需要注意，发送的消息必须以 data:开头，后面跟着消息，并以两个换行符结尾
+- 如果服务器和客户端域名不同，会存在跨域问题
+- 发送的数据可能被缓存，需要添加cache-control: no-cache
+
+## webSockets
+- 建立在单个tcp连接上进行全双工通讯的协议，允许浏览器和服务器之间建立一个持久、双向的通信通道
+
+### websocket工作原理
+- 请求 GET ws://localhost:3000 http/1.1
+  - Connection: Upgrade
+  - Sec-Websocket-Key 用于保证是合法的websocket
+  - Upgrade: Websocket  表示升级的协议是什么
+- 响应请求
+  - Sec-Websocket-Accept 根据key算出表示握手成功
+  - 状态码101 Switching Protocols
+  - Upgrade: Websocket
+  - Connection: Upgrade
+
+### api基础用法
+
+```js
+// 第一个是webSocket服务器地址，可以是相对也可以是绝对
+const Socket = new WebSocket(url, [protocols]);
+```
+
+- 创建后，可访问属性
+  - readyState：0(Connecting)、1(Open)、2(Closing)、3(Closed)
+  - bufferedAmount：表示还有多少字节数据没有发送出去
+  - extensions：表示服务器的扩展协议
+  - protocol：表示服务器选择的子协议
+- 事件
+  - onopen：连接建立时触发
+  - onmessage：客户端接受服务器端数据触发
+  - onerror
+  - onclose
+- 方法
+  - send()
+  - close()
