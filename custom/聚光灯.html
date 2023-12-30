@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>聚光灯</title>
+  <style>
+    body {
+      background-color: #000;
+    }
+    .text h2 {
+      font-size: 6em;
+      position: relative;
+      clip-path: ellipse(100px 100px at 0 center);
+    }
+    .text {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .text h2 {
+      animation: animate 7s infinite;
+    }
+    @keyframes animate {
+      0%, 100% {
+        clip-path: ellipse(100px 100px at 0% center);
+      }
+      50% {
+        clip-path: ellipse(100px 100px at 100% center);
+      }
+    }
+    .text h2 {
+      background-image: linear-gradient(60deg, #00d0ff, #4dff03, #ff0058, #ffbc00, #ff0058);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="text">
+    <h2>SpotLight</h2>
+  </div>
+</body>
+
+</html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +8,10 @@
   <!-- <meta http-equiv="Content-Security-Policy" content="script-src 'self' http://www.baidu.com"/> -->
   <title>浏览器环境</title>
 </head>
+
 <body>
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
       console.log(document.body.innerHTML)
     })
   </script>
@@ -25,30 +27,56 @@
       console.log("资源空闲或超时了")
     }, { timeout: 10 * 1000 })
   </script>
+
+  <script>
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        // 成功获取
+      }, function (error) {
+        // 获取失败
+        if (error.code === error.PERMISSION_DENIED) {
+          // 用户拒绝地理位置请求
+        } else if (error.code === error.POSITION_UNAVAKIABLE) {
+          // 地理位置信息不可用
+        } else if (error.code === error.TIMEOUT) {
+          // 获取地理位置超时
+        }
+      }, { timeout: 1000 })  // 设置超时时间
+    } else {
+      // 浏览器不支持地理定位
+    }
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.watchPosition(showPosition)
+      } else { }
+    }
+    function showPosition(position) { }
+  </script>
+
   <script>
     // 没有参数
-    const xhr = new XMLHttpRequest();
+    const xhr = new XMLHttpRequest()
     // 第三个参数表示是否异步
-    xhr.open("GET", "http://localhost:3000/xhr", true);
-    xhr.onreadystatechange = function() {
+    xhr.open("GET", "http://localhost:3000/xhr", true)
+    xhr.onreadystatechange = function () {
       if (xhr.readyState === 4) {
         if (200 <= xhr.status && xhr.status < 300) {
-          console.log(xhr.responseText);
+          console.log(xhr.responseText)
         } else {
           console.log(xhr.statusText)
         }
       } else if (xhr.readyState === 3) {
-        console.log("type: ", xhr.responseType);
-        console.log("content: ", xhr.response);
+        console.log("type: ", xhr.responseType)
+        console.log("content: ", xhr.response)
       }
     }
-    xhr.addEventListener("progress", function(e) {
+    xhr.addEventListener("progress", function (e) {
       if (e.lengthComputable) {
-        const percentComplete = e.loaded / e.total;
+        const percentComplete = e.loaded / e.total
       } else {
         console.log("无法计算进度")
       }
-    }) 
+    })
     // 实际发出请求
     xhr.send(null);
   </script>
@@ -59,19 +87,19 @@
       .then(response => response.json())
       .then(console.log)
       .catch(console.error)
-    
-    async function reader() {
-      const response = await fetch("http://localhost:3000/fetch/read");
-      const reader = response.body.getReader();
 
-      while(true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        
+    async function reader() {
+      const response = await fetch("http://localhost:3000/fetch/read")
+      const reader = response.body.getReader()
+
+      while (true) {
+        const { done, value } = await reader.read()
+        if (done) break
+
         console.log(`received ${value.length} bytes`)
       }
     }
-    reader();
+    reader()
 
     const content = "Hello Fetch"
     fetch("http://localhost:3000/fetch/post-json", {
@@ -82,9 +110,9 @@
 
   <script>
     // URLSearchParams
-    const params1 = new URLSearchParams("?name=xxyCoder");
-    const params2 = new URLSearchParams("name=xxyCoder");
-    const params3 = new URLSearchParams([["name", "xxyCoder"], ["age", 21]]);
+    const params1 = new URLSearchParams("?name=xxyCoder")
+    const params2 = new URLSearchParams("name=xxyCoder")
+    const params3 = new URLSearchParams([["name", "xxyCoder"], ["age", 21]])
     const params4 = new URLSearchParams({ name: "xxyCoder", age: 21 });
   </script>
 
@@ -98,5 +126,129 @@
     // File
     const file = new File(["foo"], "foo.txt", { type: "text/plain" });
   </script>
+
+  <script>
+    // 兼容性判断
+    if (!window.indexedDB) {
+      // 不支持
+    }
+    // 创建数据库
+    const request = indexedDB.open('idb', 1.0)
+    request.onerror = function (event) {
+      // 无法打开
+    }
+    request.onupgradeneeded = function (event) {
+      const db = event.target.result
+      // 创建数据库对象
+      const objectStore = db.createObjectStore("idb_t", { keyPath: "id" })
+      // 参数分别为 索引名称、索引所在属性、配置对象
+      objectStore.createIndex("title", "title", { unique: true })
+    }
+    request.onsuccess = function (event) {
+      const db = event.target.result
+      // 打开成功
+    }
+    // 插入数据
+    const transaction = db.transaction(['idb_t'], 'readwrite').objectStore('idb_t').add({ id: 1, title: 'indexedDB', author: "xxyCoder" })
+    transaction.onsuccess = function (event) {
+      // 写入成功
+    }
+    transaction.onerror = function (event) {
+      // 写入失败
+    }
+    // 读取数据
+    const transaction = db.transaction(['idb_t'], 'readonly')
+    const objectStore = transaction.objectStore("idb_t")
+    // 获取id=1的数据
+    const req = objectStore.get(1)
+    req.onerror = function (event) {
+      // 失败
+    }
+    req.onsuccess = function (event) {
+      const result = req.result
+      if (result) {
+        console.log(result.title, result.author)
+      } else {
+        // 没有该数据
+      }
+    }
+    // 获取全部数据
+    objectStore.getAll().onsuccess = function (event) {
+      const data = event.target.result
+    }
+    // 遍历数据
+    objectStore.openCursor().onsuccess = function (event) {
+      const cursor = event.target.result
+      if (cursor) {
+        console.log(cursor.value.title, cursor.value.author)
+        cursor.continue()
+      } else {
+        // 没有更多数据了
+      }
+    }
+    // 使用索引查询数据
+    const index = objectStore.index("title")
+    const range = IDBKeyRange.only("xxx")
+    const req = index.openCursor(range)
+    req.onsuccess = function (event) {
+      const cursor = event.target.result
+      if (cursor) {
+        // ...
+        cursor.continue
+      }
+    }
+    // 更新数据
+    const req = objectStore.put({ id: 1, title: "indexdb", author: "xxy" })
+    // 删除数据
+    const req = objectStore.delete(1)
+
+    // 自动生成主键
+    db.createObjectStore("indexed", { autoIncrement: true })
+    // 不允许重复值插入
+    db.createObjectStore("indexed", { unique: true });
+  </script>
+
+  <script>
+    // main.js
+    const w = new Worker("./worker.js")
+    // 发送消息
+    w.postMessage(data)
+    // 接受子线程传递回的结果
+    w.addEventListener("message", function (e) {
+      console.log(e.data)
+    })
+    // 加载其他脚本
+    importScripts("thrid-libary.js")
+    // 终止worker
+    w.terminal()
+  </script>
+
+  <script>
+    // web worker 主线程和worker的代码在同一个网页上
+    const scText = new Blob([document.querySelector("#worker").textContent])
+    const url = window.URL.createObjectURL(scText)
+    const worker = new Worker(url)
+
+    worker.onmessage = function (e) {
+
+    }
+  </script>
+
+  <script id="worker" type="app/worker">
+    addEventListener("message", function(e) {}, false);
+  </script>
+
+  <script>
+    // web sockets
+    const ws = new WebSocket("ws://localhost:3000")
+    ws.onopen = function () {
+      console.log("connection open!")
+      ws.send("Hello server")
+    }
+    ws.onmessage = function (e) {
+      console.log("recive from server:", e.data)
+    }
+  </script>
 </body>
+
 </html>
