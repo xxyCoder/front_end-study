@@ -1,6 +1,7 @@
 "use strict";
 
-import InterceptorManager, { AxiosInterceptorManager, IHandler } from "./InterceptorManager";
+import InterceptorManager, { AxiosInterceptorManager, IFulfilled, IHandler, IRejected } from "./InterceptorManager";
+import dispatchRequest from "./dispatchRequest";
 
 export type Method =
   | 'get' | 'GET'
@@ -45,7 +46,7 @@ export interface GenericAbortSignal {
   removeEventListener?: (...args: any) => any;
 }
 
-interface AxiosInstanceConfig<D = any> {
+export interface AxiosInstanceConfig<D = any> {
   url?: string;
   method?: Method | string;
   baseURL?: string;
@@ -91,7 +92,46 @@ class Axios {
       config.method = 'get'
     }
 
-    const requestInterceptorChain: [] = []
+    const requestInterceptorChain: (IFulfilled<AxiosInstanceConfig> | IRejected | undefined)[] = [];
+    this.interceptors.request.forEach(interceptor => {
+      if (interceptor) {
+        requestInterceptorChain.unshift(interceptor.fulfilled, interceptor.rejected);
+      }
+    })
+
+    const responseInterceptorCahin: (IFulfilled<AxiosResponse> | IRejected | undefined)[] = [];
+    this.interceptors.response.forEach(interceptor => {
+      if (interceptor) {
+        responseInterceptorCahin.push(interceptor.fulfilled, interceptor.rejected);
+      }
+    })
+
+    let i = 0, len = requestInterceptorChain.length, promise, newConfig = config;
+    while (i < len) {
+      const onFulfilled = typeof requestInterceptorChain[i] === 'function' ? requestInterceptorChain[i] : (config: AxiosInstanceConfig) => config;
+      ++i;
+      const onRejected = typeof requestInterceptorChain[i] === 'function' ? requestInterceptorChain[i] : (err:any) => err;
+      ++i;
+
+      try {
+        newConfig = onFulfilled!(newConfig);
+      } catch(err) {
+        onRejected!.call(this, err);
+        break;
+      }
+    }
+
+    try {
+      promise = dispatchRequest.call(this, newConfig)
+    } catch(err) {
+      return Promise.reject(err);
+    }
+    i = 0, len = responseInterceptorCahin.length;
+    while (i < len) {
+      promise = promise.then(responseInterceptorCahin[i++], responseInterceptorCahin[i++]);
+    }
+
+    return promise;
   }
 }
 

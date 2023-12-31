@@ -1,8 +1,8 @@
-interface IFulfilled<V> {
+export interface IFulfilled<V> {
   (value: V): V | Promise<V>
 }
 
-interface IRejected {
+export interface IRejected {
   (error: any): any
 }
 
@@ -10,6 +10,7 @@ export interface AxiosInterceptorManager<V> {
   use(onFulfilled?: IFulfilled<V> | null, onRejected?: IRejected | null): number;
   eject(id: number): void;
   clear(): void;
+  forEach(fn: (h: IHandler<V>) => void): void;
 }
 
 export type IHandler<V> = ({ fulfilled?: IFulfilled<V>, rejected?: IRejected } | null)
