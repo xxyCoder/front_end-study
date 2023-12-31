@@ -96,3 +96,26 @@
 - fullscreenElement返回以全屏状态展示的dom元素
   - requestFullscreen() 全屏
   - exitFullscreen() 退出全屏
+- links返回标签a以及area的集合
+- forms返回form表单节点
+- images返回所有img图片节点
+- scripts返回所有scripts节点
+- styleSheets返回网页内嵌或引入的css样式集合表
+- domain返回当前文档的域
+- lastModified返回文档最后修改时间
+- referrer表示当前文档的访问者来自哪里
+- readyState返回当前文档状态，状态每发生一次变化都会触发readystatechange事件
+  - loading 加载html代码阶段
+  - interactive 加载外部资源阶段（img、links等）
+  - complete 加载完成
+- designMode控制当前文档是否可编辑
+  - on或off
+- currentScript返回当前脚本所在的dom节点
+
+### 方法
+- open()清空当前文档所有内容，使得文档处于可写状态，供write()写入内容
+- close()关闭打开的文档
+- write()写入文档，对标签不转义
+- elementsFromPoint(x,y) 返回位于页面指定坐标（相对视口）所有元素
+
+## Element
