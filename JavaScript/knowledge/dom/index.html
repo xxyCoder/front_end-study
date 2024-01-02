@@ -5,6 +5,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    .hw {
+      height: 10px;
+      width: 10px;
+      overflow: scroll;
+    }
+  </style>
 </head>
 
 <body>
@@ -13,6 +20,8 @@
   </video>
 
   <div id="myDiv">全屏看看</div>
+
+  <div class="hw">1111111111</div>
 
   <script>
     var videoElement = document.getElementById('myVideo')
@@ -34,6 +43,12 @@
     // 添加点击事件监听器，点击时切换全屏状态
     videoElement.addEventListener('click', toggleFullscreen);
     divElement.addEventListener('click', toggleFullscreen);
+  </script>
+
+  <script>
+    // element
+    const hw = document.querySelector(".hw");
+    console.log(hw.offsetHeight, hw.scrollHeight, hw.getBoundingClientRect().height)
   </script>
 </body>
 
