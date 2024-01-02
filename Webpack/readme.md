@@ -144,3 +144,16 @@
 
 ## external
 - 防止将某些import的包打包到bundle中，而是运行时再去从外部获取这些依赖扩展，列入从CDN引入
+
+# 面试题
+- split-chunk分包过多怎么解决？
+  1. limitChunkCountPlugin限定数量
+  ```js
+    plugins: [
+      new webpack.optimize.LimitChunkCountPlugin({
+        maxChunk: cnt
+      })
+    ]
+  ```
+  2. 调整splitChunks配置（minChunk、minSize）
+  3. 按需加载和懒加载（初次加载就不会加载所有分包）
