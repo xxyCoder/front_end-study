@@ -43,6 +43,10 @@
   - generator.filename覆盖output.assetModuleFilename
   - resourceQuery资源查询匹配的条件（?后面的字段）
   - resolve.fullySpecified表示是否需要为文件提供扩展名
+  - type
+    - asset/resource 对标file-loader
+    - asset/inline 对标url-loader
+    - asset/source 对标raw-loader 适用于svg这种需要原封不动打包进去
 
 ## webpack中loader有两个执行阶段 normal和pitching
 
@@ -157,3 +161,70 @@
   ```
   2. 调整splitChunks配置（minChunk、minSize）
   3. 按需加载和懒加载（初次加载就不会加载所有分包）
+- 图片如何优化？
+  1. 图片压缩 image-webpack-loader
+  ```js
+  module: {
+    rules: [{
+      test: /\.(gif|png|jpe?g|svg)$/i,
+      type: "asset/resource",
+      use: [{
+        loader: "image-webpack-loader",
+        options: {
+          disable: process.env.NODE_ENV === 'production', // 比较耗时，在生产环境使用
+          // 压缩jpe?g
+          mozjpeg: {
+            quantity: 80
+          },
+          // 压缩png
+          optpng: {},
+          // 压缩svg
+          svgo: {},
+          // 压缩gif
+          gifsicle: {},
+          // 将jpg/png转换为webp
+          webp: {}
+        }
+      }]
+    }]
+  }
+  ```
+  2. 雪碧图 webpack-spritesmith
+  ```js
+  resolve: {
+    modules: ["node_modules", "assets"]
+  },
+  plugin: [
+    new SpritesmithPlugin({
+      src: {
+        cwd: path.resolve(__dirname, 'src/icons'),
+        glob: "*.png"
+      },
+      target: {
+        image: path.resolve(__dirname, "src/assets/sprite.png"),
+        css: path.resolve(__dirname, "src/assets/sprite.less")
+      }
+    })
+  ]
+  ```
+    - 该插件会将src.cwd中目录所匹配的src.glob合并成一张大图片，保存在target.image中，同时生成兼容性的sass/less/stylus预处理的mixins代码
+  3. 响应式图片 即为不同设备提供不同尺寸的图片 responsive-loader sharp
+  ```js
+  module: {
+    rules: [{
+      test: /\.(png|jpg)$/,
+      oneOf: [{
+        type: "javascript/auto",
+        resourceQuery: /sizes?/, // 并非所有图片都需要，使用这个进行过滤
+        use: [{
+          loader: "responsive-loader",
+          options: {
+            adapter: require("responsive-loader/sharp")
+          }
+        }, {
+          type: "asset/resource"
+        }]
+      }]
+    }]
+  };
+  ```

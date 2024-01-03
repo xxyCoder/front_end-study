@@ -86,7 +86,7 @@ module.exports = {
     flagIncludedChunks: true,
     mangleWasmImports: true,
     mergeDuplicateChunks: true,
-    minimize: true,
+    minimize: false,
     minimizer: [
       new TerserPlugin({
         parallel: true,
@@ -130,7 +130,7 @@ module.exports = {
       },
       reconnect: 3,
     },
-    compress: true,
+    compress: false,
     static: {
       publicPath: "/assets/"
     },
