@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>按钮打勾</title>
+    <style>
+        body {
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            position: relative;
+        }
+
+        .btn {
+            display: none;
+        }
+
+        .download {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 60px;
+            width: 240px;
+            border-radius: 30px;
+            color: white;
+            background: rgba(111, 119, 230);
+            transition: all .5s;
+        }
+
+        .check {
+            opacity: 0;
+            position: absolute;
+            color: rgba(111, 119, 230);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 1s ease-in-out;
+        }
+
+        @keyframes download {
+            0% {
+                width: 240px;
+            }
+
+            100% {
+                width: 60px;
+            }
+        }
+
+        .btn:checked~.download .check {
+            opacity: 1;
+        }
+
+        .btn:checked~.download .circle {
+            animation: draw 3s ease forwards;
+        }
+
+        .btn:checked~.download {
+            color: #fff;
+            width: 60px;
+            background-color: #fff;
+            animation: download .5s both ease-out;
+        }
+
+        .circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            position: absolute;
+            fill: none;
+            stroke: rgba(111, 119, 230);
+            stroke-width: 2px;
+            stroke-dasharray: 110;
+            stroke-dashoffset: 110;
+        }
+
+        @keyframes draw {
+            100% {
+                stroke-dasharray: 500;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <input type="checkbox" id="button" class="btn">
+        <label for="button" class="download">
+            下载<i class="check">√</i>
+            <svg class="circle">
+                <circle cx="32" cy="32" r="16"></circle>
+            </svg>
+        </label>
+    </div>
+</body>
+
+</html>
