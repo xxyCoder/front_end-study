@@ -60,7 +60,8 @@
 - 一个类数组对象，成员是节点对象，以下方法可以获得该实例
 - Node.childNodes
 - document.querySelectorAll()
-- forEach() keys() values() entries()
+- 方法
+  - forEach() keys() values() entries()
 
 ## HTMLCollection接口
 - 只能包含元素节点，也是类数组对象，与NodeList不同在于只能使用for循环
@@ -156,6 +157,55 @@
   - insertDate(start, len) 插入
   - replaceDate(start, len, newStr)
   - subStringDate(start, len)获取子字符串
+
+## CSSStyleDeclaration接口
+- Element.style、CSSStyle.style、window.getComputedStyle()部署该接口
+- 属性
+  - cssText当前规则的所有样式声明文本
+  - getPropertyPriority()返回一个字符有没有设置important优先级
+  - getPropertyValue(key)返回属性的属性值
+  - removeProperty(key)移除某个属性
+  - setProperty(key, value, important?)设置css新属性
+
+## CSS对象
+- 方法
+  - escape()转义css特殊字符
+  - supports(key, value)返回布尔表示当前环境是否支持该css规则
+
+## window的css方法
+  - getComputedStyle(dom, ?伪元素)拿到最终计算出来的规则样式
+
+### 侦测css模块
+- css属性存在会返回一个字符串或空字符串，如果该属性不存在则返回undefined
+
+## StyleSheet接口
+- 代表网页的一张样式表，包括link元素加载和style内嵌的样式表，document.styleSheets可以拿到当前页面所有的StyleSheet实例
+- 属性
+  - disabled表示该样式是否禁用
+  - href返回样式表带网址，对于内嵌则返回null
+  - ownerNode返回styleSheet对象所在的dom节点，通常是link或style
+  - cssRules返回一个类数组对象，里面每一个成员就是当前样式表的一条css规则，每个css规则都有一个style属性去读写
+- 方法
+  - insertRule(rule, pos = 0)插入一条css规则
+  - deleteRule(pos)删除一条规则
+
+## CSSRuleList接口
+- 一个类数组对象，表示一组css规则，成员都是cssRule实例，通过styleSheet.cssRules获得
+
+## CSSRule接口
+- 属性
+  - cssText返回当前规则文本
+  - type规则类型
+     1. 普通
+     3. @import
+     4. @media
+     5. @font-face
+
+## CSSStyleRule接口
+- 如果一条css规则是普通规则，那么除了cssRule接口，还部署了cssStyleRule接口
+- 属性
+  - selectorText返回当前规则的选择器
+  - style
 
 ## Mutation Observer
 - 监听dom变动，事件是异步触发，将变动记录封装成一个数组

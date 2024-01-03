@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="./index.css">
   <style>
     .hw {
       height: 10px;
@@ -49,6 +50,14 @@
     // element
     const hw = document.querySelector(".hw");
     console.log(hw.offsetHeight, hw.scrollHeight, hw.getBoundingClientRect().height)
+  </script>
+
+  <script>
+    if (CSS.supports("transform", "5px")) {
+      console.log("support transform: 5px")
+    }
+    console.log(window.getComputedStyle(hw, ":before"))
+    console.log(document.styleSheets)
   </script>
 </body>
 
