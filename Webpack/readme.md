@@ -42,7 +42,7 @@
   - loader是use:[ { loader } ]的别名
   - generator.filename覆盖output.assetModuleFilename
   - resourceQuery资源查询匹配的条件（?后面的字段）
-  - fullySpecified表示是否需要为文件提供扩展名
+  - resolve.fullySpecified表示是否需要为文件提供扩展名
 
 ## webpack中loader有两个执行阶段 normal和pitching
 
