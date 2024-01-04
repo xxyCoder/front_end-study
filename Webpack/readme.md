@@ -145,6 +145,20 @@
 ## external
 - 防止将某些import的包打包到bundle中，而是运行时再去从外部获取这些依赖扩展，列入从CDN引入
 
+# 打包逻辑
+1. 合并参数
+  - 命令行参数和webpack.config.js等文件
+2. create compiler object
+3. create compilation object
+4. 遍历entry配置
+  - Compilation.addEntry()
+5. 创建Module对象
+6. 根据module类型解析loaders，调用loader执行模块转译
+7. 模块内容转AST，寻找依赖，构建完整模块依赖关系图
+8. 遍历entry构建chunk
+9. 生成运行时代码
+10. 创建asset，调用fs.write写入output
+
 # 面试题
 - split-chunk分包过多怎么解决？
   1. limitChunkCountPlugin限定数量
@@ -157,3 +171,14 @@
   ```
   2. 调整splitChunks配置（minChunk、minSize）
   3. 按需加载和懒加载（初次加载就不会加载所有分包）
+- tree-shaking怎么实现
+  1. 使用esm规范
+  2. 配置optimization.usedExports: true
+  3. 启动优化
+    - mode: production
+    - optimization.minimize: true
+    - 提供optimization.minimizer数组
+  - 需要标记出模块哪些导出值没有使用过的，再是使用压缩插件删除导出值中未使用的东西
+    - 将ESM模块导出语句转换为Dependency对象并记录到模块的dependencies集合
+    - 遍历module对象的dependencies集合找到Dependency依赖对象转换为ExportInfo记录到ModuleGraph对象中
+    - 便利每个module对象的ExportInfo数组，执行compilation.getDependencyReferencedExports 方法确定是否有被其他模块使用，有使用则标记
