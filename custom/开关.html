@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>开关</title>
+    <style>
+        body {
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn {
+            display: none;
+        }
+
+        .switch {
+            display: block;
+            padding: 5px;
+            border-radius: 30px;
+            width: 60px;
+            height: 30px;
+            background-color: #ccc;
+        }
+
+        .circle {
+            position: relative;
+            height: 30px;
+            width: 30px;
+            background-color: #fff;
+            border-radius: 50%;
+            transition: transform 1s;
+        }
+        .btn:checked ~ .switch .circle {
+            transform: translateX(30px);
+        }
+        .btn:checked ~ .switch {
+            background-color: rgb(94, 141, 229);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <input type="checkbox" id="btn" class="btn">
+        <label for="btn" class="switch">
+            <div class="circle"></div>
+        </label>
+    </div>
+</body>
+
+</html>
