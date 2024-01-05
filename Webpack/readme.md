@@ -159,6 +159,24 @@
 9. 生成运行时代码
 10. 创建asset，调用fs.write写入output
 
+# source map
+- 主要作用是将经过压缩、混合的产物代码还原回未打包的原始形态，帮助开发者在生产环境中精确问题发生的行列位置
+- 遍历产物文件assets数组，调用webpack-sources提供的map方法，计算出assets与源码之间的映射关系
+- V3 版本 Sourcemap 文件由三部分组成
+  - 开发者编写的原始代码；
+  经过 Webpack 压缩、转化、合并后的产物，且产物中必须包含指向 Sourcemap 文件地址的 //# sourceMappingURL=https://xxxx/bundle.js.map 指令；
+  - 记录原始代码与经过工程化处理代码之间位置映射关系 Map 文件
+- 页面初始运行时只会加载编译构建产物，直到特定事件发生 —— 例如在 Chrome 打开 Devtool 面板时，才会根据 //# sourceMappingURL 内容自动加载 Map 文件，并按 Sourcemap 协议约定的映射规则将代码重构还原回原始形态
+
+## devtool规则详解
+- eval：生成的模块代码会包裹进一段eval函数中，且模块的source map信息通过// # sourceURL直接挂在模块代码内
+- source-map：产物会额外生成.map文件
+- cheap：会抛弃列维度信息
+- module：只在cheap关键字下生效，Webpack 根据 module 关键字判断按 loader 联调处理结果作为 source，还是按处理之前的代码作为 source
+- nosources：生成的文件内容不包括源码内容，即sourceContent字段
+- inine：将source map内容编码为base 64 url直接追加在产物中
+- hidden：当 devtool 包含 hidden 时，编译产物中不包含 //# sourceMappingURL= 指令，要使用需要手动加载
+
 # 面试题
 - split-chunk分包过多怎么解决？
   1. limitChunkCountPlugin限定数量
