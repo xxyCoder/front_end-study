@@ -1,4 +1,8 @@
 namespace Utils {
+    export namespace my {
+        export const name = "xxyCoder"
+    }
+
     function isString(value: any) {
         return typeof value === 'string'
     }
@@ -9,6 +13,10 @@ namespace Utils {
         console.error(msg)
     }
 }
+
+// import 避免多次.调用
+import my = Utils.my
+console.log(my.name)
 
 // Utils.isString("Error")
 Utils.error("可以外部使用")

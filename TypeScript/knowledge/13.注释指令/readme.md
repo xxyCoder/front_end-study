@@ -1,0 +1,9 @@
+# 注释指令
+- // @ts-nocheck 告诉编译器不对当前脚本进行类型检查
+- // @ts-check 一个JS脚本使用，那么编译器进行类型检查
+- // @ts-ignore 告诉编译器不对下一行代码进行类型检查
+- // @ts-expect-error 告诉编译器，下一行有错误的时候压制报错信息，将错误留给代码自己处理
+- JSDoc，TS直接处理JS文件，如果无法推断类型，会使用JS的JSDoc注释
+- @typedef 创建自定义类型
+- @extends 定义继承的基类
+- @private、@public、@protected、@readonly
