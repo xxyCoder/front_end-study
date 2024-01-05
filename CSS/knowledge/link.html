@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>性能优化之link</title>
+    <link rel="prefetch" href="https://unpkg.com/vue@3.4.5/dist/vue.global.js">
+    <link as="font" rel="preload" href="https://lf3-cdn-tos.bytegoofy.com/obj/goofy/toutiao/toutiao_web_pc/fonts/Byte_Number-center.688369de.ttf">
+    <link rel="preconnect" href="www.baidu.com">
+</head>
+
+<body>
+    <button id="btn">加载vue.global.js</button>
+    <script>
+        const btn = document.getElementById("btn");
+        const loadScript = src => {
+            const script = document.createElement("script");
+            script.src = src;
+            document.body.appendChild(script);
+            script.onload = () => {
+                console.log(Vue)
+            }
+        };
+
+        btn.onclick = () => {
+            loadScript("https://unpkg.com/vue@3.4.5/dist/vue.global.js")
+        }
+        console.log(Vue)
+    </script>
+</body>
+
+</html>
+
+<!-- 
+    1. prefetch 预取回
+        - 网络资源空间休闲的时候预先下载指定好的资源（但是不加载），减少用户等待时间
+    2. preload 预加载
+        - 用于提高页面加载的优先级，优先确保资源加载完成
+    3. preconnect 预连接
+        - 用于提前与目标域名握手，完成DNS寻址，并建立TCP和TLS链接
+        - 寻找浏览器的DNS对照表
+        - 寻找电脑文件etc/目录下dns文件
+        - 寻找电脑文件host文件
+    4. DNS-prefetch
+        - 与preconnect一样，兼容ie浏览器
+ -->
