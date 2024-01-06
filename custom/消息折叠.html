@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>消息折叠</title>
+    <style>
+        body {
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            padding-top: 80px;
+            perspective: 1000px;
+        }
+        ul {
+            list-style: none;
+            position: relative;
+            width: 400px;
+            cursor: pointer;
+            transform-style: preserve-3d;
+        }
+        ul li {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            padding: 12px;
+            background: rgba(255, 255, 255, .7);
+            border-radius: 15px;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .5);
+            backdrop-filter: blur(20px);
+            transition: all .6s;
+        }
+        .title {
+            display: flex;
+            justify-content: space-between;
+        }
+        .title i {
+            font-size: 18px;
+            color: #4acfae
+        }
+        .time {
+            color: #666
+        }
+        ul li:nth-child(2) {
+            z-index: -1;
+            color: transparent;
+            transform: translateY(8px) translateZ(-24px);
+            background: rgba(255, 255, 255, .6);
+        }
+        ul li:nth-child(3) {
+            z-index: -2;
+            color: transparent;
+            transform: translateY(16px) translateZ(-48px);
+            background: rgba(255, 255, 255, .5);
+        }
+        ul.active li {
+            color: #000;
+            background: rgba(255, 255, 255, .7);
+        }
+        ul.active li:nth-child(2) {
+            transform: translateY(calc(100% + 8px));
+        }
+        ul.active li:nth-child(3) {
+            transform: translateY(calc(200% + 16px));
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li>
+            <div class="title">
+                <div><i class="iconfont icon-weixin">微信</i></div>
+                <div class="time">30分钟前</div>
+            </div>
+            <h4>xxyCoder</h4>
+            <div>Hello World</div>
+        </li>
+        <li>
+            <div class="title">
+                <div><i class="iconfont icon-weixin">微信</i></div>
+                <div class="time">30分钟前</div>
+            </div>
+            <h4>xxyCoder</h4>
+            <div>Hello World</div>
+        </li>
+        <li>
+            <div class="title">
+                <div><i class="iconfont icon-weixin">微信</i></div>
+                <div class="time">30分钟前</div>
+            </div>
+            <h4>xxyCoder</h4>
+            <div>Hello World</div>
+        </li>
+    </ul>
+
+    <script>
+        const ul = document.querySelector("ul");
+        ul.addEventListener("click", (e) => {
+            ul.classList.toggle("active");
+        })
+    </script>
+</body>
+
+</html>

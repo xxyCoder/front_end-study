@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>interceptionObserver</title>
+    <style>
+        .placeholder {
+            height: 100vh;
+            background-color: aqua;
+        }
+    </style>
+</head>
+
+<body>  
+    <div class="placeholder"></div>
+    <div class="placeholder"></div>
+    <img src="./images/es6.jpg" data-src="./images/cq.jpg">
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    console.log(img.dataset)
+                    img.src = img.dataset.src;
+                    // 关闭监听
+                    observer.unobserve(img);
+                }
+            })
+        }, {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0 // 0表示没有交叉，1表示完全交叉
+        });
+        const imgs = document.querySelectorAll("img");
+
+        imgs.forEach(img => {
+            observer.observe(img);
+        })
+    </script>
+</body>
+
+</html>

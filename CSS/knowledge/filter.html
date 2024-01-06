@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>filter</title>
+    <style>
+        body {
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .bubbles {
+            border-radius: 10px;
+            position: relative;
+            width: 160px;
+            height: 60px;
+            background-color: aqua;
+            filter: drop-shadow(2px 2px 2px #000);
+        }
+        .bubbles::after {
+            position: absolute;
+            content: "";
+            border: 10px solid transparent;
+            border-top-color: aqua !important;
+            bottom: -20px;
+            left: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bubbles"></div>
+</body>
+
+</html>

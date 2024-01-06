@@ -149,6 +149,38 @@
 ## external
 - 防止将某些import的包打包到bundle中，而是运行时再去从外部获取这些依赖扩展，列入从CDN引入
 
+# 打包逻辑
+1. 合并参数
+  - 命令行参数和webpack.config.js等文件
+2. create compiler object
+3. create compilation object
+4. 遍历entry配置
+  - Compilation.addEntry()
+5. 创建Module对象
+6. 根据module类型解析loaders，调用loader执行模块转译
+7. 模块内容转AST，寻找依赖，构建完整模块依赖关系图
+8. 遍历entry构建chunk
+9. 生成运行时代码
+10. 创建asset，调用fs.write写入output
+
+# source map
+- 主要作用是将经过压缩、混合的产物代码还原回未打包的原始形态，帮助开发者在生产环境中精确问题发生的行列位置
+- 遍历产物文件assets数组，调用webpack-sources提供的map方法，计算出assets与源码之间的映射关系
+- V3 版本 Sourcemap 文件由三部分组成
+  - 开发者编写的原始代码；
+  经过 Webpack 压缩、转化、合并后的产物，且产物中必须包含指向 Sourcemap 文件地址的 //# sourceMappingURL=https://xxxx/bundle.js.map 指令；
+  - 记录原始代码与经过工程化处理代码之间位置映射关系 Map 文件
+- 页面初始运行时只会加载编译构建产物，直到特定事件发生 —— 例如在 Chrome 打开 Devtool 面板时，才会根据 //# sourceMappingURL 内容自动加载 Map 文件，并按 Sourcemap 协议约定的映射规则将代码重构还原回原始形态
+
+## devtool规则详解
+- eval：生成的模块代码会包裹进一段eval函数中，且模块的source map信息通过// # sourceURL直接挂在模块代码内
+- source-map：产物会额外生成.map文件
+- cheap：会抛弃列维度信息
+- module：只在cheap关键字下生效，Webpack 根据 module 关键字判断按 loader 联调处理结果作为 source，还是按处理之前的代码作为 source
+- nosources：生成的文件内容不包括源码内容，即sourceContent字段
+- inine：将source map内容编码为base 64 url直接追加在产物中
+- hidden：当 devtool 包含 hidden 时，编译产物中不包含 //# sourceMappingURL= 指令，要使用需要手动加载
+
 # 面试题
 - split-chunk分包过多怎么解决？
   1. limitChunkCountPlugin限定数量
@@ -228,3 +260,14 @@
     }]
   };
   ```
+- tree-shaking怎么实现
+  1. 使用esm规范
+  2. 配置optimization.usedExports: true
+  3. 启动优化
+    - mode: production
+    - optimization.minimize: true
+    - 提供optimization.minimizer数组
+  - 需要标记出模块哪些导出值没有使用过的，再是使用压缩插件删除导出值中未使用的东西
+    - 将ESM模块导出语句转换为Dependency对象并记录到模块的dependencies集合
+    - 遍历module对象的dependencies集合找到Dependency依赖对象转换为ExportInfo记录到ModuleGraph对象中
+    - 便利每个module对象的ExportInfo数组，执行compilation.getDependencyReferencedExports 方法确定是否有被其他模块使用，有使用则标记

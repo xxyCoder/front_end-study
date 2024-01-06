@@ -71,3 +71,16 @@ function conn<T extends U, U>(a: T, b: U): void {
 type orNull<T> = T | null;
 type oneOrMany<T> = T | T[];
 type oneOrManyOrNull<T> = orNull<oneOrMany<T>>
+
+// keyof
+const obj = {
+    name: "xxyCoder",
+    age: 21
+};
+function getValue<T extends object, K extends keyof T>(obj: T, key: K) {
+    return obj[key]
+}
+// for in
+type Options<T extends object> = {
+    [K in keyof T]?: T[K]
+}
