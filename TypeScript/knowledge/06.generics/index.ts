@@ -80,7 +80,52 @@ const obj = {
 function getValue<T extends object, K extends keyof T>(obj: T, key: K) {
     return obj[key]
 }
-// for in
+
+interface T {
+    [key: string]: string;
+}
+type t = keyof T
+
+type t1 = keyof ({ a: string, c: boolean } | { b: string, c: boolean })
+type t2 = keyof ({ a: string, c: boolean} & { b: string, c: boolean })
+// 返回值的联合类型
+interface MyObj {
+    foo: number;
+    bar: string;
+}
+type t3 = MyObj[keyof MyObj]
+
+// in
 type Options<T extends object> = {
     [K in keyof T]?: T[K]
 }
+
+// 条件运算符
+type t4 = 1 extends number ? true : false;
+
+// is
+const myNum = {
+    add(num1: number, num2: number): number {
+        return num1 + num2;
+    }
+}
+
+interface myNum {
+    add(num1: number, num2: number): number
+}
+
+function isNumber(num: any): num is myNum {
+    return typeof num.add !== 'undefined'
+}
+let x;
+if (isNumber(x)) {
+    x.add(1, 2)
+}
+
+// satisfies
+type Colors = "red" | "blue" | "green"
+const plattes = {
+    red: "red",
+    green: "green",
+    blue: [0, 0, 255]
+} satisfies Record<Colors, string | number[]>

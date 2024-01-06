@@ -1,29 +1,26 @@
-declare let x: number;
-declare function sayHello(name: string): void
-// 其后面不能带有function的具体实现
+declare let x: number
+
+declare function sayHello(name: string): void;
+
 declare class Animal {
-    public static s0(): string;
-    public static s1: string;
-    private name: string;
-    constructor(name: string);
-    eat(): void;
-    sleep(): void;
+  private name: string;
+  constructor(name: string);
+  eat(): void;
 }
-// 其后面不能带有class的具体实现
 
 declare namespace AnimalLib {
-    class Animal { }
-    type Animals = "Dot" | "Cat"
+  export type Animals = "Cat" | "Dog";
 }
 
-declare enum E {
-
+declare module "io" {
+  export function readFile(filename: string): string;
 }
 
-export { };
-
-declare global {
-    interface String {
-        toSmallString(): string;
+// 为外部模块添加属性和方法，给出新增部分的描述
+declare module "moduleA" {
+  interface Foo {
+    custom: {
+      prop: string
     }
+  }
 }
