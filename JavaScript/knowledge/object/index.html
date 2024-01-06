@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>对象</title>
+</head>
+
+<body>
+  <script>
+    const num = Object(1)
+    console.log(num instanceof Number)
+    const arr = []
+    console.log(arr === Object(arr))
+
+    function isObject(val) {
+      return val === Object(val)
+    }
+    console.log((new Object(1)) instanceof Number)
+    console.log((new Object(arr)) === arr)
+
+    if (new Boolean(false)) {
+      console.log(true)
+    }
+
+    console.log((10.055).toFixed(2), (10.005).toFixed(2))
+    console.log((12.34).toPrecision(1)) // "1e+1"
+    console.log((12.34).toPrecision(2)) // "12"
+    console.log((12.34).toPrecision(3)) // "12.3"
+    console.log((12.34).toPrecision(4)) // "12.34"
+    console.log((12.34).toPrecision(5)) // "12.340"
+  </script>
+
+  <script>
+    console.log(String.fromCharCode(97))
+    console.log("a|b|c|d".split("|", 2))
+  </script>
+
+  <script>
+    console.log(new Date() === Date(), new Date(), Date())
+    console.log(new Date() + new Date(), new Date() - new Date())
+    console.log(new Date(2024, 0, 6))
+  </script>
+
+  <script>
+    const str = "xxyCoder 123 aaa bbb ccc xxx aa 123x"
+    const reg = /\d+(\w*)/g
+    console.log(str.match(reg), reg.exec(str), reg.exec(str))
+  </script>
+
+  <script>
+    const obj = { 
+      name: "xxyCoder", addr: "China", score: 1951, age: undefined, sex: null,
+      toJSON: function(){
+        console.log("toJSON")
+        return {
+          name: this.name,
+          addr: this.addr
+        }
+      }
+    }
+    const arr1 = [undefined, function () { }, 1, 2, 3]
+    console.log(
+      JSON.stringify(obj, ["name", "age", "score"]), 
+      JSON.stringify(arr1, function (k, v) { 
+        if (typeof v === "number") return v * 2; 
+        return v 
+      }))
+  </script>
+</body>
+
+</html>
