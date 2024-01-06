@@ -181,6 +181,17 @@
 - inine：将source map内容编码为base 64 url直接追加在产物中
 - hidden：当 devtool 包含 hidden 时，编译产物中不包含 //# sourceMappingURL= 指令，要使用需要手动加载
 
+# HMR
+- 设置devServer.hot为true
+- 代码中调用module.hot.accept接口，将模块安全的替换为最新代码
+
+## 实现过程
+- 使用了webpack-dev-server托管静态资源，同时以runtime方式注入一段处理hmr逻辑客户端代码
+- 浏览器加载页面后与web socket连接
+- webpack监听文件变化后，增量构建变更模块，通过web socket发送hash事件
+- 浏览器接收到hash事件后，请求manifest资源文件（[hash].hot-update.json），请求变更模块
+- 拿到变更模块（[hash].hot-update.js）触发变更模块的module.hot.accept回调执行变更逻辑
+
 # 面试题
 - split-chunk分包过多怎么解决？
   1. limitChunkCountPlugin限定数量
