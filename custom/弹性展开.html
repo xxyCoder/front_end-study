@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>弹性展开工具栏</title>
+  <link rel="stylesheet" href="http://at.alicdn.com/t/c/font_4096975_i8f4jjygw.css" />
+  <style>
+    body {
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    body, ul, div {
+      padding: 0;
+      margin: 0;
+    }
+    li {
+      list-style: none;
+    }
+    .button {
+      position: absolute;
+      height: 50px;
+      width: 50px;
+      border-radius: 50%;
+      background-color: aquamarine;
+      text-align: center;
+      transition: transform .5s, left .5s;
+    }
+    .button::after {
+      content: "+";
+      font-size: 30px;
+    }
+    .active {
+      transform: rotate(45deg);
+    }
+    .icons {
+      padding-left: 50px;
+      width: 0;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      height: 50px;
+      border-radius: 25px;
+      transition: width .5s;
+    }
+    .icons li {
+      padding: 6px 12px;
+    }
+    .icons:nth-last-child(1) {
+      padding-right: 0;
+    }
+    .expend {
+      width: 100%;
+      box-shadow: 1px 1px 1px 1px #dcdcdc;
+    }
+    .toolbar {
+      position: relative;
+      width: 50px;
+      transition: width .5s;
+    }
+    .t-expend {
+      width: 50vw
+    }
+  </style>
+</head>
+
+<body>
+  <div class="toolbar">
+    <div class="button"></div>
+    <ul class="icons">
+      <li><i class="iconfont icon-message"></i></li>
+      <li><i class="iconfont icon-cart"></i></li>
+      <li><i class="iconfont icon-money"></i></li>
+      <li><i class="iconfont icon-star"></i></li>
+    </ul>
+  </div>
+
+  <script>
+    const btn = document.querySelector(".button");
+    const icons = document.querySelector(".icons");
+    const toolbar = document.querySelector(".toolbar")
+    btn.addEventListener("click", () => {
+      btn.classList.toggle("active");
+      icons.classList.toggle("expend")
+      toolbar.classList.toggle("t-expend")
+    })
+  </script>
+</body>
+
+</html>
