@@ -32,34 +32,68 @@
 - 使用new Boolean()的构造函数需谨慎，返回一个对象而不是包装
 
 ## Number
+- 二进制前方添加0b，八进制前方添加0o
+- 允许使用_作为分隔符，不能放在数值最前方或最后面；不能连着两个或两个以上分隔符；小数点后不能有分隔符；指数e前不能有；
 - 静态属性
   - NaN
   - MIN_VALUE 最小的正数
   - MAX_SAFE_INTEGER 能够精准表示的最大整数
   - MIN_SAFE_INTEGER 能够精准表示的最小整数
+  - EPSILON极小的常量，判断浮点数误差
+- 静态方法
+  - isNaN()
+  - isFinite() 是否有限，参数不是数值一律返回false
+  - 以上和传统方法的区别在于，传统方法会对参数使用Number转换后再进行判断，该静态方法只对数值有效
+  - parseInt() parseFloat()
+    - 将全局方法移动到Number，行为不变
+  - isInteger()判断是否是整数
+    - 整数和浮点数采用同样的存储方法，所以25.0和25都是整数
+  - tunc() 去除小数，返回整数
+  - cbrt() 立方根
 - 实例方法
   - toString() 将数值转换为字符串形式
   - toFixed() 将一个数转为指定位数的小数（有效范围为0到100，超出这个范围将抛出 RangeError 错误），然后返回这个小数对应的字符串，由于浮点数的原因，小数5的四舍五入是不确定的
   - toExponential()将一个数转换科学计数法形式
   - toPrecision() 将一个数转换为指定位数的有效数字
 
+## bigInt
+- 大整数，没有位数限制，该数据类型后面需要添加n
+- BigInt()和Number类似，将参数变为大整数
+- 静态方法
+  - asUintN(width, bigInt) 给定的BigInt转换为0 到 2^width - 1之间对应的值
+  - asIntN()给定的bigInt转换为-2^width 到 2^width-1之间对应的值
+  - parseInt(str[,radix]) 将字符串转换为指定进制的bigInt
+- 使用一元+报错，不能和普通数值进行混合运算
+
 ## String
 - 静态方法
   - fromCharCode() 该方法的参数是一个或多个数值，代表 Unicode 码点，返回值是这些码点组成的字符串
+  - fromCodePoint() 同上，区别是可以识别码点大雨0xffff的字符
+  - raw() 还原原生string对象
 - 实例方法
   - charCodeAt(pos) 返回字符串指定位置的 Unicode 码点（十进制表示）
+  - codePointAt() 同上，可以处理4个字节存储的字符
   - concat(...str) 连接多个字符串，返回一个新字符串，不改变原字符串
   - slice(start, end)
   - indexOf(str) 一个字符串在另一个字符串中第一次出现的位置，返回结果是匹配开始的位置，没有则返回-1
   - lastIndexOf() 同上，返回最后一次出现的
   - trim() 删除左右的空格，返回一个新字符串，不改变原字符串
+  - trimStart() trimEnd()
   - toLowerCase() 转为小写
   - toUpperCase() 转为大写
   - match(str|regex) 用于确定原字符串是否匹配某个子字符串，返回一个数组，成员为匹配的第一个字符串，返回的数组还有index属性和input属性，分别表示匹配字符串开始的位置和原始字符串
   - search(str|regex) 等同于match，但是返回是位置
   - replace(old|regex, newStr) 替换第一个匹配到的，除非使用带有g修饰的正则
+  - replaceAll() 同上，区别是全部替换
+    - regex必须携带g符号，否则报错
   - split(str|regex, ?cnt) 根据str对字符串进行分割，接受第二个参数限定返回的组数
   - localeCompare(str1, str2)比较两个字符串，返回一个整数，小于0 => str1 < str2，等于0 => str1 = str2，大于0 => str1 > str2
+  - includes() 返回布尔表示是否找到字符串参数
+  - startsWith() 返回布尔表示是否在原字符串开头找到
+  - endsWith() 返回布尔表示是否在原字符串末尾找到
+  - repeat(cnt) 重复cnt次数，小数字向下取整，负数或者无穷则报错
+  - padStart(len, str) 头部补齐
+  - padEnd(len, str) 尾部补齐
 
 ## Date
 - 以国际标准时间1970年1月1日00:00:00作为时间的零点
