@@ -129,3 +129,53 @@ const plattes = {
     green: "green",
     blue: [0, 0, 255]
 } satisfies Record<Colors, string | number[]>
+
+// mapping
+type X = {
+    foo: number
+}
+type MP = {
+    [P in keyof X as `${P}ID`]?: T[P]
+}
+type Filter<T> = {
+    [K in keyof T as T[K] extends string ? K : never] : string
+}
+
+// Awaited<T>
+type MyAwaited<T> =
+  T extends null | undefined ? T :
+  T extends object & {
+    then(
+      onfulfilled: infer F,
+      ...args: infer _
+    ): any;
+  } ? F extends (
+    value: infer V,
+    ...args: infer _
+  ) => any ? Awaited<V> : never
+  : T;
+
+// ConstructorParameters<T>
+type MyConstructorParameters<T extends abstract new (...args: any) => any> = 
+    T extends abstract new (...args: infer P) => any ? P :never;
+
+// Exlude
+type MyExculde<U, T> = U extends T ? never : U;
+
+// Extract
+type MyExtract<U, T> = U extends T ? U : never;
+
+// InstanceType
+type MyInstanceType<T extends abstract new(...args: any) => any> = 
+    T extends abstract new (...args: any) => infer R ? R : never;
+
+// NonNullable
+type MyNonNullable<T> = T & {}
+
+// Pick
+type MyPick<T, K extends keyof T> = {
+    [P in K]: T[P]
+}
+
+// Omit
+type MyOmit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
