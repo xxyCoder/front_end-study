@@ -75,3 +75,25 @@ const content = `
 response.setHeader("Content-Type","text/javascript");
 response.send(content);
 ```
+
+# eslint处理
+
+## parser 解析起
+- eslint默认使用Espree进行ast解析，其能识别大多数的ECMAScript语法，但是不支持ts，因此需要引入@typescript-eslint/parser解决问题
+
+## parserOptions 解析器选项
+- ecmaVersion启用什么版本的js语法
+- sourceType，默认为script，如果使用es module则设置为module
+- ecmaFeatures，表示额外想要使用的对象
+
+## rules 具体代码规则
+- 手动调整哪些代码规则
+
+## extends
+- 相当于继承另一份eslint配置
+  - 从eslint本身继承
+  - 从类似eslint-config-xx的npm包继承
+  - 从eslint插件继承
+
+## env和global
+- 分别表示运行环境和全局变量
