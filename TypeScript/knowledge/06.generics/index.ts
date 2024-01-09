@@ -179,3 +179,47 @@ type MyPick<T, K extends keyof T> = {
 
 // Omit
 type MyOmit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
+
+// ThisParameterType
+type MyThisParameterType<T> = 
+    T extends (this: infer U, ...args: any) => any ? U : unknown;
+
+// OmitThisParameter
+type MyOmitThisParameter<T> = 
+    unknown extends ThisParameterType<T> ? T : 
+    T extends (...args: infer A) => infer R ?
+    (...args: A) => R : T
+
+// Parameter
+type MyParametes<T extends (...args: any) => any> = 
+    T extends (...args: infer P) => any ? P : never
+
+// Partial
+type MyPartial<T> = {
+    [P in keyof T]?: T[P]
+}
+
+// Readonly
+type MyReadonly<T> = {
+    readonly [P in keyof T]: T[P]
+}
+
+// Record
+type MyRecord<K extends string|number|symbol, T> = {
+    [P in K]: T
+}
+
+// Required
+type MyRequired<T> = {
+    [P in keyof T]-?: T[P]
+}
+
+// ReadonlyArray
+interface MyReadonlyArray<T> {
+    readonly length: number;
+    readonly [n: number]: T
+}
+
+// ReturnType
+type MyReturnType<T extends(...args: any) => any> = 
+    T extends (...args: any) => infer R ? R : any;

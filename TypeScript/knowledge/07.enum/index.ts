@@ -42,3 +42,15 @@ console.log(MyEnum['a'])
 const enum Greeting {
     Hello = "Hi"
 }
+
+// as const
+enum FOO {
+    A = 1.1,
+    B,
+    C
+}
+const BAR = {
+    A: 1.1,
+    B: 2.1,
+    C: 3.1   
+} as const;

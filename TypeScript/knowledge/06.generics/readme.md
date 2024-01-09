@@ -39,3 +39,16 @@
 - NonNullable<T> 用来从联合类型T中删除null和undefined类型
 - Pick<T, K>从对象中挑出指定的key组成新类型返回
 - Omit<T, K>从对象中删除指定的key组成新类型返回
+- ThisParameterType<T> 返回函数的this类型
+- OmitThisParameter<T> 返回去除了this的函数类型
+- Parameters<T> 返回函数的参数，组成元组返回
+- Partial<T> 将所有属性变为可选属性
+- Readonly<T> 将所有属性变为只读属性
+- Record<K, T> 返回一个对象类型，K作为键名类型，T作为键值类型
+- Required<T> 返回一个新类型，所有属性为必选属性
+- ReadonlyArray<T> 生成一个只读类型数组，T表示数组成员类型，修改原数组的push等方法不存在
+- ReturnType<T> 返回函数的返回类型
+- Uppercase<stringType> 将字符串类型每个字符变大写
+- Lowercase<stringType> 将字符串每个字符变小写
+- Capitalize<stringType> 将字符串的第一个字符变大写
+- Uncapitalize<stringType> 将字符串第一个字符变小写
