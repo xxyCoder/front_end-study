@@ -74,6 +74,15 @@
         return v 
       }))
   </script>
+
+  <script>
+    // function
+    function foo(x, x) {}
+    // 浏览器报错
+    // function foo(x, x, y = 1) {} 
+    console.log((function(a, b = 1, ...args) {}).length)
+    
+  </script>
 </body>
 
 </html>
