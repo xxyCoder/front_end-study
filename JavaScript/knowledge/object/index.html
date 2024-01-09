@@ -56,9 +56,9 @@
   </script>
 
   <script>
-    const obj = { 
+    const obj = {
       name: "xxyCoder", addr: "China", score: 1951, age: undefined, sex: null,
-      toJSON: function(){
+      toJSON: function () {
         console.log("toJSON")
         return {
           name: this.name,
@@ -68,20 +68,41 @@
     }
     const arr1 = [undefined, function () { }, 1, 2, 3]
     console.log(
-      JSON.stringify(obj, ["name", "age", "score"]), 
-      JSON.stringify(arr1, function (k, v) { 
-        if (typeof v === "number") return v * 2; 
-        return v 
+      JSON.stringify(obj, ["name", "age", "score"]),
+      JSON.stringify(arr1, function (k, v) {
+        if (typeof v === "number") return v * 2;
+        return v
       }))
   </script>
 
   <script>
     // function
-    function foo(x, x) {}
+    function foo(x, x) { }
     // 浏览器报错
     // function foo(x, x, y = 1) {} 
-    console.log((function(a, b = 1, ...args) {}).length)
-    
+    console.log((function (a, b = 1, ...args) { }).length)
+    let x = 10;
+    function f(x, y = x) {
+      console.log("y", y)
+    }
+    f(1)
+
+    function f2(x, y = () => x = 10) {
+      console.log("before y exec", x);
+      y();
+      console.log("after y exec", x)
+    }
+    f2(0)
+
+    const f3 = function () { }
+    const f4 = () => { };
+    console.log(f3.name, f4.name)
+    console.log(f2.name, f3.bind().name)
+    console.log([NaN].includes(NaN))
+
+    // false说明有空位
+    console.log(0 in [, , ,])
+    console.log([, undefined, null].toString())
   </script>
 </body>
 
