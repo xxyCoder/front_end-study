@@ -8,6 +8,48 @@
 </head>
 
 <body>
+
+  <script>
+    const proto = {
+      foo: "hello",
+      find() {
+        console.log("proto:", this.foo);
+      }
+    };
+    const self = {
+      foo: "world",
+      find() {
+        super.find()
+        return  super.foo;
+      },
+      [Symbol('s')]: 'symbol'
+    }
+    Object.setPrototypeOf(self, proto);
+    console.log(self.find())
+
+    try {
+      throw new AggregateError([
+        new Error("name error", { cause: "name" }),
+        new Error("message error", { cause: "message" })
+      ], "Hello World");
+    } catch(e) {
+      console.log(e, e.errors, e.message, e.name)
+    }
+
+    // console.log({...null}, Object.assign(null))
+    // console.log({...undefined}, Object.assign(undefined))
+    console.log(Object.assign(self, undefined, null, 2, "xxy", { fn: () => {}, get v() { return 'v' } }))
+    console.log({...self, ...{ fn: () => {}, get v() { return 'v' } }})
+
+    Object.setPrototypeOf(1, self)
+    console.log(Object.getPrototypeOf(self))
+
+    console.log(Object.fromEntries([["name", "xxyCoder"], ["age", 21, 1]]))
+
+    const nullObj = Object.create(null);
+    // console.log(nullObj.hasOwnProperty("foo"))
+  </script>
+
   <script>
     const num = Object(1)
     console.log(num instanceof Number)

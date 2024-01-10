@@ -14,12 +14,34 @@
   - freeze()冻结对象（无法添加新数据、不能删除旧属性和修改值） isFrozen()判断一个对象是否被冻结
   - create()指定原型，返回新对象
   - getPrototypeOf()返回对象Prototype对象
+  - setPrototypeOf() 设置对象的原型
+    - 如果第一个参数不是对象，会自动转为对象。但是由于返回的还是第一个参数，所以这个操作不会产生任何效果
+    - null和undefined报错
+  - is()与 === 行为基本一致，但是-0不等于+0，且NaN等于自身
+  - assign()用于对象的合并，将所有可枚举且非继承复（Symbol属性也会被拷贝）的属性制到目标对象
+    - 参数是首位：对于非对象会先转换成对象，而null和undefined则报错
+    - 他类型的值（即数值、字符串和布尔值）不在首参数，也不会报错。但是，除了字符串会以数组形式，拷贝入目标对象，其他值都不会产生效果，对于无法转换则跳过
+    - 对于get函数那么先求值后再赋值
+    - 和扩展运算符处理相似，只不过扩展运算符处理null和undefined不报错
+  - fromEntries()是entries()的逆操作，用于将一个键值对数组转换为对象
+  - hasOwn(obj, prop)判断某个属性是否为自身属性，对比对象自身的hasOwnProperty()来说，好处是对于不继承Object.prototype的对象不会报错，而hasOwnProperty()是会报错的
 - 实例方法，定义在Object.prototype
   - valueOf()返回对象的值
   - toString()返回对象字符串形式
   - hasOwnProperty()判断某个属性是否为当前自身属性
   - isPrototypeOf()判断当前对象是否是另一个对象的原型
   - propertyIsEnumerable()判断某个属性是否可枚举
+- super关键字，指向当前对象的原型对象，只能用在对象的方法中，其余地方报错
+  - 属性：Object.getPrototypeOf(this).property
+  - 方法：Object.getPrototypeOf(this).method.call(this)
+- 对象解构拿到该对象所有属性除了原型和不可枚举属性；如果扩展运算符后跟着不是对象则自动转换为对象
+
+### AggregateError错误对象
+- 在一个错误对象中，封装了多个错误；即同时引发了多个错误需要同时抛出，那么就可以生成该对象将各个错误存放
+- 接受一个errors数组，message字符串
+
+### Error对象的cause属性
+- 添加报错原因的描述
 
 ## 包装对象
 - 数字、字符串、布尔值在一定条件下会自动转换为对象
