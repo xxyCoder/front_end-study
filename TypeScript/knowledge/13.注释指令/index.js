@@ -1,6 +1,7 @@
 // @ts-check
 let isCheck = 12
-// console.log(isChecked) // 报错
+// @ts-ignore
+console.log(isChecked) // 报错
 
 // JSDoc
 
@@ -11,9 +12,10 @@ let isCheck = 12
 /**
  * @param {string} message 
  * @param {NumberLike} age
+ * @param {number} [sex = "women"]
  * @return {void}
  */
-function sayHello(message, age) {
+function sayHello(message, age, sex) {
 
 }
 

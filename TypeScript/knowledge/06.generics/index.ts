@@ -81,6 +81,10 @@ function getValue<T extends object, K extends keyof T>(obj: T, key: K) {
     return obj[key]
 }
 
+type anyObj = keyof any
+
+type noPropObj = keyof {}
+
 interface T {
     [key: string]: string;
 }
