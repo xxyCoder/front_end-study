@@ -32,6 +32,7 @@
     "sass": "^1.69.7",
     "typescript": "^5.2.2",
     "vite": "^5.0.8",
+    "vite-plugin-svgr": "^4.2.0",
     "vite-plugin-windicss": "^1.9.3",
     "windicss": "^3.5.6"
   }

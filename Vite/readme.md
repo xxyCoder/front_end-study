@@ -19,12 +19,24 @@ Vite意在提供开箱即用的配置
 - 对于生产环境使用了rollup进行打包，并采取一系列打包优化手段
 
 # 依赖性预构建
+- 对于第三方依赖包的代码仍然会选择打包，使用esbulid完成这过程
 - 首先vite会找到依赖项，然后调用esbuild将其他规范的代码转换成esmodule规范，然后重写导入的url路径，将文件放到当前目录的下node_modules/.vite/deps进行缓存，同时对esmodule规范的各个模块进行统一集成
+  - 设置了http强缓存(max-age)
+  - 本地缓存，当以下有改动则缓存失效
+    - package.json的dependencies字段
+    - 各种包管理器的lock文件
+    - optimizeDeps配置内容
 - 解决了三个问题
   - 不同的包有不同的导出格式
-  - 对路径的处理可以直接使用.vite/deps，方便路径重写
+  - 对路径的处理可以直接使用.vite/deps，路径重写
   - 网络多包传输的性能，无论有多少export或import，vite都会尽可能将其集成，最后生成一个或几个模块
 - 对于vite.config.js为什么可以使用es module规范，是因为vite会先于node去解析配置文件，将es module转变为commonJS规范
+
+## 手动开启
+- 入口文件参数optimizeDeps.entries指定自定义预构建入口文件数组
+  - 默认是以index.html作为入口扫描到的项目用到的第三方依赖进行编译
+- 添加额外依赖optimizeDeps.include决定了可以强制预构建的依赖项
+  - 动态import导致只有运行时才能被识别到，导致vite识别到后二次构建
 
 # 自动搜寻依赖
 - 没有对应的依赖，vite将抓取源码并自动搜寻引入的依赖项
@@ -97,3 +109,19 @@ response.send(content);
 
 ## env和global
 - 分别表示运行环境和全局变量
+
+# 静态资源处理
+- 配置别名 resolve.alias: {} 不仅在js的import生效，css代码的@import和url导入语句也可生效
+- Vite对其他类型如媒体类、字体类、文本类也做了内置支持，如果存在其他格式的静态资源可以使用assetsInclude: []配置让vite支持加载
+- Vite引入静态资源的时候，也支持在路径最后添加特殊的query后缀
+  - ?url表示获取资源的路径，只想拿到文件路径而不是文件内容
+  - ?raw表示获取资源的字符串，只想拿到资源的原始内容
+  - ?inline表示资源强制内联
+- 构建静态资源有俩种方式，一种是打包成单文件，一种是通过base64内联到代码中
+  - 默认是4kb作为分界线，可以通过build.assetsInlineLimit配置
+- 图片压缩：vite-plugin-imagemin插件
+- 雪碧图：vite-plugin-svg-icons
+
+# 批量加载
+- import.meta.glob('../assets/icons/logo-*.svg') 返回对象，值都是动态import
+- import.meta.globEager('../assets/icons/logo-*.svg') 返回对象，同步加载，值都是module对象

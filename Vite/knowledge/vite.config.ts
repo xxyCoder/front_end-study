@@ -3,6 +3,8 @@ import autoprefixer from 'autoprefixer'
 import windi from "vite-plugin-windicss";
 import react from '@vitejs/plugin-react'
 import path from 'path'
+import svgr from 'vite-plugin-svgr';
+import viteImagemin from 'vite-plugin-imagemin';
 
 export const config = {
   root: path.join(__dirname, 'src'), // 项目根目录
@@ -14,7 +16,18 @@ const variablePath = normalizePath(path.resolve('./src/variable.scss'));
 export default defineConfig({
   plugins: [
     react(),
-    windi()
+    windi(),
+    svgr(),
+    viteImagemin({
+      svgo: {
+        plugins: [{
+          name: "removeViewBox"
+        },{
+          name: "removeEmptyAttrs",
+          active: false
+        }]
+      }
+    })
   ],
   // css相关配置
   css: {
@@ -37,5 +50,13 @@ export default defineConfig({
         })
       ]
     }
+  },
+  resolve: {
+    alias: {
+      '@assets': path.join(__dirname, 'src/assets')
+    }
+  },
+  build: {
+    assetsInlineLimit: 6 * 1024
   }
 })
