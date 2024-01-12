@@ -37,6 +37,7 @@ Vite意在提供开箱即用的配置
   - 默认是以index.html作为入口扫描到的项目用到的第三方依赖进行编译
 - 添加额外依赖optimizeDeps.include决定了可以强制预构建的依赖项
   - 动态import导致只有运行时才能被识别到，导致vite识别到后二次构建
+- exclude用于将某些依赖从预构建中排除
 
 # 自动搜寻依赖
 - 没有对应的依赖，vite将抓取源码并自动搜寻引入的依赖项
@@ -125,3 +126,20 @@ response.send(content);
 # 批量加载
 - import.meta.glob('../assets/icons/logo-*.svg') 返回对象，值都是动态import
 - import.meta.globEager('../assets/icons/logo-*.svg') 返回对象，同步加载，值都是module对象
+
+# esbuild
+- 开发阶段作为依赖性预构建阶段
+- 不支持es5代码，导致不能在低端浏览器跑
+- 不支持const enum语法
+- 不提供操作打包产物的接口、分包操作
+- 没有实现ts的类型系统，在编译ts的时候仅仅是抹除类型相关的代码
+- 在生产环境中esbuild压缩器通过插件的形式融入到rollup打包流程中
+
+## 插件
+- 被设计为一个对象，有name和setup属性分别代表插件名和函数，setup接受一个build对象，该对象挂载了一些钩子使用
+
+# Rollup
+- vite生产环境的打包核心工具
+- css代码分割，当某个异步模块引入了一些css代码，vite会自动将这些css抽取出来单独生成一个文件，提高线上产物的缓存复用率
+- 自动预加载，vite会为入口chunk的依赖自动生成预加载标签 <link ref="modulepreload" href="/assets/vendor.xxxx.js" />
+- 异步chunk加载优化，在异步引入的chunk中，有一些公用模块，一般情况下是加载异步模块后才决定加载包含的公用模块，优化后在请求异步模块的时候同时自动预加载公用模块

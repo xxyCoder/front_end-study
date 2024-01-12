@@ -1,0 +1,204 @@
+lockfileVersion: '6.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+dependencies:
+  esbuild:
+    specifier: 0.14.18
+    version: 0.14.18
+  react:
+    specifier: ^18.2.0
+    version: 18.2.0
+  react-dom:
+    specifier: ^18.2.0
+    version: 18.2.0(react@18.2.0)
+
+packages:
+
+  /esbuild-android-arm64@0.14.18:
+    resolution: {integrity: sha512-AuE8vIwc6QLquwykyscFk0Ji3RFczoOvjka64FJlcjLLhD6VsS584RYlQrSnPpRkv69PunUvyrBoEF7JFTJijg==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/esbuild-android-arm64/-/esbuild-android-arm64-0.14.18.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fesbuild-android-arm64%2F-%2Fesbuild-android-arm64-0.14.18.tgz}
+    engines: {node: '>=12'}
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /esbuild-darwin-64@0.14.18:
+    resolution: {integrity: sha512-nN1XziZtDy8QYOggaXC3zu0vVh8YJpS8Bol7bHaxx0enTLDSFBCXUUJEKYpmAAJ4OZRPgjXv8NzEHHQWQvLzXg==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/esbuild-darwin-64/-/esbuild-darwin-64-0.14.18.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fesbuild-darwin-64%2F-%2Fesbuild-darwin-64-0.14.18.tgz}
+    engines: {node: '>=12'}
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /esbuild-darwin-arm64@0.14.18:
+    resolution: {integrity: sha512-v0i2n6TCsbxco/W1fN8RgQt3RW00Q9zJO2eqiAdmLWg6Hx0HNHloZyfhF11i7nMUUgW8r5n++ZweIXjAFPE/gQ==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/esbuild-darwin-arm64/-/esbuild-darwin-arm64-0.14.18.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fesbuild-darwin-arm64%2F-%2Fesbuild-darwin-arm64-0.14.18.tgz}
+    engines: {node: '>=12'}
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /esbuild-freebsd-64@0.14.18:
+    resolution: {integrity: sha512-XLyJZTWbSuQJOqw867tBxvto6GjxULvWZYKs6RFHYQPCqgQ0ODLRtBmp4Fqqpde52yOe45npaaoup9IXNfr32A==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/esbuild-freebsd-64/-/esbuild-freebsd-64-0.14.18.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fesbuild-freebsd-64%2F-%2Fesbuild-freebsd-64-0.14.18.tgz}
+    engines: {node: '>=12'}
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /esbuild-freebsd-arm64@0.14.18:
+    resolution: {integrity: sha512-0ItfrR8hePnDcUXxUQxY+VfICcBfeMJCdK6mcNUXnXw6LyHjyUYXWpFXF+J18pg1/YUWRWO1HbsJ7FEwELcQIA==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/esbuild-freebsd-arm64/-/esbuild-freebsd-arm64-0.14.18.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fesbuild-freebsd-arm64%2F-%2Fesbuild-freebsd-arm64-0.14.18.tgz}
+    engines: {node: '>=12'}
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /esbuild-linux-32@0.14.18:
+    resolution: {integrity: sha512-mnG84D9NsEsoQdBpBT0IsFjm5iAwnd81SP4tRMXZLl09lPvIWjHHSq6LDlb4+L5H5K5y68WC//X5Dr2MtNY3DQ==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/esbuild-linux-32/-/esbuild-linux-32-0.14.18.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fesbuild-linux-32%2F-%2Fesbuild-linux-32-0.14.18.tgz}
+    engines: {node: '>=12'}
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /esbuild-linux-64@0.14.18:
+    resolution: {integrity: sha512-HvExRtkeA8l/p+7Lf6aBrnLH+jTCFJTUMJxGKExh2RD8lCXGTeDJFyP+BOEetP80fuuH+Syj79+LVQ9MihdBsg==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/esbuild-linux-64/-/esbuild-linux-64-0.14.18.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fesbuild-linux-64%2F-%2Fesbuild-linux-64-0.14.18.tgz}
+    engines: {node: '>=12'}
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /esbuild-linux-arm64@0.14.18:
+    resolution: {integrity: sha512-CCWmilODE1ckw+M7RVqoqKWA4UB0alCyK2bv0ikEeEAwkzinlJeoe94t9CnT/ECSQ2sL+C16idsr+aUviGp7sg==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/esbuild-linux-arm64/-/esbuild-linux-arm64-0.14.18.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fesbuild-linux-arm64%2F-%2Fesbuild-linux-arm64-0.14.18.tgz}
+    engines: {node: '>=12'}
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /esbuild-linux-arm@0.14.18:
+    resolution: {integrity: sha512-+ZL8xfXVNaeaZ2Kxqlw2VYZWRDZ7NSK4zOV9GKNAtkkWURLsPUU84aUOBatRe9BH1O5FDo3LLQSlaA04ed6lhA==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/esbuild-linux-arm/-/esbuild-linux-arm-0.14.18.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fesbuild-linux-arm%2F-%2Fesbuild-linux-arm-0.14.18.tgz}
+    engines: {node: '>=12'}
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /esbuild-linux-mips64le@0.14.18:
+    resolution: {integrity: sha512-8LjO4+6Vxz5gbyCHO4OONYMF689nLderCtzb8lG1Bncs4ZXHpo6bjvuWeTMRbGUkvAhp+P6hMTzia7RHOC53wQ==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/esbuild-linux-mips64le/-/esbuild-linux-mips64le-0.14.18.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fesbuild-linux-mips64le%2F-%2Fesbuild-linux-mips64le-0.14.18.tgz}
+    engines: {node: '>=12'}
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /esbuild-linux-ppc64le@0.14.18:
+    resolution: {integrity: sha512-0OJk/6iYEmF1J7LXY6+cqf6Ga5vG4an7n1nubTKce7kYqaTyNGfYcTjDZce6lnDVlZTJtwntIMszq1+ZX7Kenw==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/esbuild-linux-ppc64le/-/esbuild-linux-ppc64le-0.14.18.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fesbuild-linux-ppc64le%2F-%2Fesbuild-linux-ppc64le-0.14.18.tgz}
+    engines: {node: '>=12'}
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /esbuild-linux-s390x@0.14.18:
+    resolution: {integrity: sha512-UNY7YKZHjY31KcNanJK4QaT2/aoIQyS+jViP3QuDRIoYAogRnc6WydylzIkkEzGMaC4fzaXOmQ8fxwpLAXK4Yg==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/esbuild-linux-s390x/-/esbuild-linux-s390x-0.14.18.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fesbuild-linux-s390x%2F-%2Fesbuild-linux-s390x-0.14.18.tgz}
+    engines: {node: '>=12'}
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /esbuild-netbsd-64@0.14.18:
+    resolution: {integrity: sha512-wE/2xT9KNzLCfEBw24YbVmMmXH92cFIzrRPUlwWH9dIizjvEYYcyQ+peTMVkqzUum7pdlVLZ2CDDqAaZo/nW/w==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/esbuild-netbsd-64/-/esbuild-netbsd-64-0.14.18.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fesbuild-netbsd-64%2F-%2Fesbuild-netbsd-64-0.14.18.tgz}
+    engines: {node: '>=12'}
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /esbuild-openbsd-64@0.14.18:
+    resolution: {integrity: sha512-vdymE2jyuH/FRmTvrguCYSrq81/rUwuhMYyvt/6ibv9ac7xQ674c8qTdT+RH73sR9/2WUD/NsYxrBA/wUVTxcg==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/esbuild-openbsd-64/-/esbuild-openbsd-64-0.14.18.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fesbuild-openbsd-64%2F-%2Fesbuild-openbsd-64-0.14.18.tgz}
+    engines: {node: '>=12'}
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /esbuild-sunos-64@0.14.18:
+    resolution: {integrity: sha512-X/Tesy6K1MdJF1d5cbzFDxrIMMn0ye+VgTQRI8P5Vo2CcKxOdckwsKUwpRAvg+VDZ6MxrSOTYS9OOoggPUjxTg==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/esbuild-sunos-64/-/esbuild-sunos-64-0.14.18.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fesbuild-sunos-64%2F-%2Fesbuild-sunos-64-0.14.18.tgz}
+    engines: {node: '>=12'}
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /esbuild-windows-32@0.14.18:
+    resolution: {integrity: sha512-glG23I/JzCL4lu7DWFUtVwqFwNwlL0g+ks+mcjjUisHcINoSXTeCNToUN0bHhzn6IlXXnggNQ38Ew/idHPM8+g==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/esbuild-windows-32/-/esbuild-windows-32-0.14.18.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fesbuild-windows-32%2F-%2Fesbuild-windows-32-0.14.18.tgz}
+    engines: {node: '>=12'}
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /esbuild-windows-64@0.14.18:
+    resolution: {integrity: sha512-zEiFKHgV/3z14wsVamV98/5mxeOwz+ecyg0pD3fWcBz9j4EOIT1Tg47axypD4QLwiKFvve9mUBYX1cD99qxOyw==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/esbuild-windows-64/-/esbuild-windows-64-0.14.18.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fesbuild-windows-64%2F-%2Fesbuild-windows-64-0.14.18.tgz}
+    engines: {node: '>=12'}
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /esbuild-windows-arm64@0.14.18:
+    resolution: {integrity: sha512-Mh8lZFcPLat13dABN7lZThGUOn9YxoH5RYkhBq0U3WqQohHzKRhllYh7ibFixnkpMLnv8OZEbl8bGLMy03MpfA==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/esbuild-windows-arm64/-/esbuild-windows-arm64-0.14.18.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fesbuild-windows-arm64%2F-%2Fesbuild-windows-arm64-0.14.18.tgz}
+    engines: {node: '>=12'}
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /esbuild@0.14.18:
+    resolution: {integrity: sha512-vCUoISSltnX7ax01w70pWOSQT+e55o+2P/a+A9MSTukJAt3T4aDZajcjeG4fnZbkvOEv+dkKgdkvljz6vVQD4A==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/esbuild/-/esbuild-0.14.18.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fesbuild%2F-%2Fesbuild-0.14.18.tgz}
+    engines: {node: '>=12'}
+    hasBin: true
+    requiresBuild: true
+    optionalDependencies:
+      esbuild-android-arm64: 0.14.18
+      esbuild-darwin-64: 0.14.18
+      esbuild-darwin-arm64: 0.14.18
+      esbuild-freebsd-64: 0.14.18
+      esbuild-freebsd-arm64: 0.14.18
+      esbuild-linux-32: 0.14.18
+      esbuild-linux-64: 0.14.18
+      esbuild-linux-arm: 0.14.18
+      esbuild-linux-arm64: 0.14.18
+      esbuild-linux-mips64le: 0.14.18
+      esbuild-linux-ppc64le: 0.14.18
+      esbuild-linux-s390x: 0.14.18
+      esbuild-netbsd-64: 0.14.18
+      esbuild-openbsd-64: 0.14.18
+      esbuild-sunos-64: 0.14.18
+      esbuild-windows-32: 0.14.18
+      esbuild-windows-64: 0.14.18
+      esbuild-windows-arm64: 0.14.18
+    dev: false
+
+  /js-tokens@4.0.0:
+    resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/js-tokens/-/js-tokens-4.0.0.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fjs-tokens%2F-%2Fjs-tokens-4.0.0.tgz}
+    dev: false
+
+  /loose-envify@1.4.0:
+    resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/loose-envify/-/loose-envify-1.4.0.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Floose-envify%2F-%2Floose-envify-1.4.0.tgz}
+    hasBin: true
+    dependencies:
+      js-tokens: 4.0.0
+    dev: false
+
+  /react-dom@18.2.0(react@18.2.0):
+    resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/react-dom/-/react-dom-18.2.0.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Freact-dom%2F-%2Freact-dom-18.2.0.tgz}
+    peerDependencies:
+      react: ^18.2.0
+    dependencies:
+      loose-envify: 1.4.0
+      react: 18.2.0
+      scheduler: 0.23.0
+    dev: false
+
+  /react@18.2.0:
+    resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/react/-/react-18.2.0.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Freact%2F-%2Freact-18.2.0.tgz}
+    engines: {node: '>=0.10.0'}
+    dependencies:
+      loose-envify: 1.4.0
+    dev: false
+
+  /scheduler@0.23.0:
+    resolution: {integrity: sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/scheduler/-/scheduler-0.23.0.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fscheduler%2F-%2Fscheduler-0.23.0.tgz}
+    dependencies:
+      loose-envify: 1.4.0
+    dev: false

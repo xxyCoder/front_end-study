@@ -11,8 +11,14 @@ dependencies:
   react-dom:
     specifier: ^18.2.0
     version: 18.2.0(react@18.2.0)
+  react-virtualized:
+    specifier: ^9.22.5
+    version: 9.22.5(react-dom@18.2.0)(react@18.2.0)
 
 devDependencies:
+  '@milahu/patch-package':
+    specifier: ^6.4.14
+    version: 6.4.14
   '@types/node':
     specifier: ^20.10.7
     version: 20.10.7
@@ -272,6 +278,13 @@ packages:
       '@babel/core': 7.23.7
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
+
+  /@babel/runtime@7.23.8:
+    resolution: {integrity: sha512-Y7KbAP984rn1VGMbGqKmBLio9V7y5Je9GvU4rQPCPinCyNfUcToxIXl06d59URp/F3LwinvODxab5N/G6qggkw==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/@babel/runtime/-/runtime-7.23.8.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2F%40babel%2Fruntime%2F-%2Fruntime-7.23.8.tgz}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      regenerator-runtime: 0.14.1
+    dev: false
 
   /@babel/template@7.22.15:
     resolution: {integrity: sha512-QPErUVm4uyJa60rkI73qneDacvdvzxshT3kksGqlGWYdOTIUOwJ7RDUL8sGqslY1uXWSL6xMFKEXDS3ox2uF0w==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/@babel/template/-/template-7.22.15.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2F%40babel%2Ftemplate%2F-%2Ftemplate-7.22.15.tgz}
@@ -557,6 +570,28 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
+  /@milahu/patch-package@6.4.14:
+    resolution: {integrity: sha512-sfjl5rZPGu8T7Yl3oSnpwCLp7WGK1rKoSMkC2iZCI7M5y1lijF1GFAuJl2xKCGB4SubgChm+HGJ3YkWYLc3xVg==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/@milahu/patch-package/-/patch-package-6.4.14.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2F%40milahu%2Fpatch-package%2F-%2Fpatch-package-6.4.14.tgz}
+    engines: {npm: '>5'}
+    hasBin: true
+    dependencies:
+      '@types/dashdash': 1.14.3
+      '@yarnpkg/lockfile': 1.1.0
+      chalk: 2.4.2
+      cross-spawn: 7.0.3
+      dashdash: 2.0.0
+      find-yarn-workspace-root: 2.0.0
+      fs-extra: 10.1.0
+      is-ci: 3.0.1
+      klaw-sync: 6.0.0
+      open: 8.4.2
+      rimraf: 3.0.2
+      semver: 7.5.4
+      shlex: 2.1.2
+      slash: 2.0.0
+      tmp: 0.2.1
+    dev: true
+
   /@nodelib/fs.scandir@2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2F%40nodelib%2Ffs.scandir%2F-%2Ffs.scandir-2.1.5.tgz}
     engines: {node: '>= 8'}
@@ -830,6 +865,10 @@ packages:
       '@babel/types': 7.23.6
     dev: true
 
+  /@types/dashdash@1.14.3:
+    resolution: {integrity: sha512-1BKd5kepSM4R+92c1SV1V0tcCletn2RDHh7QnuI9pTUVpVPwGJPi/3JPdaXR9l7TmwRlV9Zn24hiwxybjWR3Lw==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/@types/dashdash/-/dashdash-1.14.3.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2F%40types%2Fdashdash%2F-%2Fdashdash-1.14.3.tgz}
+    dev: true
+
   /@types/estree@1.0.5:
     resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/@types/estree/-/estree-1.0.5.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2F%40types%2Festree%2F-%2Festree-1.0.5.tgz}
     dev: true
@@ -1046,6 +1085,10 @@ packages:
       - supports-color
     dev: true
 
+  /@yarnpkg/lockfile@1.1.0:
+    resolution: {integrity: sha512-GpSwvyXOcOOlV70vbnzjj4fW5xW/FdUF6nQEt1ENy7m4ZCczi1+/buVUPAqmGfqznsORNFzUMjctTIp8a9tuCQ==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/@yarnpkg/lockfile/-/lockfile-1.1.0.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2F%40yarnpkg%2Flockfile%2F-%2Flockfile-1.1.0.tgz}
+    dev: true
+
   /acorn-jsx@5.3.2(acorn@8.11.3):
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/acorn-jsx/-/acorn-jsx-5.3.2.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Facorn-jsx%2F-%2Facorn-jsx-5.3.2.tgz}
     peerDependencies:
@@ -1164,6 +1207,11 @@ packages:
       get-intrinsic: 1.2.2
       is-array-buffer: 3.0.2
       is-shared-array-buffer: 1.0.2
+    dev: true
+
+  /assert-plus@1.0.0:
+    resolution: {integrity: sha512-NfJ4UzBCcQGLDlQq7nHxH+tv3kyZ0hHQqF5BO6J7tNJeP5do1llPr8dZ8zHonfhAu0PHAdMkSo+8o0wxg9lZWw==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/assert-plus/-/assert-plus-1.0.0.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fassert-plus%2F-%2Fassert-plus-1.0.0.tgz}
+    engines: {node: '>=0.8'}
     dev: true
 
   /asynciterator.prototype@1.0.0:
@@ -1287,6 +1335,16 @@ packages:
       fsevents: 2.3.3
     dev: true
 
+  /ci-info@3.9.0:
+    resolution: {integrity: sha512-NIxF55hv4nSqQswkAeiOi1r83xy8JldOFDTWiug55KBu9Jnblncd2U6ViHmYgHf01TPZS77NJBhBMKdWj9HQMQ==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/ci-info/-/ci-info-3.9.0.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fci-info%2F-%2Fci-info-3.9.0.tgz}
+    engines: {node: '>=8'}
+    dev: true
+
+  /clsx@1.2.1:
+    resolution: {integrity: sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/clsx/-/clsx-1.2.1.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fclsx%2F-%2Fclsx-1.2.1.tgz}
+    engines: {node: '>=6'}
+    dev: false
+
   /color-convert@1.9.3:
     resolution: {integrity: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/color-convert/-/color-convert-1.9.3.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fcolor-convert%2F-%2Fcolor-convert-1.9.3.tgz}
     dependencies:
@@ -1343,6 +1401,12 @@ packages:
 
   /csstype@3.1.3:
     resolution: {integrity: sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/csstype/-/csstype-3.1.3.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fcsstype%2F-%2Fcsstype-3.1.3.tgz}
+
+  /dashdash@2.0.0:
+    resolution: {integrity: sha512-ElMoAPlrzmF4l0OscF5pPBZv8LhUJBnwh7rHKllUOrwabAr47R1aQIIwC53rc59ycCb7k5Sj1/es+A3Bep/x5w==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/dashdash/-/dashdash-2.0.0.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fdashdash%2F-%2Fdashdash-2.0.0.tgz}
+    engines: {node: '>=10.x'}
+    dependencies:
+      assert-plus: 1.0.0
     dev: true
 
   /debug@4.3.4:
@@ -1368,6 +1432,11 @@ packages:
       get-intrinsic: 1.2.2
       gopd: 1.0.1
       has-property-descriptors: 1.0.1
+    dev: true
+
+  /define-lazy-prop@2.0.0:
+    resolution: {integrity: sha512-Ds09qNh8yw3khSjiJjiUInaGX9xlqZDY7JVryGxdxV7NPeuqQfplOpQ66yJFZut3jLa5zOwkXw1g9EI2uKh4Og==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/define-lazy-prop/-/define-lazy-prop-2.0.0.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fdefine-lazy-prop%2F-%2Fdefine-lazy-prop-2.0.0.tgz}
+    engines: {node: '>=8'}
     dev: true
 
   /define-properties@1.2.1:
@@ -1399,6 +1468,13 @@ packages:
     dependencies:
       esutils: 2.0.3
     dev: true
+
+  /dom-helpers@5.2.1:
+    resolution: {integrity: sha512-nRCa7CK3VTrM2NmGkIy4cbK7IZlgBE/PYMn55rrXefr5xXDP0LdtfPnblFDoVdcAfslJ7or6iqAUnx0CCGIWQA==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/dom-helpers/-/dom-helpers-5.2.1.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fdom-helpers%2F-%2Fdom-helpers-5.2.1.tgz}
+    dependencies:
+      '@babel/runtime': 7.23.8
+      csstype: 3.1.3
+    dev: false
 
   /dot-case@3.0.4:
     resolution: {integrity: sha512-Kv5nKlh6yRrdrGvxeJ2e5y2eRUpkUosIW4A2AS38zwSz27zu7ufDwQPi5Jhs3XAlGNetl3bmnGhQsMtkKJnj3w==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/dot-case/-/dot-case-3.0.4.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fdot-case%2F-%2Fdot-case-3.0.4.tgz}
@@ -1780,6 +1856,12 @@ packages:
       path-exists: 4.0.0
     dev: true
 
+  /find-yarn-workspace-root@2.0.0:
+    resolution: {integrity: sha512-1IMnbjt4KzsQfnhnzNd8wUEgXZ44IzZaZmnLYx7D5FZlaHt2gW20Cri8Q+E/t5tIj4+epTBub+2Zxu/vNILzqQ==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/find-yarn-workspace-root/-/find-yarn-workspace-root-2.0.0.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Ffind-yarn-workspace-root%2F-%2Ffind-yarn-workspace-root-2.0.0.tgz}
+    dependencies:
+      micromatch: 4.0.5
+    dev: true
+
   /flat-cache@3.2.0:
     resolution: {integrity: sha512-CYcENa+FtcUKLmhhqyctpclsq7QF38pKjZHsGNiSQF5r4FtoKDWabFDl3hzaEQMvT1LHEysw5twgLvpYYb4vbw==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/flat-cache/-/flat-cache-3.2.0.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fflat-cache%2F-%2Fflat-cache-3.2.0.tgz}
     engines: {node: ^10.12.0 || >=12.0.0}
@@ -1801,6 +1883,15 @@ packages:
 
   /fraction.js@4.3.7:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/fraction.js/-/fraction.js-4.3.7.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Ffraction.js%2F-%2Ffraction.js-4.3.7.tgz}
+    dev: true
+
+  /fs-extra@10.1.0:
+    resolution: {integrity: sha512-oRXApq54ETRj4eMiFzGnHWGy+zo5raudjuxN0b8H7s/RU2oW0Wvsx9O0ACRN/kRq9E8Vu/ReskGB5o3ji+FzHQ==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/fs-extra/-/fs-extra-10.1.0.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Ffs-extra%2F-%2Ffs-extra-10.1.0.tgz}
+    engines: {node: '>=12'}
+    dependencies:
+      graceful-fs: 4.2.11
+      jsonfile: 6.1.0
+      universalify: 2.0.1
     dev: true
 
   /fs.realpath@1.0.0:
@@ -1914,6 +2005,10 @@ packages:
     resolution: {integrity: sha512-d65bNlIadxvpb/A2abVdlqKqV563juRnZ1Wtk6s1sIR8uNsXR70xqIzVqxVf1eTqDunwT2MkczEeaezCKTZhwA==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/gopd/-/gopd-1.0.1.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fgopd%2F-%2Fgopd-1.0.1.tgz}
     dependencies:
       get-intrinsic: 1.2.2
+    dev: true
+
+  /graceful-fs@4.2.11:
+    resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/graceful-fs/-/graceful-fs-4.2.11.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fgraceful-fs%2F-%2Fgraceful-fs-4.2.11.tgz}
     dev: true
 
   /graphemer@1.4.0:
@@ -2051,6 +2146,13 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
+  /is-ci@3.0.1:
+    resolution: {integrity: sha512-ZYvCgrefwqoQ6yTyYUbQu64HsITZ3NfKX1lzaEYdkTDcfKzzCI/wthRRYKkdjHKFVgNiXKAKm65Zo1pk2as/QQ==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/is-ci/-/is-ci-3.0.1.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fis-ci%2F-%2Fis-ci-3.0.1.tgz}
+    hasBin: true
+    dependencies:
+      ci-info: 3.9.0
+    dev: true
+
   /is-core-module@2.13.1:
     resolution: {integrity: sha512-hHrIjvZsftOsvKSn2TRYl63zvxsgE0K+0mYMoH6gD4omR5IWB2KynivBQczo3+wF1cCkjzvptnI9Q0sPU66ilw==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/is-core-module/-/is-core-module-2.13.1.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fis-core-module%2F-%2Fis-core-module-2.13.1.tgz}
     dependencies:
@@ -2062,6 +2164,12 @@ packages:
     engines: {node: '>= 0.4'}
     dependencies:
       has-tostringtag: 1.0.0
+    dev: true
+
+  /is-docker@2.2.1:
+    resolution: {integrity: sha512-F+i2BKsFrH66iaUFc0woD8sLy8getkwTwtOBjvs56Cx4CgJDeKQeqfz8wAYiSb8JOprWhHH5p77PbmYCvvUuXQ==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/is-docker/-/is-docker-2.2.1.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fis-docker%2F-%2Fis-docker-2.2.1.tgz}
+    engines: {node: '>=8'}
+    hasBin: true
     dev: true
 
   /is-extglob@2.1.1:
@@ -2171,6 +2279,13 @@ packages:
       get-intrinsic: 1.2.2
     dev: true
 
+  /is-wsl@2.2.0:
+    resolution: {integrity: sha512-fKzAra0rGJUUBwGBgNkHZuToZcn+TtXHpeCgmkMJMMYx1sQDYaCSyjJBSCa2nH1DGm7s3n1oBnohoVTBaN7Lww==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/is-wsl/-/is-wsl-2.2.0.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fis-wsl%2F-%2Fis-wsl-2.2.0.tgz}
+    engines: {node: '>=8'}
+    dependencies:
+      is-docker: 2.2.1
+    dev: true
+
   /isarray@2.0.5:
     resolution: {integrity: sha512-xHjhDr3cNBK0BzdUJSPXZntQUx/mwMS5Rw4A7lPJ90XGAO6ISP/ePDNuo0vhqOZU+UD5JoodwCAAoZQd3FeAKw==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/isarray/-/isarray-2.0.5.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fisarray%2F-%2Fisarray-2.0.5.tgz}
     dev: true
@@ -2232,6 +2347,14 @@ packages:
     hasBin: true
     dev: true
 
+  /jsonfile@6.1.0:
+    resolution: {integrity: sha512-5dgndWOriYSm5cnYaJNhalLNDKOqFwyDB/rr1E9ZsGciGvKPs8R2xYGCacuf3z6K1YKDz182fd+fY3cn3pMqXQ==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/jsonfile/-/jsonfile-6.1.0.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fjsonfile%2F-%2Fjsonfile-6.1.0.tgz}
+    dependencies:
+      universalify: 2.0.1
+    optionalDependencies:
+      graceful-fs: 4.2.11
+    dev: true
+
   /jsx-ast-utils@3.3.5:
     resolution: {integrity: sha512-ZZow9HBI5O6EPgSJLUb8n2NKgmVWTwCvHGwFuJlMjvLFqlGG6pjirPhtdsseaLZjSibD8eegzmYpUZwoIlj2cQ==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/jsx-ast-utils/-/jsx-ast-utils-3.3.5.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fjsx-ast-utils%2F-%2Fjsx-ast-utils-3.3.5.tgz}
     engines: {node: '>=4.0'}
@@ -2246,6 +2369,12 @@ packages:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/keyv/-/keyv-4.5.4.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fkeyv%2F-%2Fkeyv-4.5.4.tgz}
     dependencies:
       json-buffer: 3.0.1
+    dev: true
+
+  /klaw-sync@6.0.0:
+    resolution: {integrity: sha512-nIeuVSzdCCs6TDPTqI8w1Yre34sSq7AkZ4B3sfOBbI2CgVSB4Du4aLQijFU2+lhAFCwt9+42Hel6lQNIv6AntQ==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/klaw-sync/-/klaw-sync-6.0.0.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fklaw-sync%2F-%2Fklaw-sync-6.0.0.tgz}
+    dependencies:
+      graceful-fs: 4.2.11
     dev: true
 
   /kolorist@1.8.0:
@@ -2371,7 +2500,6 @@ packages:
   /object-assign@4.1.1:
     resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/object-assign/-/object-assign-4.1.1.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fobject-assign%2F-%2Fobject-assign-4.1.1.tgz}
     engines: {node: '>=0.10.0'}
-    dev: true
 
   /object-inspect@1.13.1:
     resolution: {integrity: sha512-5qoj1RUiKOMsCCNLV1CBiPYE10sziTsnmNxkAI/rZhiD63CF7IqdFGC/XzjWjpSgLf0LxXX3bDFIh0E18f6UhQ==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/object-inspect/-/object-inspect-1.13.1.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fobject-inspect%2F-%2Fobject-inspect-1.13.1.tgz}
@@ -2430,6 +2558,15 @@ packages:
     resolution: {integrity: sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/once/-/once-1.4.0.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fonce%2F-%2Fonce-1.4.0.tgz}
     dependencies:
       wrappy: 1.0.2
+    dev: true
+
+  /open@8.4.2:
+    resolution: {integrity: sha512-7x81NCL719oNbsq/3mh+hVrAWmFuEYUqrq/Iw3kUzH8ReypT9QQ0BLoJS7/G9k6N81XjW4qHWtjWwe/9eLy1EQ==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/open/-/open-8.4.2.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fopen%2F-%2Fopen-8.4.2.tgz}
+    engines: {node: '>=12'}
+    dependencies:
+      define-lazy-prop: 2.0.0
+      is-docker: 2.2.1
+      is-wsl: 2.2.0
     dev: true
 
   /optionator@0.9.3:
@@ -2545,7 +2682,6 @@ packages:
       loose-envify: 1.4.0
       object-assign: 4.1.1
       react-is: 16.13.1
-    dev: true
 
   /punycode@2.3.1:
     resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/punycode/-/punycode-2.3.1.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fpunycode%2F-%2Fpunycode-2.3.1.tgz}
@@ -2568,12 +2704,31 @@ packages:
 
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/react-is/-/react-is-16.13.1.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Freact-is%2F-%2Freact-is-16.13.1.tgz}
-    dev: true
+
+  /react-lifecycles-compat@3.0.4:
+    resolution: {integrity: sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Freact-lifecycles-compat%2F-%2Freact-lifecycles-compat-3.0.4.tgz}
+    dev: false
 
   /react-refresh@0.14.0:
     resolution: {integrity: sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/react-refresh/-/react-refresh-0.14.0.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Freact-refresh%2F-%2Freact-refresh-0.14.0.tgz}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /react-virtualized@9.22.5(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-YqQMRzlVANBv1L/7r63OHa2b0ZsAaDp1UhVNEdUaXI8A5u6hTpA5NYtUueLH2rFuY/27mTGIBl7ZhqFKzw18YQ==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/react-virtualized/-/react-virtualized-9.22.5.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Freact-virtualized%2F-%2Freact-virtualized-9.22.5.tgz}
+    peerDependencies:
+      react: ^15.3.0 || ^16.0.0-alpha || ^17.0.0 || ^18.0.0
+      react-dom: ^15.3.0 || ^16.0.0-alpha || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@babel/runtime': 7.23.8
+      clsx: 1.2.1
+      dom-helpers: 5.2.1
+      loose-envify: 1.4.0
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-lifecycles-compat: 3.0.4
+    dev: false
 
   /react@18.2.0:
     resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/react/-/react-18.2.0.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Freact%2F-%2Freact-18.2.0.tgz}
@@ -2600,6 +2755,10 @@ packages:
       globalthis: 1.0.3
       which-builtin-type: 1.1.3
     dev: true
+
+  /regenerator-runtime@0.14.1:
+    resolution: {integrity: sha512-dYnhHh0nJoMfnkZs6GmmhFknAGRrLznOu5nc9ML+EJxGvrx6H7teuevqVqCuPcPK//3eDrrjQhehXVx9cnkGdw==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/regenerator-runtime/-/regenerator-runtime-0.14.1.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fregenerator-runtime%2F-%2Fregenerator-runtime-0.14.1.tgz}
+    dev: false
 
   /regexp.prototype.flags@1.5.1:
     resolution: {integrity: sha512-sy6TXMN+hnP/wMy+ISxg3krXx7BAtWVO4UouuCN/ziM9UEne0euamVNafDfvC83bRNr95y0V5iijeDQFUNpvrg==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/regexp.prototype.flags/-/regexp.prototype.flags-1.5.1.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fregexp.prototype.flags%2F-%2Fregexp.prototype.flags-1.5.1.tgz}
@@ -2743,12 +2902,21 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
+  /shlex@2.1.2:
+    resolution: {integrity: sha512-Nz6gtibMVgYeMEhUjp2KuwAgqaJA1K155dU/HuDaEJUGgnmYfVtVZah+uerVWdH8UGnyahhDCgABbYTbs254+w==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/shlex/-/shlex-2.1.2.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fshlex%2F-%2Fshlex-2.1.2.tgz}
+    dev: true
+
   /side-channel@1.0.4:
     resolution: {integrity: sha512-q5XPytqFEIKHkGdiMIrY10mvLRvnQh42/+GoBlFW3b2LXLE2xxJpZFdm94we0BaoV3RwJyGqg5wS7epxTv0Zvw==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/side-channel/-/side-channel-1.0.4.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fside-channel%2F-%2Fside-channel-1.0.4.tgz}
     dependencies:
       call-bind: 1.0.5
       get-intrinsic: 1.2.2
       object-inspect: 1.13.1
+    dev: true
+
+  /slash@2.0.0:
+    resolution: {integrity: sha512-ZYKh3Wh2z1PpEXWr0MpSBZ0V6mZHAQfYevttO11c51CaWjGTaadiKZ+wVt1PbMlDV5qhMFslpZCemhwOK7C89A==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/slash/-/slash-2.0.0.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fslash%2F-%2Fslash-2.0.0.tgz}
+    engines: {node: '>=6'}
     dev: true
 
   /slash@3.0.0:
@@ -2854,6 +3022,13 @@ packages:
     resolution: {integrity: sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/text-table/-/text-table-0.2.0.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Ftext-table%2F-%2Ftext-table-0.2.0.tgz}
     dev: true
 
+  /tmp@0.2.1:
+    resolution: {integrity: sha512-76SUhtfqR2Ijn+xllcI5P1oyannHNHByD80W1q447gU3mp9G9PSpGdWmjUOHRDPiHYacIk66W7ubDTuPF3BEtQ==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/tmp/-/tmp-0.2.1.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Ftmp%2F-%2Ftmp-0.2.1.tgz}
+    engines: {node: '>=8.17.0'}
+    dependencies:
+      rimraf: 3.0.2
+    dev: true
+
   /to-fast-properties@2.0.0:
     resolution: {integrity: sha512-/OaKK0xYrs3DmxRYqL/yDc+FxFUVYhDlXMhRmv3z915w2HF1tnN1omB354j8VUGO/hbRzyD6Y3sA7v7GS/ceog==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/to-fast-properties/-/to-fast-properties-2.0.0.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fto-fast-properties%2F-%2Fto-fast-properties-2.0.0.tgz}
     engines: {node: '>=4'}
@@ -2946,6 +3121,11 @@ packages:
 
   /undici-types@5.26.5:
     resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/undici-types/-/undici-types-5.26.5.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Fundici-types%2F-%2Fundici-types-5.26.5.tgz}
+    dev: true
+
+  /universalify@2.0.1:
+    resolution: {integrity: sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw==, tarball: http://artifactory.intra.xiaojukeji.com/artifactory/api/npm/npm/universalify/-/universalify-2.0.1.tgz?dl=https%3A%2F%2Fregistry.npmmirror.com%2Funiversalify%2F-%2Funiversalify-2.0.1.tgz}
+    engines: {node: '>= 10.0.0'}
     dev: true
 
   /update-browserslist-db@1.0.13(browserslist@4.22.2):
