@@ -143,3 +143,16 @@ response.send(content);
 - css代码分割，当某个异步模块引入了一些css代码，vite会自动将这些css抽取出来单独生成一个文件，提高线上产物的缓存复用率
 - 自动预加载，vite会为入口chunk的依赖自动生成预加载标签 <link ref="modulepreload" href="/assets/vendor.xxxx.js" />
 - 异步chunk加载优化，在异步引入的chunk中，有一些公用模块，一般情况下是加载异步模块后才决定加载包含的公用模块，优化后在请求异步模块的时候同时自动预加载公用模块
+
+## rollup机制
+- 执行了rollup命令之后，大致流程如下
+```ts
+// build阶段
+const bundle = await rollup.rollup(inputOptions);
+// output阶段
+await Promise.all(outputOptions.map(bundle.write));
+// 构建结束阶段
+await bundle.close()
+```
+- build阶段负责创建模块的依赖图，初始化各个模块的ast以及模块之间的依赖关系
+- output阶段完成打包以及输出的过程
