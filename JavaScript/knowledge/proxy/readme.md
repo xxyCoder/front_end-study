@@ -1,0 +1,11 @@
+# proxy
+- 用于修改某些操作的默认行为，理解为在目标对象之前设一层拦截，可以搭配Reflect静态方法使用（Reflect对象与Proxy对象方法一一对应）
+- receiver指向proxy实例，this指向handler，target指向目标对象
+- apply拦截call、apply和普通函数调用
+- has可以拦截in运算符，但是对于 for...in 不生效
+  - 调用getOwnProperty等触发的get拦截
+- construct拦截new命令
+- defineProperty拦截Object.defineProperty方法
+- ownKeys拦截Object.getOwnPropertyNames()、Object.getOwnPropertySymbols()、Object.keys()、for...in循环
+- 静态方法
+  - revocable()返回一个可取消的实例，取消之后访问proxy则报错

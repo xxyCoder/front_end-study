@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>proxy 和 reflect</title>
+</head>
+
+<body>
+  <script>
+    const target = {
+      name: "xxy",
+      cnt: 1,
+      [Symbol.for("symbol")]: "symbol",
+      fn() {
+        console.log("fn", this)
+      }
+    }
+    const handler = {
+      get(tar, key, receiver) {
+        console.log("proxy get", receiver, this, tar)
+        return Reflect.get(tar, key, receiver)
+      },
+      set(tar, key, value, receiver) {
+        console.log("proxy set")
+        return Reflect.set(tar, key, value, receiver);
+      },
+      apply(tar, thisBind, args) { // 拦截call、apply以及普通调用
+        console.log("proxy apply", thisBind, args)
+        return tar.apply(thisBind, args)
+      },
+      construct(tar, args, newTar) {
+        console.log("proxy new");
+        return new tar(args);
+      },
+      has(tar, key) {
+        console.log("proxy has")
+        if (key[0] === '_') return false;
+        return key in tar
+      }
+    }
+    const proxy = new Proxy(target, handler);
+    ++target.cnt
+    console.log(proxy.cnt)
+    console.log("name" in proxy, proxy.hasOwnProperty("name"))
+
+    console.log("----")
+    const fn = proxy.fn
+    proxy.fn()
+    fn();
+    console.log("----")
+
+    const proxyFn = new Proxy(function (a, b) {
+      return a + b
+    }, handler)
+    proxyFn(1, 2)
+    new proxyFn(1, 2)
+    
+    let {proxyRe, revoke} = Proxy.revocable(target, handler);
+    proxyRe.foo = "foo"
+    revoke()
+    console.log("---")
+    proxyRe.foo = "bar"
+
+  </script>
+</body>
+
+</html>

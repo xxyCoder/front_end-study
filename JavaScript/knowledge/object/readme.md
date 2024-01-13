@@ -208,3 +208,9 @@
 - forEach() filter() reduce() every() some()都会跳过空位
 - map()会跳过空位，但是保留该值
 - join()和toString()将空位视作为undefined，而undefined和null被视为空字符串
+
+## symbol
+- 表示独一无二的值，接受一个字符串作为参数表示描述，通过属性description获取
+- 静态方法
+  - for()生成新的Symbol会被记录到全局环境中提供搜索，如果全局环境中有则直接返回
+  - keyFor()返回一个已登机的Symbol类型值的key，没有则返回undefined

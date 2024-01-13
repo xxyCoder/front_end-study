@@ -146,6 +146,15 @@
     console.log(0 in [, , ,])
     console.log([, undefined, null].toString())
   </script>
+
+  <script>
+    const s = Symbol("symbol")
+    console.log(s.description)
+
+    const sf = Symbol.for("symbol");
+    console.log(Symbol.for("symbol") === sf, s == sf)
+    console.log(Symbol.keyFor(sf), Symbol.keyFor(s))
+  </script>
 </body>
 
 </html>
