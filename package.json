@@ -8,6 +8,7 @@
     "mobx-miniprogram": "^4.13.2",
     "mobx-miniprogram-bindings": "^1.2.1",
     "nodejs-websocket": "^1.7.2",
+    "typescript": "^5.3.3",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {

@@ -49,3 +49,23 @@ let inter: B = {
 type Age = number;
 // type MyAge = typeof Age
 type func = typeof printId
+
+const arr1: number[] = []
+const arr2: (string | number)[] = []
+const arr3 = [];
+arr3.push(1)
+const arr4: readonly number[] = [1, 2, 3]
+// arr4[0] = 0
+const arr5: ReadonlyArray<number> = [1, 2, 3]
+const arr6: number[] = [1, 2, 3] as const;
+arr6[0] = 0
+arr6[3] = 3
+
+const tup1: [number, string?] = [1]
+const tup2: [string, ...number[]] = ["xxx", 1, 2]
+tup2[3] = 1
+type tup = typeof tup2[number] // 取元组全部类型
+const tup3: readonly [number] = [1]
+// tup3[1] = '0'
+
+export { }
