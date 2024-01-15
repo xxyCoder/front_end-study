@@ -4,6 +4,7 @@ bigStr = new String("big");
 
 let symbol: Symbol = Object(Symbol())
 symbol = Symbol()
+const us: unique symbol = Symbol(5)
 
 let a: any = "hell0"
 let aa: number = a

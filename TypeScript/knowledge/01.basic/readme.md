@@ -3,7 +3,10 @@
 - string
 - number
 - bigint，与number不兼容
-- symbol
+- symbol 包含所有的symbol值，无法表示一个具体的symbol值
+  - unique symbol表示单个、某个具体的Symbol值，必须用const命令声明
+    - 类型推导为 typeof 变量
+  - 对于let类型会推断为symbol，对于const则类型推断为const
 - undefined、null
   - null和undefined既可以作为值也可以作为类型
   - 作为值时，其类型在没有开启noImpliciAny和strictNullChecks时会被推断为any

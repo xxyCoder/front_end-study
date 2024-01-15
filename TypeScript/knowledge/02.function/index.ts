@@ -9,9 +9,10 @@ const f1 = function (message: string) {
 const f2: (message: string) => void = function (message) {
     console.log(message)
 }
-// 变量被赋值函数，写法三
+// 变量被赋值函数，写法三，用于函数本身存在属性(完全就是对象了)
 const f3: {
-    (msg: string): void
+    (msg: string): void;
+    version?: number
 } = function (message) {
     console.log(message)
 }
@@ -58,8 +59,29 @@ type AnimalConstructor = new () => Animal;
 function create(c: AnimalConstructor): Animal {
     return new c();
 }
+
+// 函数重载
+function reverse(str: string): string;
+function reverse(arr: any[]): any[];
+function reverse(strOrArr: string | any[]): string | any[] {
+    if (typeof strOrArr === 'string') {
+        return strOrArr.split('').reverse().join('');
+    } else {
+        return strOrArr.reverse()
+    }
+}
+
+// 重载顺序
+function cf(x: any): number;
+function cf(x: string): 0 | 1;
+function cf(x: any): any {}
+
+// const a:0|1 = cf('hi'); // 报错
+
 // this问题
 function fn(this: { name: string }) {
     console.log(this.name);
 }
 fn.call({ name: 'xxy' })
+
+export { }
