@@ -1,1 +1,0 @@
-<view class="search-box"><uni-search-bar bind:input="__e" vue-id="57324f80-1" data-event-opts="{{[['^input',[['input']]]]}}" bind:__l="__l"></uni-search-bar></view>
