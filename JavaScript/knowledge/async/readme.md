@@ -1,0 +1,3 @@
+# async
+- 相比generator，可以自动执行，await后面可以跟着promise对象和原始类型（会被自动转换为resolve的promise对象），最后的返回值被包裹成promise对象传入resolve的值
+- async函数内部爆出错误会导致返回的promise变为reject状态，且整个asycn函数都被中断，即后续的await和其他内容都不会执行
