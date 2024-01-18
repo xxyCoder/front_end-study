@@ -23,9 +23,7 @@ class Point {
 }
 // 构造函数声明
 class Point2 {
-    constructor(public x: number, public y: number) {
-
-    }
+    constructor(public x: number, public y: number) {}
 }
 const p2 = new Point2(1, 2);
 console.log(p2.x, p2.y)
@@ -36,9 +34,16 @@ interface Country1 {
 type Country2 = {
     capital: string;
 }
-class MyCountry implements Country1, Country2 {
+class Country3 {
+    static Type = 3
+    static show() {}
+    cities: number;
+    // show() {}
+}
+class MyCountry implements Country1, Country2, Country3 {
     name: string;
     capital: string;
+    cities: number;
 }
 // 类的合并
 class A {
@@ -47,7 +52,7 @@ class A {
 interface A {
     y: number;
 }
-let a = new A();
+let a:A = new A();
 a.y = 10;
 // 类的自身
 function createPoint(
@@ -75,8 +80,9 @@ abstract class Base {
     id = 1;
     abstract foo: string;
     abstract execute(): void;
-    show() {
+    show(): this {
         console.log("xu")
+        return this;
     }
 }
 class Ext extends Base {
@@ -87,3 +93,5 @@ class Ext extends Base {
         this.show();
     }
 }
+
+export {}

@@ -57,3 +57,5 @@ class Y extends X {
 }
 
 const y: xx = new Y("xxyCoder");
+
+export {}
