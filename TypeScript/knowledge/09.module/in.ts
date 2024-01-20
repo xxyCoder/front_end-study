@@ -4,3 +4,5 @@ import { A, a, type Bool } from './out'
 // import * as fs from 'fs'
 import obj = require('./out')
 console.log(obj)
+
+export type bool = true | false

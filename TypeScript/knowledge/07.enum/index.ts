@@ -29,14 +29,15 @@ enum Foo {
 // keyof 取出所有Enum结构的所有成员名
 enum MyEnum {
     A = 'a',
-    B = 'b'
+    B = 'b',
+    C = 1
 }
 type t = typeof MyEnum;
 const m: t = MyEnum;
 type ab = keyof typeof MyEnum
 
 // 反向映射 通过成员值获取成员们
-console.log(MyEnum['a'])
+console.log(MyEnum[1])
 
 // const 枚举
 const enum Greeting {
@@ -54,3 +55,5 @@ const BAR = {
     B: 2.1,
     C: 3.1   
 } as const;
+
+export {}

@@ -7,6 +7,11 @@ namespace Utils {
         return typeof value === 'string'
     }
 
+    export interface MyInstance {
+        my: { readonly name: string };
+        error: (msg: string) => void;
+    }
+
     isString("Yes")
 
     export function error(msg: string) {
