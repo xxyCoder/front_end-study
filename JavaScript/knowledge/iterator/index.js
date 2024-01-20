@@ -105,3 +105,60 @@ function *iterEntries(obj) {
 for (let [key, value] of iterEntries(obj)) {
   console.log(key, value);
 }
+
+// 异步遍历器
+function makeAsyncIterator(array) {
+  let index = 0, n = array.length;
+  return {
+    next() {
+      return index < n ?
+        new Promise((resolve) => resolve({ value: array[index++], done: false })) :
+        new Promise(resolve => resolve({ value: undefined, done: true }))
+    }
+  }
+}
+
+const ait = makeAsyncIterator([1, 2, 3, 4]);
+ait.next().then(console.log)
+ait.next().then(console.log)
+ait.next().then(console.log)
+ait.next().then(console.log)
+ait.next().then(console.log)
+
+const asyncObj = {
+  name: "xxy",
+  age: 21,
+  [Symbol.asyncIterator]() {
+    const keys = Object.getOwnPropertyNames(asyncObj), n = keys.length;
+    let idx = 0;
+    return {
+      next() {
+        return idx < n ?
+          new Promise(resolve => setTimeout(resolve({ value: asyncObj[keys[idx++]], done: false }))):
+          new Promise((resolve => setTimeout(resolve({ value: undefined, done: true }))))
+      }
+    }
+  }
+}
+async function af() {
+  for await (const p of asyncObj) {
+    console.log(p)
+  }
+}
+af()
+
+async function *agen() {
+  console.log('----', 1)
+  yield 'hello';
+  yield new Promise(resolve => {
+    setTimeout(resolve(111), 1000)
+  });
+  console.log('----', 2)
+  yield 'world'
+}
+
+const ag = agen();
+ag.next().then(console.log);
+ag.next().then(console.log);
+ag.next().then(console.log);
+ag.next().then(console.log);

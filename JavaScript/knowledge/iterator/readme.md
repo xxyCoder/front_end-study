@@ -38,3 +38,12 @@
 
 ## generator的this
 - 默认执行全局对象，可以使用call方法改变其this指向且不影响调用next方法
+
+# 异步迭代器
+- 调用next方法返回一个promise对象，当变为resolve状态可以拿到value和done值，异步的next是可以连续调用，不必等到上一个promise变为resolve
+- 通过Symbol.asyncIterator接口实现
+- 调用都必须在async函数中
+
+## 使用场合
+- for await...of
+- 异步generator
