@@ -1,0 +1,7 @@
+exports.LAB = 'leftAngleBck'
+exports.ID = 'identifier'
+exports.BS = 'backslash'
+exports.RAB = 'rightAngleBck'
+exports.ATTRIKEY = 'attributeKey'
+exports.ATTRIVAL = 'attributeValue'
+exports.TEXT = 'text'
