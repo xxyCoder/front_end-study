@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>卡片悬停</title>
+  <style>
+    html,
+    body,
+    div,
+    p,
+    h2 {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --clr: #222;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--clr);
+    }
+
+    .card {
+      position: relative;
+      width: 320px;
+      height: 250px;
+      background-color: #fff;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: .5s;
+    }
+
+    .card:hover {
+      height: 350px;
+    }
+
+    .img-box {
+      position: absolute;
+      z-index: 1;
+      inset: 20px 20px 50px 20px;
+      background-color: #f00;
+      border-radius: 15px;
+      transition: .5s;
+    }
+
+    .card:hover .img-box {
+      inset: -50px 60px 250px 60px;
+      box-shadow: 0 0 0 10px var(--clr);
+    }
+
+    .img-box::after,
+    .img-box::before {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: transparent;
+      right: -30px;
+      border-top-left-radius: 20px;
+      transform: translateY(-100px);
+      box-shadow: -5px -5px 0 4px var(--clr);
+      pointer-events: none;
+      opacity: 0;
+      transition: .5s;
+    }
+
+    .img-box::before {
+      box-shadow: 5px -5px 0 4px var(--clr);
+      left: -30px;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 20px;
+      right: 0;
+    }
+
+    .card:hover .img-box::after,
+    .card:hover .img-box::before {
+      opacity: 1;
+      transform: translateY(50px);
+    }
+
+    .card p {
+      text-align: center;
+      transition: .5s;
+      opacity: 0;
+    }
+
+    .card:hover p {
+      opacity: 1;
+    }
+
+    .card h2 {
+      position: absolute;
+      bottom: 8px;
+      transition: .5s;
+      font-weight: bold;
+    }
+    .card:hover h2 {
+      padding: 5px 25px;
+      background-color: #6f25ce;
+      color: #fff;
+      bottom: -20px;
+      border-radius: 15px;
+      box-shadow: 0 0 0 10px var(--clr);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <div class="img-box"></div>
+    <p>远程消耗，攻击范围长，大招伤害大;远程消耗，攻击范围长，大招伤害大;远程消耗，攻击范围长，大招伤害大;远程消耗，攻击范围长，大招伤害大</p>
+    <h2>小乔</h2>
+  </div>
+</body>
+
+</html>
