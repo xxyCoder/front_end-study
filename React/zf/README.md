@@ -1,24 +1,94 @@
+# 虚拟DOM的两种创建方式
+1. JSX语法
+```babel
+const dom = (
+  <h1 class="title">
+    <span>Hello,JSX</span>
+  </h1>
+)
+```
+2. JS语法
+```js
+const dom = React.createElement('h1', { class: 'title' }, React.createElement('span', {}, 'Hello,JS'))
+```
+- 总结，JSX是React.createElement的语法糖，虚拟DOM也是Object类型，但是虚拟DOM比真实DOM“轻”，无需真实DOM那么到属性
+```js
+{
+  $$typeof: Symbol(react.element),
+  key: null,
+  props: {},
+  ref: null,
+  type: 函数名|类名
+}
+```
+
+## JSX语法规则
+1. 定义虚拟DOM不需要写引号
+2. 标签混入JS表达式使用{}
+3. 定义样式书写className属性
+4. 内联样式要使用style={{ key: value }} 形式，外面大括号表示JS表达式，内部大括号表示是一个对象存储键值对
+5. 虚拟DOM必须只有一个根标签
+6. 标签必须闭合
+7. 标签首字母
+  - 小写，则转换为html标签，若无该元素则报错
+  - 大写，则渲染对应组件，若没有定义则报错
+
 # 函数组件
 - 在src目录下,创建以jsx为后缀名的文件,即创建一个组件,在组件中返回一个JSX视图
 - 基于ES6 module规范
 - 没有实例的概念，而是把函数执行，产生一个私有的上下文
+```jsx
+function FunComp() {
+  return <h1>function component</h1>
+}
+React.render(<FunComp/>, document.getElementById('root'));
+```
+- 函数组件中的this为undefined，因为babel开启了严格模式
 - 渲染机制
-  1. 基于babel-preset-react-app把调用的组件转换为createElement格式
-  2. 执行createElement,创建virtualDOM
-    ```js
-    {
-        $$typeof: Symbol(react.element),
-        key: null,
-        props: {},
-        ref: null,
-        type: DemoOne(函数即函数名)
-    }
-    ```
-  3. 基于root.render把虚拟DOM变为真是DOM
+  1. 根据标签首字母大写发现是组件，如果是函数组件则调用，得到返回值
+  2. 基于babel-preset-react-app把结果转换为createElement格式
+  3. 执行createElement,创建virtualDOM
+  4. 基于React.render把虚拟DOM变为真实DOM
      - type是函数
      - 把props作为实参传递给函数
      - 此时把函数执行
      - 接收函数执行结果,最后基于render把虚拟DOM变为真实DOM
+
+
+# 类组件
+```jsx
+class ClassComp extend React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { name: 'class component' };
+    this.handlerClickMethod = this.handlerClickMethod.bind(this); // 会给类实例身上添加该方法
+  }
+  handlerClickArrow: () => {}
+  handlerClickMethod() {}
+  render() {
+    return (
+      <>
+        <h1 onClick={this.handlerClickArrow}>Class Component</h1>
+        <h2 onClick={this.handlerClickMethod}>event</h2>
+      </>
+    )
+  }
+}
+```
+- render方法中的this是类实例对象
+- 绑定函数就是执行了onClick=this.handlerClick，但触发点击事件就会执行onClick()，这样就改变了this指向
+- 渲染机制
+  1. 解析标签发现是类组件，使用new方法调用获得实例对象，调用实例原型身上的render，拿到结果
+  2. 将其转换为createElement格式并执行创建虚拟DOM
+  3. 基于React.render把虚拟DOM变为真实DOM
+
+- 传递props挂载自身
+  - 需要constructor构造函数中调用super,将props挂载到this实例上
+  - 或者不写constructor,React也会自动挂载到this实例上
+- 状态初始化  this.state
+- 重新渲染视图  
+  - this.setState
+  - this.forceUpdate()  强制更新
 
 # props
 - 只读,不可修改,修改则报错
@@ -28,28 +98,6 @@
 - 可以对props属性设置校验,不论成功还是失败,都正常运行,失败则报警告
   - 设置默认值 函数组件.defaultProps = {}
   - 设置其他规则    依赖第官方插件 prop-types
-
-# 类组件
-- 继承React.Component
-- 需要有render方法,返回一个JSX视图
-- 虚拟DOM
-```js
-{
-  $$typeof: Symbol(react.element),
-  key: null,
-  props: {},
-  ref: null,
-  type: Class Vote
-}
-```
-- 每次调用都是new一个新的实例对象
-- 传递props挂载自身
-  - 需要constructor构造函数中调用super,将props挂载到this实例上
-  - 或者不写constructor,React也会自动挂载到this实例上
-- 状态初始化  this.state
-- 重新渲染视图  
-  - this.setState
-  - this.forceUpdate()  强制更新
 
 # 生命周期函数
 ## 挂载钩子函数

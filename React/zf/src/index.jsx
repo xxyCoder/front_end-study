@@ -5,9 +5,12 @@ import ReactDom from 'react-dom/client'
 // import ThemeContext from './ThemeContext'
 // import { Provider } from 'react-redux'
 import App from './App';
+import DemoThree from './views/DemoThree';
 
 const root = ReactDom.createRoot(document.getElementById("root"));
-root.render(<App />)
+// root.render(<App />)
+
+root.render(<DemoThree />)
 
 // root.render(
 //     <Provider store={store}>
