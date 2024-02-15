@@ -38,7 +38,7 @@ const dom = React.createElement('h1', { class: 'title' }, React.createElement('s
 - 基于ES6 module规范
 - 没有实例的概念，而是把函数执行，产生一个私有的上下文
 ```jsx
-function FunComp() {
+function FunComp(props) {
   return <h1>function component</h1>
 }
 React.render(<FunComp/>, document.getElementById('root'));
@@ -54,7 +54,6 @@ React.render(<FunComp/>, document.getElementById('root'));
      - 此时把函数执行
      - 接收函数执行结果,最后基于render把虚拟DOM变为真实DOM
 
-
 # 类组件
 ```jsx
 class ClassComp extend React.Component {
@@ -63,7 +62,7 @@ class ClassComp extend React.Component {
     this.state = { name: 'class component' };
     this.handlerClickMethod = this.handlerClickMethod.bind(this); // 会给类实例身上添加该方法
   }
-  handlerClickArrow: () => {}
+  handlerClickArrow = () => {}
   handlerClickMethod() {}
   render() {
     return (
@@ -90,14 +89,52 @@ class ClassComp extend React.Component {
   - this.setState
   - this.forceUpdate()  强制更新
 
+# state
+- 状态直接更改不会触发更新，需要使用`setState()`（位于组件.__proto__.__proto__身上）更改状态
+  - `setState({})`更新单个或多个只是合并并非替换整个state
+
 # props
 - 只读,不可修改,修改则报错
 - 被冻结,不能增删改成员,也不能对成员做劫持(defineProperty)
 - 被密封,不能增删成员,也不能对成员做劫持
-- 不可扩展是只不能增加成员
-- 可以对props属性设置校验,不论成功还是失败,都正常运行,失败则报警告
-  - 设置默认值 函数组件.defaultProps = {}
-  - 设置其他规则    依赖第官方插件 prop-types
+- 不可扩展，不能增加成员
+- 可以对props属性设置校验,不论成功还是失败,都正常运行,失败则报警告，依赖第官方插件 prop-types
+  ```js
+  // 限定传入props
+  FunComp.propTypes = {
+    prop1: PropTypes.string.isRequired,
+    propFunc: PropTypes.func
+  }
+  // 给定默认值
+  FunComp.defaultProps = {
+    prop2: 'val2'
+  }
+  // or
+  ClassComp extends React.Component {
+    static propTypes = {}
+    static defaultPropt = {}
+    state = {}
+  }
+  ```
+
+# ref
+- 字符串类型的ref可以从this.refs中获得
+- 回调函数形式，如果是内联函数，更新则执行两次，第一次是null，第二次是绑定的元素。对于内联函数，重新渲染会创建新的函数实例
+- React.createRef()，调用后返回一个容器
+```js
+class ClassComp extends React.Component {
+  d3 = React.createRef();
+  render() {
+    return (
+      <>
+        <div ref="d1"></div>
+        <div ref={comp => this.d2 = comp}></div>
+        <div ref={d3}></div>
+      </>
+    )
+  }
+}
+```
 
 # 生命周期函数
 ## 挂载钩子函数
