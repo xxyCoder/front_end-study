@@ -148,7 +148,7 @@ class ClassComp extends React.Component {
 - 对于函数组件使用ref会报错（Function components cannot be given refs）
   - 配合forwardRef，获取函数子组件内部某个元素
 
-# 生命周期函数
+# 生命周期函数（旧）
 - constructor
 ## 挂载钩子函数
 - componentWillMount()   不安全
@@ -159,7 +159,7 @@ class ClassComp extends React.Component {
 - componentDidMount()
 
 ## 更新钩子函数
-- componentWillReceiveProps 组件获得新props调用（第一次不会触发）
+- componentWillReceiveProps 组件获得新props调用（第一次不会触发） 不安全
 - shouldComponentUpdate() 
   - 对于forceUpdate会跳过该钩子函数，进入下一步
 - componentWillUpdate() 不安全
@@ -172,6 +172,31 @@ class ClassComp extends React.Component {
 
 ## 卸载钩子函数
 - componentWillUnmount()  
+
+# 生命周期（新）
+
+## 初始化
+- constructor
+- getDerivedStateFromProps
+- render
+- componentDidMount
+
+## 更新
+- constructor
+- static getDerivedStateFromProps(props, state) 返回null或者更新或的state，也可以让state取决于props
+- shouldComponentUpdate
+- render
+- getSnapshotBeforeUpdate() 使得组件能够发生变更之前从dom中捕获信息，该方法的返回值传递给componentDidUpdate
+- componentDidUpdate(preProps, preState, snapshotValue)
+
+## 卸载
+- componetnWillUmount
+
+# 样式模块化
+1. 命名以 .module.css 结尾
+2. 通过import style from 'xxx.module.css'引入
+3. 使用 style.className 作为className值使用
+
 
 # PureComponent与Component
 - PureComponent默认会增加一个钩子函数shouldComponentUpdate()
