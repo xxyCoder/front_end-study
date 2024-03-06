@@ -94,7 +94,12 @@ class ClassComp extend React.Component {
   - `setState({})`更新单个或多个只是合并并非替换整个state
 
 ## setState
-- 第一个参数传递回调函数或对象
+- 第一个参数传递函数（返回值是更新对象）或对象
+```js
+this.setState((state, props) => {
+  return { key: state.value }
+})
+```
 - 接受第二个参数（回调函数），在componentDidUpdate之后触发
 - 即使shouldComponentUpdate阻止了更新，但回调函数仍然会执行
 - 异步更新，多次修改视图只更新一次
@@ -395,3 +400,9 @@ const [params,setParams] = useSearchParams();
 params.get("name");
 ```
 - useMatch(pathname) 代替版本5的useRouteMatch（可以基于params获取路径参数匹配信息），但是这个Hooks的params不会解析
+
+# LazyLoad
+```js
+cosnt Component = lazy(() => import('./component'))
+```
+- 注册路由的时候需要用Suspense组件包裹，给fallback指定一个组件（该组件不能是懒加载的）
