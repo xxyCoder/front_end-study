@@ -16,9 +16,12 @@ const dom = React.createElement('h1', { class: 'title' }, React.createElement('s
 {
   $$typeof: Symbol(react.element),
   key: null,
-  props: {},
+  props: {
+    属性,
+    children: []
+  },
   ref: null,
-  type: 函数名|类名
+  type: 函数名|类名|标签名
 }
 ```
 
